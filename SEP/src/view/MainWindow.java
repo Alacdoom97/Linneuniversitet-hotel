@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class MainWindow extends Application {
 
 	private RegistrationWindow regWin;
+	private CheckinWindow cheWin;
 	@Override
 	public void start(Stage primaryStage) {
 		VBox layout = new VBox();
@@ -55,6 +56,16 @@ public class MainWindow extends Application {
 					regWin = new RegistrationWindow();
 				} catch(Exception e1) {
 					e1.printStackTrace();
+				}
+			}
+		});
+		
+		checkinButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				try {
+					cheWin = new CheckinWindow();
+				} catch (Exception e2) {
+					e2.printStackTrace();
 				}
 			}
 		});
