@@ -2,7 +2,12 @@ package model;
 
 import java.time.LocalDate;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Guest {
+	private StringProperty firstName = null;
+	private StringProperty sirName = null;
 	private String companyName;
 	private String name;
 	private String lastName;
@@ -13,8 +18,16 @@ public class Guest {
 	public Guest(){
 		createGuest("", "", "", LocalDate.now(), false);
 	}
+	public Guest(String company, String name, String lastName, String address, LocalDate birthday, boolean isBusiness){
+		companyName = company;
+		this.name = name;
+		this.lastName = lastName;
+		this.adress = address;
+		this.birthday = birthday;
+		this.isBusiness = isBusiness;
+	}
 	
-	public void createGuest(String name, String lastname, String adress, LocalDate birthday, Boolean isBusiness){
+	public void createGuest(String name, String lastname, String adress, LocalDate birthday, boolean isBusiness){
 		
 	}
 
@@ -32,6 +45,7 @@ public class Guest {
 
 	public void setName(String name) {
 		this.name = name;
+		this.firstName = new SimpleStringProperty(name);
 	}
 
 	public String getLastName() {
@@ -40,6 +54,7 @@ public class Guest {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+		this.sirName = new SimpleStringProperty(lastName);
 	}
 
 	public String getAdress() {
@@ -64,6 +79,14 @@ public class Guest {
 
 	public void setBusiness(boolean isBusiness) {
 		this.isBusiness = isBusiness;
+	}
+	
+	public StringProperty getFirstNameProperty() {
+		return firstName;
+	}
+	
+	public StringProperty getLastNameProperty() {
+		return sirName;
 	}
 	
 	public boolean compareTo(Guest guest){
