@@ -66,7 +66,7 @@ public class RegistrationWindow {
 			        "Business",
 			        "Private"
 			    );
-			final ComboBox comboBox = new ComboBox(options);
+			final ComboBox<String> comboBox = new ComboBox<String>(options);
 			
 			Label businessCheck = new Label("Reason for staying? ");
 			businessCheck.setTranslateX(100);
