@@ -1,5 +1,6 @@
 package view;
 
+import controller.MainWindowController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,9 +14,15 @@ import javafx.stage.Stage;
 
 public class MainWindow extends Application {
 
+	static MainWindowController winCont;
 	private RegistrationWindow regWin;
 	private CheckinWindow cheWin;
 	private ReservationWindow resWin;
+	public Button guestButton = new Button();
+	public Button reservationButton = new Button();
+	public Button checkinButton = new Button();
+	MainWindowController mainC = new MainWindowController(this);
+	
 	@Override
 	public void start(Stage primaryStage) {
 		VBox layout = new VBox();
@@ -30,19 +37,19 @@ public class MainWindow extends Application {
 		centerPane.setPrefSize(800, 700);
 		
 		
-		Button guestButton = new Button();
+		
 		guestButton.setText("Guest");
 		guestButton.setPrefSize(120, 120);
 		guestButton.setTranslateX(80);
 		guestButton.setTranslateY(200);
 		
-		Button reservationButton = new Button();
+		
 		reservationButton.setText("Reservation");
 		reservationButton.setPrefSize(120, 120);
 		reservationButton.setTranslateX(450);
 		reservationButton.setTranslateY(200);
 		
-		Button checkinButton = new Button();
+		
 		checkinButton.setText("Check in");
 		checkinButton.setPrefSize(120, 120);
 		checkinButton.setTranslateX(800);
@@ -50,38 +57,7 @@ public class MainWindow extends Application {
 		
 		centerPane.getChildren().addAll(guestButton, reservationButton, checkinButton);
 		
-		guestButton.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				try {
-					
-					regWin = new RegistrationWindow();
-				} catch(Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		
-		reservationButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-			try {
-				resWin = new ReservationWindow();
-				
-			}catch (Exception e3){
-				e3.printStackTrace();
-			}
-			}
-		});
-		
-		checkinButton.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				try {
-					cheWin = new CheckinWindow();
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-			}
-		});
-		
+		mainC.eventHandle();
 		
 		
 		layout.getChildren().addAll(topPane,centerPane);
@@ -98,4 +74,8 @@ public class MainWindow extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	
+	
+	
 }
