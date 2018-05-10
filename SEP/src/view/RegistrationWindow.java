@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -79,7 +80,13 @@ public class RegistrationWindow {
 		createTextField("Name: ", 0, 1);
 		createTextField("Last Name: ", 0, 2);
 		createTextField("Address: ", 0, 3);
-		createTextField("Birthday: ", 0, 4);
+		Label birthLabel= new Label("Birthday: ");
+		birthLabel.setTranslateX(100);
+		grid.add(birthLabel, 0, 4);
+		DatePicker textField = new DatePicker ();
+		textField.setTranslateX(100);
+		grid.add(textField, 1, 4);
+		/*createTextField("Birthday: ", 0, 4);*/
 		
 		
 		Scene regisWindow = new Scene(grid, 600, 800);

@@ -15,6 +15,7 @@ public class MainWindow extends Application {
 
 	private RegistrationWindow regWin;
 	private CheckinWindow cheWin;
+	private ReservationWindow resWin;
 	@Override
 	public void start(Stage primaryStage) {
 		VBox layout = new VBox();
@@ -57,6 +58,17 @@ public class MainWindow extends Application {
 				} catch(Exception e1) {
 					e1.printStackTrace();
 				}
+			}
+		});
+		
+		reservationButton.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent e){
+			try {
+				resWin = new ReservationWindow();
+				
+			}catch (Exception e3){
+				e3.printStackTrace();
+			}
 			}
 		});
 		
