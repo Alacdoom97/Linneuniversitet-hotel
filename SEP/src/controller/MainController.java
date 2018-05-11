@@ -6,14 +6,14 @@ import view.CheckinWindow;
 import view.MainWindow;
 import view.RegistrationWindow;
 import view.ReservationWindow;
-public class MainWindowController {
+public class MainController {
 	
 	RegistrationWindow regWin;
 	ReservationWindow resWin;
 	CheckinWindow cheWin;
 	MainWindow main;
 	
-	public MainWindowController(MainWindow main){
+	public MainController(MainWindow main){
 		this.main = main;
 	}
 	
@@ -28,6 +28,15 @@ public class MainWindowController {
 			}
 		});
 		
+		main.reservationButton.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle (ActionEvent e){
+				try{
+					resWin = new ReservationWindow();
+				}catch(Exception e2){
+					e2.printStackTrace();
+				}
+			}
+		});
 		
 	}
 	

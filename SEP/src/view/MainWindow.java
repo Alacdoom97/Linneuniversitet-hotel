@@ -1,6 +1,6 @@
 package view;
 
-import controller.MainWindowController;
+import controller.MainController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,14 +14,14 @@ import javafx.stage.Stage;
 
 public class MainWindow extends Application {
 
-	static MainWindowController winCont;
+	static MainController winCont;
 	private RegistrationWindow regWin;
 	private CheckinWindow cheWin;
 	private ReservationWindow resWin;
 	public Button guestButton = new Button();
 	public Button reservationButton = new Button();
 	public Button checkinButton = new Button();
-	MainWindowController mainC = new MainWindowController(this);
+	private MainController mainC = new MainController(this);
 	
 	@Override
 	public void start(Stage primaryStage) {

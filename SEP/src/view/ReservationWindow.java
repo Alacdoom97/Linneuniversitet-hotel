@@ -1,10 +1,15 @@
 package view;
 
+import java.time.LocalDate;
+
+import controller.ReservationController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -14,17 +19,27 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class ReservationWindow {
 	final ToggleGroup group = new ToggleGroup();
 	final ToggleGroup group1 = new ToggleGroup();
+	final ComboBox cBoxQuality = new ComboBox();
+	final ComboBox cBoxBeds = new ComboBox();
+	public Button guestButton = new Button();
+	public Button newGuestButton = new Button();
+	public Button confirmB = new Button("Confirm");
+	public Button cancelB = new Button("Cancel");
+	private ReservationController resControl = new ReservationController(this);
+	public Stage resWin = new Stage();
 
 	
 	public ReservationWindow(){
 		reservationWin();
 	}
+	
 	public void reservationWin() {
-		Stage resWin = new Stage();
+		
 		GridPane grid = new GridPane();
 		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
@@ -45,12 +60,12 @@ public class ReservationWindow {
 			grid.getRowConstraints().add(rowConst);
 		}
 		
-		Button guestButton = new Button();
+		
 		guestButton.setPrefSize(200, 20);
 		guestButton.setText("Guests");
 		grid.add(guestButton,2,1);
 		
-		Button newGuestButton = new Button();
+		
 		newGuestButton.setPrefSize(200, 20);
 		newGuestButton.setText("New Guest");
 		grid.add(newGuestButton, 2, 2);
@@ -65,21 +80,51 @@ public class ReservationWindow {
 		
 		
 		DatePicker checkInDate = new DatePicker();
+		checkInDate.setValue(LocalDate.now());
 		DatePicker checkOutDate = new DatePicker();
+		
+		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
+
+						if (item.isBefore(LocalDate.now())) {
+							setDisable(true);
+							setStyle("-fx-background-color: #EEEEEE;");
+						}
+					}
+				};
+			}
+		};
+		
+		final Callback<DatePicker, DateCell> dayCellFactory1 = new Callback<DatePicker, DateCell>() {
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
+
+						if (item.isBefore(LocalDate.now().plusDays(1))) {
+							setDisable(true);
+							setStyle("-fx-background-color: #EEEEEE;");
+						}
+					}
+				};
+			}
+		};
+		checkInDate.setDayCellFactory(dayCellFactory);
+		checkOutDate.setDayCellFactory(dayCellFactory1);
+			
 		grid.add(checkInDate, 0, 1);
 		grid.add(checkOutDate, 1, 1);
 		
-		RadioButton singleRoomButton = new RadioButton("Single room");
-		RadioButton doubleRoomButton = new RadioButton("Double room");
-		RadioButton tripleRoomButton = new RadioButton("Triple room");
-		singleRoomButton.setToggleGroup(group);
-		singleRoomButton.setSelected(true);
-		doubleRoomButton.setToggleGroup(group);
-		tripleRoomButton.setToggleGroup(group);
-		
-		grid.add(singleRoomButton, 0, 3);
-		grid.add(doubleRoomButton, 1, 3);
-		grid.add(tripleRoomButton, 0, 4);
+		cBoxBeds.getItems().addAll("Single Room", "Double Room", "Triple Room");
+		cBoxBeds.setValue("Single Room");
+		grid.add(cBoxBeds, 0, 3);
 		
 		RadioButton nonSmokeB = new RadioButton("Non-Smoking");
 		RadioButton SmokeB = new RadioButton("Smoking");
@@ -88,8 +133,26 @@ public class ReservationWindow {
 		nonSmokeB.setSelected(true);
 		SmokeB.setToggleGroup(group1);
 		
-		grid.add(nonSmokeB, 0, 6);
-		grid.add(SmokeB, 1, 6);
+		grid.add(nonSmokeB, 0, 5);
+		grid.add(SmokeB, 1, 5);
+		
+		
+		
+		confirmB.setTranslateX(270);
+		
+		
+		cancelB.setTranslateX(100);
+		
+		
+		grid.add(confirmB,1,12);
+		grid.add(cancelB, 2, 12);
+		
+		cBoxQuality.getItems().addAll("1-Star", "2-Star", "3-Star");
+		cBoxQuality.setValue("1-Star");
+		grid.add(cBoxQuality, 0, 4);
+		
+		resControl.eventHandle();
+		
 		
 		Scene scene = new Scene(grid, 800, 800);
 		resWin.setScene(scene);
