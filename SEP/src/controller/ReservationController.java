@@ -6,6 +6,7 @@ import view.*;
 public class ReservationController {
 	ReservationWindow main;
 	RegistrationWindow regWin;
+	GuestWindow guestWin;
 	public ReservationController(ReservationWindow main){
 		this.main = main;
 		
@@ -29,6 +30,16 @@ public class ReservationController {
 					main.resWin.close();
 				}catch(Exception e2){
 					e2.printStackTrace();
+				}
+			}
+		});
+		
+		main.guestButton.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent e){
+				try{
+					guestWin = new GuestWindow();
+				}catch(Exception e3){
+					e3.printStackTrace();
 				}
 			}
 		});
