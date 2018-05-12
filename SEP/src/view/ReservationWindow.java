@@ -15,9 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -26,10 +29,13 @@ public class ReservationWindow {
 	final ToggleGroup group1 = new ToggleGroup();
 	final ComboBox cBoxQuality = new ComboBox();
 	final ComboBox cBoxBeds = new ComboBox();
+	final ComboBox cBoxSmoke = new ComboBox();
 	public Button guestButton = new Button();
 	public Button newGuestButton = new Button();
 	public Button confirmB = new Button("Confirm");
 	public Button cancelB = new Button("Cancel");
+	public Button searchButton = new Button("Search");
+	
 	private ReservationController resControl = new ReservationController(this);
 	public Stage resWin = new Stage();
 
@@ -39,14 +45,17 @@ public class ReservationWindow {
 	}
 	
 	public void reservationWin() {
-		
+		resWin.setTitle("Reservation Manager");
+		Pane layout = new Pane();
 		GridPane grid = new GridPane();
-		grid.setGridLinesVisible(true);
+		grid.setGridLinesVisible(false);
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(20);
 		grid.setPadding(new Insets(40,20,20,20));
-		int colMax = 3;
-		int rowMax = 14;
+		grid.setPrefSize(1000, 200);
+		grid.setTranslateZ(10);
+		int colMax = 4;
+		int rowMax = 4;
 		
 		for(int i = 0; i < colMax; ++i){
 			ColumnConstraints colConst = new ColumnConstraints();
@@ -61,22 +70,24 @@ public class ReservationWindow {
 		}
 		
 		
-		guestButton.setPrefSize(200, 20);
-		guestButton.setText("Guests");
-		grid.add(guestButton,2,1);
 		
 		
-		newGuestButton.setPrefSize(200, 20);
-		newGuestButton.setText("New Guest");
-		grid.add(newGuestButton, 2, 2);
+		searchButton.setPrefSize(200,20);
+		searchButton.setText("Search");
+		grid.add(searchButton, 2, 3);
 		
 		Label arrivalLabel = new Label("Arrival");
-		arrivalLabel.setTranslateY(15);
+		arrivalLabel.setTranslateY(10);
 		grid.add(arrivalLabel, 0, 0);
 		
 		Label departureLabel = new Label("Departure");
-		departureLabel.setTranslateY(15);
+		departureLabel.setTranslateY(10);
 		grid.add(departureLabel, 1, 0);
+		
+		TextField roomNrTF = new TextField();
+		roomNrTF.setPromptText("Room nr");
+		
+		grid.add(roomNrTF, 1, 3);
 		
 		
 		DatePicker checkInDate = new DatePicker();
@@ -124,39 +135,91 @@ public class ReservationWindow {
 		
 		cBoxBeds.getItems().addAll("Single Room", "Double Room", "Triple Room");
 		cBoxBeds.setValue("Single Room");
-		grid.add(cBoxBeds, 0, 3);
+		grid.add(cBoxBeds, 0, 2);
 		
-		RadioButton nonSmokeB = new RadioButton("Non-Smoking");
-		RadioButton SmokeB = new RadioButton("Smoking");
-		
-		nonSmokeB.setToggleGroup(group1);
-		nonSmokeB.setSelected(true);
-		SmokeB.setToggleGroup(group1);
-		
-		grid.add(nonSmokeB, 0, 5);
-		grid.add(SmokeB, 1, 5);
+		cBoxSmoke.getItems().addAll("Non-smoker", "Smoker");
+		cBoxSmoke.setValue("Non-smoker");
+		grid.add(cBoxSmoke, 0, 3);
 		
 		
 		
-		confirmB.setTranslateX(270);
 		
 		
-		cancelB.setTranslateX(100);
-		
-		
-		grid.add(confirmB,1,12);
-		grid.add(cancelB, 2, 12);
 		
 		cBoxQuality.getItems().addAll("1-Star", "2-Star", "3-Star");
 		cBoxQuality.setValue("1-Star");
-		grid.add(cBoxQuality, 0, 4);
+		grid.add(cBoxQuality, 1, 2);
 		
 		resControl.eventHandle();
+		GridPane grid1 = new GridPane();
+		grid1.setGridLinesVisible(false);
+		grid1.setPrefSize(400, 800);
+		grid1.setTranslateX(1050);
+		grid1.setTranslateY(35);
+		
+		int rowMax1 = 16;
+		int colMax1 = 1;
+		
+		for (int i = 0; i < rowMax1; ++i){
+			RowConstraints rowConst = new RowConstraints();
+			rowConst.setPercentHeight(100.0/rowMax1);
+			grid1.getRowConstraints().add(rowConst);
+		}
+		
+		for(int i = 0; i < colMax1; ++i){
+			ColumnConstraints colConst = new ColumnConstraints();
+			colConst.setPercentWidth(100.0/colMax1);
+			grid1.getColumnConstraints().add(colConst);
+		}
+		
+		guestButton.setPrefSize(150, 20);
+		guestButton.setText("Guests");
+		grid1.add(guestButton,0,0);
 		
 		
-		Scene scene = new Scene(grid, 800, 800);
+		newGuestButton.setPrefSize(150, 20);
+		newGuestButton.setText("New Guest");
+		newGuestButton.setTranslateX(200);
+		grid1.add(newGuestButton, 0, 0);
+		for (int i = 1; i < 15; i += 2){
+			grid1.add(cellFill("-fx-background-color:grey"),0, i);	
+		}
+		
+		grid1.add(textLabel("Name"), 0, 1);
+		grid1.add(textLabel("Birthdate"), 0, 3);
+		grid1.add(textLabel("Country"), 0, 5);
+		grid1.add(textLabel("Adress"), 0, 7);
+		grid1.add(textLabel("Phone"), 0, 9);
+		
+		confirmB.setTranslateX(200);
+		grid1.add(confirmB, 0, 15);
+		cancelB.setTranslateX(280);
+		grid1.add(cancelB, 0, 15);
+		
+		
+		GridPane grid2 = new GridPane();
+		grid2.setPrefSize(900, 600);
+		grid2.setStyle("-fx-background-color:blue");
+		grid2.setTranslateX(20);
+		grid2.setTranslateY(200);
+		layout.getChildren().addAll(grid, grid1);
+		
+		
+		
+		Scene scene = new Scene(layout, 1500, 900);
 		resWin.setScene(scene);
 		resWin.show();
 		
+	}
+	
+	public StackPane cellFill(String color){
+		StackPane sp = new StackPane();
+		sp.setStyle(color);
+		return sp;
+	}
+	
+	public Label textLabel(String text){
+		Label tl = new Label(text);
+		return tl;
 	}
 }
