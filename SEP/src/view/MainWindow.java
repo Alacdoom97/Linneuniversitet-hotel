@@ -21,6 +21,7 @@ public class MainWindow extends Application {
 	public Button guestButton = new Button();
 	public Button reservationButton = new Button();
 	public Button checkinButton = new Button();
+	public Button guestListButton = new Button();
 	private MainController mainC = new MainController(this);
 	
 	@Override
@@ -55,7 +56,12 @@ public class MainWindow extends Application {
 		checkinButton.setTranslateX(800);
 		checkinButton.setTranslateY(200);
 		
-		centerPane.getChildren().addAll(guestButton, reservationButton, checkinButton);
+		guestListButton.setText("Guest List");
+		guestListButton.setPrefSize(120, 120);
+		guestListButton.setTranslateX(450);
+		guestListButton.setTranslateY(500);
+		
+		centerPane.getChildren().addAll(guestButton, reservationButton, checkinButton, guestListButton);
 		
 		mainC.eventHandle();
 		
