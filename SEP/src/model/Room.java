@@ -1,6 +1,7 @@
 package model;
 
 public class Room {
+	private String hotelName;
 	private int roomNumber;
 	private int quality;
 	private int floor;
@@ -11,7 +12,8 @@ public class Room {
 		
 	}
 	
-	public Room(int roomNumber, int quality, int floor, boolean smokingAllowed, boolean availability) {
+	public Room(String hotelName, int roomNumber, int quality, int floor, boolean smokingAllowed, boolean availability) {
+		this.hotelName = hotelName;
 		this.roomNumber = roomNumber;
 		this.quality = quality;
 		this.floor = floor;
