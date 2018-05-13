@@ -7,22 +7,22 @@ public class Guest {
 	private String name;
 	private String lastName;
 	private String adress;
-	private LocalDate birthday;
+	private String personalNumber;
 	private boolean isBusiness;
 	
 	public Guest(){
-		createGuest("", "", "", LocalDate.now(), false);
+		createGuest("", "", "", "", false);
 	}
-	public Guest(String company, String name, String lastName, String address, LocalDate birthday, boolean isBusiness){
+	public Guest(String company, String name, String lastName, String address, String personalNumber, boolean isBusiness){
 		companyName = company;
 		this.name = name;
 		this.lastName = lastName;
 		this.adress = address;
-		this.birthday = birthday;
+		this.personalNumber = personalNumber;
 		this.isBusiness = isBusiness;
 	}
 	
-	public void createGuest(String name, String lastname, String adress, LocalDate birthday, boolean isBusiness){
+	public void createGuest(String name, String lastname, String adress, String personalNumber, boolean isBusiness){
 		
 	}
 
@@ -58,12 +58,12 @@ public class Guest {
 		this.adress = adress;
 	}
 
-	public LocalDate getBirthday() {
-		return birthday;
+	public String getPersNum() {
+		return personalNumber;
 	}
 
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
+	public void setBirthday(String personalNumber) {
+		this.personalNumber = personalNumber;
 	}
 
 	public boolean isBusiness() {
@@ -84,8 +84,8 @@ public class Guest {
 	}
 	
 	public boolean compareTo(Guest guest){
-		if(this.name == guest.getName() && this.birthday == guest.getBirthday() 
-				&& this.isBusiness == guest.isBusiness & this.lastName == guest.lastName){
+		if(this.name == guest.getName() && this.personalNumber == guest.getPersNum() 
+				&& this.isBusiness == guest.isBusiness() & this.lastName == guest.getLastName()){
 			return true;
 		}
 		else {

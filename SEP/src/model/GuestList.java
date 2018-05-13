@@ -26,5 +26,18 @@ public class GuestList {
 	public int getSize(){
 		return size;
 	}
+	
+	public boolean getFromList(String name, String date) {
+		for(int i = 0; i < getSize(); i++) {
+			if (name == guests.get(i).getName() && date == guests.get(i).getPersNum()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Guest getGuest(int i) {
+		return guests.get(i);
+	}
 
 }

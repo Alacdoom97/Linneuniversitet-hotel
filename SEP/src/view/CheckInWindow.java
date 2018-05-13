@@ -4,9 +4,8 @@ import java.time.LocalDate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,10 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.Guest;
@@ -26,11 +22,14 @@ import model.GuestList;
 public class CheckInWindow {
 	public static final ObservableList<String> data = FXCollections.observableArrayList();
 	public static final ObservableList<Guest> names = FXCollections.observableArrayList();
+	public Button searchButton = new Button();
 	public Button checkIn = new Button();
 	public Button checkOut = new Button();
 	public Stage guestWin = new Stage();
+	public TextField searchBar;
+	public TextField searchBar2;
 	private GuestList gueList = new GuestList();
-	GridPane gridy;
+	
 	LocalDate now = LocalDate.now();
 
 	public CheckInWindow() {
@@ -41,12 +40,7 @@ public class CheckInWindow {
 	@SuppressWarnings("unchecked")
 	public void cheWin() {
 		Pane pane = new Pane();
-		gridy = new GridPane();
-		gridy.setAlignment(Pos.CENTER);
-		gridy.setPadding(new Insets(40, 40, 40, 40));
-		gridy.setGridLinesVisible(false);
-		gridy.setTranslateX(200);
-		gridy.setTranslateY(50);
+		
 
 		checkIn.setText("Check In");
 		checkIn.setPrefSize(120, 120);
@@ -57,126 +51,145 @@ public class CheckInWindow {
 		checkOut.setPrefSize(120, 120);
 		checkOut.setTranslateX(275);
 		checkOut.setTranslateY(300);
-
-		for (int i = 0; i < 1; i++) {
-			/* Creating the Columns and rows */
-			ColumnConstraints columns = new ColumnConstraints();
-			columns.setPercentWidth(250 / 3);
-			gridy.getColumnConstraints().add(columns);
-
-		}
-		for (int i = 0; i < 5; i++) {
-			/* Creating the Columns and rows */
-
-			RowConstraints rows = new RowConstraints();
-			rows.setPercentHeight(250 / 5);
-			gridy.getRowConstraints().add(rows);
-		}
+		
+		searchButton.setText("Search");
+		searchButton.setTranslateX(300);
+		searchButton.setTranslateY(160);
+		
+		searchBar = new TextField();
+		searchBar.setPromptText("Enter Name");
+		searchBar.setTranslateX(300);
+		searchBar.setTranslateY(100);
+		
+		searchBar2 = new TextField();
+		searchBar2.setPromptText("Enter Personal Number");
+		searchBar2.setTranslateX(300);
+		searchBar2.setTranslateY(130);
 
 		final ListView listView = new ListView<>(names);
 
 		listView.setPrefSize(250, 450);
 		listView.setEditable(true);
-
-		Guest guest1 = new Guest("", "Alfred", "Mourney", "Georg Lückligs Väg 22", now, false);
-		Guest guest2 = new Guest("", "Hau", "Trinh", "Lovely Street 29", now, false);
-		Guest guest3 = new Guest("", "Pranav", "Patel", "Näktergalsvägen 30", now, false);
-		Guest guest4 = new Guest("", "Stefan", "Bampovits", "Stuborvägen 15", now, false);
-		Guest guest5 = new Guest("", "Vikrant", "Mainali", "Fyllerydsvägen 43C", now, false);
-		Guest guest6 = new Guest("", "Christian", "Fagerholm", "Kungsgatan 13", now, false);
-
-		names.add(guest1);
-		names.add(guest2);
-		names.add(guest3);
-		names.add(guest4);
-		names.add(guest5);
-		names.add(guest6);
 		
+		
+
+		Guest guest1 = new Guest("", "Alfred", "Mourney", "Georg Lückligs Väg 22", "19810423-1234", false);
+		Guest guest2 = new Guest("", "Pranav", "Patel", "Lively Road 25", "19971125-2255", false);
+		Guest guest3 = new Guest("", "Stefan", "Bampovits", "Stuborvägen 15", "12345678-9123", false);
+		Guest guest4 = new Guest("", "Hau", "Trinh", "Kunggatan 10", "23456789-1234", false);
+		Guest guest5 = new Guest("", "Vikrant", "Mainali", "Fyllerydsvägen 43C", "34567891-2345", false);
 		
 		gueList.addToList(guest1);
 		gueList.addToList(guest2);
 		gueList.addToList(guest3);
 		gueList.addToList(guest4);
 		gueList.addToList(guest5);
-		gueList.addToList(guest6);
-
+		
+		names.add(guest1);
+		names.add(guest2);
+		names.add(guest3);
+		names.add(guest4);
+		names.add(guest5);
+		
+		
 		for (int i = 0; i < names.size(); i++) {
 			data.add(names.get(i).getName() + " " + names.get(i).getLastName());
 		}
+		
+		
+		searchButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent search) {
+				try {
+					names.clear();
+					data.clear();
+					for (int i = 0; i < gueList.getSize(); i++) {
+						Guest guest = gueList.getGuest(i);
+						if (searchBar.getText().equals(guest.getName()) && searchBar2.getText().equals(guest.getPersNum())) {
+							names.add(guest);
+							data.add(names.get(i).getName() + " " + names.get(i).getLastName());
+						}
+					}
+				} catch (Exception e4) {
+					e4.printStackTrace();
+				}
+			}
+		});
 
 		listView.setItems(data);
 
 		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-
+				Guest tempGuest = (Guest) listView.getOnMouseClicked();
+				Guest guest = null;
 				if (event.getButton().equals(MouseButton.PRIMARY)) {
 					if (event.getClickCount() == 2) {
 						for (int i = 0; i < gueList.getSize(); i++) {
-							if (names.get(i) == null) {
-								Guest guest = names.get(i);
-								if (guest != null) {
-									Pane listPane = new Pane();
-									Scene listScene = new Scene(listPane, 500, 500);
-									Stage listStage = new Stage();
-
-									Label nameLab = new Label("Name: ");
-									nameLab.setTranslateY(10);
-
-									TextField name = new TextField(guest.getName());
-									name.setEditable(false);
-									name.setTranslateX(60);
-									name.setTranslateY(10);
-
-									Label lastNameLab = new Label("Last Name: ");
-									lastNameLab.setTranslateY(40);
-
-									TextField lastName = new TextField(guest.getLastName());
-									lastName.setEditable(false);
-									lastName.setTranslateX(60);
-									lastName.setTranslateY(40);
-
-									Label addressLab = new Label("Address: ");
-									addressLab.setTranslateY(70);
-
-									TextField address = new TextField(guest.getAdress());
-									address.setEditable(false);
-									address.setTranslateY(70);
-									address.setTranslateX(60);
-
-									Label birthdayLab = new Label("Birthday: ");
-									birthdayLab.setTranslateY(100);
-
-									TextField birthday = new TextField(guest.getBirthday().toString());
-									birthday.setEditable(false);
-									birthday.setTranslateY(100);
-									birthday.setTranslateX(60);
-
-									Label businessLab = new Label("Business stay: ");
-									businessLab.setTranslateY(130);
-
-									TextField isBusiness = new TextField(guest.booleanToString(guest.isBusiness()));
-									isBusiness.setEditable(false);
-									isBusiness.setTranslateY(130);
-									isBusiness.setTranslateX(80);
-
-									listPane.getChildren().addAll(name, nameLab, lastName, lastNameLab, address,
-											addressLab, birthday, birthdayLab, isBusiness, businessLab, checkIn,
-											checkOut);
-									listStage.setScene(listScene);
-									listStage.show();
-								}
+							if (tempGuest.compareTo(names.get(i))) {
+								guest = names.get(i);
+								break;
 							}
-
 						}
 					}
+					if (guest != null) {
+						Pane listPane = new Pane();
+						Scene listScene = new Scene(listPane, 500, 500);
+						Stage listStage = new Stage();
+
+						Label nameLab = new Label("Name: ");
+						nameLab.setTranslateY(10);
+
+						TextField name = new TextField(guest.getName());
+						name.setEditable(false);
+						name.setTranslateX(60);
+						name.setTranslateY(10);
+
+						Label lastNameLab = new Label("Last Name: ");
+						lastNameLab.setTranslateY(40);
+
+						TextField lastName = new TextField(guest.getLastName());
+						lastName.setEditable(false);
+						lastName.setTranslateX(60);
+						lastName.setTranslateY(40);
+
+						Label addressLab = new Label("Address: ");
+						addressLab.setTranslateY(70);
+
+						TextField address = new TextField(guest.getAdress());
+						address.setEditable(false);
+						address.setTranslateY(70);
+						address.setTranslateX(60);
+
+						Label birthdayLab = new Label("Birthday: ");
+						birthdayLab.setTranslateY(100);
+
+						TextField birthday = new TextField(guest.getPersNum());
+						birthday.setEditable(false);
+						birthday.setTranslateY(100);
+						birthday.setTranslateX(60);
+
+						Label businessLab = new Label("Business stay: ");
+						businessLab.setTranslateY(130);
+
+						TextField isBusiness = new TextField(guest.booleanToString(guest.isBusiness()));
+						isBusiness.setEditable(false);
+						isBusiness.setTranslateY(130);
+						isBusiness.setTranslateX(80);
+
+						listPane.getChildren().addAll(name, nameLab, lastName, lastNameLab, address, addressLab,
+								birthday, birthdayLab, isBusiness, businessLab, checkIn, checkOut);
+						listStage.setScene(listScene);
+						listStage.show();
+					}
 				}
+
 			}
+
 		});
 
 		StackPane root = new StackPane();
-		pane.getChildren().addAll(root, gridy);
-		root.getChildren().addAll(listView);
+		pane.getChildren().addAll(root, searchBar, searchBar2, searchButton);
+		root.getChildren().add(listView);
 
 		Scene scene = new Scene(pane, 500, 500);
 		guestWin.setScene(scene);
