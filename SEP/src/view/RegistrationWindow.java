@@ -20,8 +20,13 @@ public class RegistrationWindow {
 	ColumnConstraints columns;
 	RowConstraints rows;
 	GridPane grid;
-	Button accept = new Button();
-	
+	public Button accept = new Button();
+	public Button cancel = new Button();
+	public TextField name;
+	public TextField companyName;
+	public TextField adress;
+	public TextField lastname;
+	public DatePicker textField = new DatePicker ();
 	
 	public RegistrationWindow() {
 		RegisWindow();
@@ -49,13 +54,13 @@ public class RegistrationWindow {
 			rows.setPercentHeight(100.0/6);
 			grid.getRowConstraints().add(rows);
 		}
-		Button accept = new Button();
+		
 		accept.setPrefSize(120, 60);
 		accept.setTranslateX(100);
 		accept.setTranslateY(50);
 		accept.setText("Confirm");
 		grid.add(accept, 0, 5);
-		Button cancel = new Button();
+		
 		cancel.setPrefSize(120, 60);
 		cancel.setTranslateX(100);
 		cancel.setTranslateY(50);
@@ -77,17 +82,18 @@ public class RegistrationWindow {
 			comboBox.setTranslateX(100);
 		grid.add(comboBox, 1, 4);
 		
-		createTextField("Company Name: ", 0, 0);
-		createTextField("Name: ", 0, 1);
-		createTextField("Last Name: ", 0, 2);
-		createTextField("Address: ", 0, 3);
-		Label birthLabel= new Label("Birthday: ");
+		companyName = createTextField("Company Name: ", 0, 0);
+		name = createTextField("Name: ", 0, 1);
+		lastname = createTextField("Last Name: ", 0, 2);
+		adress = createTextField("Address: ", 0, 3);
+		Label birthLabel= new Label(": ");
 		birthLabel.setTranslateX(100);
 		grid.add(birthLabel, 0, 4);
-		DatePicker textField = new DatePicker ();
+		
+		
 		textField.setTranslateX(100);
 		grid.add(textField, 1, 4);
-		/*createTextField("Birthday: ", 0, 4);*/
+		/*createTextField(": ", 0, 4);*/
 		
 		
 		Scene regisWindow = new Scene(grid, 600, 800);
@@ -95,13 +101,14 @@ public class RegistrationWindow {
 		regWin.show();
 	}
 	
-	public void createTextField(String name, int column, int row) {
+	public TextField createTextField(String name, int column, int row) {
 		Label label1 = new Label(name);
 		label1.setTranslateX(100);
 		grid.add(label1, column, row);
 		TextField textField = new TextField ();
 		textField.setTranslateX(100);
 		grid.add(textField, column+1, row);
+		return textField;
 		
 	}
 

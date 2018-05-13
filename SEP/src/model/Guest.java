@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Guest {
 	private String companyName;
@@ -8,6 +9,7 @@ public class Guest {
 	private String lastName;
 	private String adress;
 	private String personalNumber;
+	private ArrayList<LocalDate> bookings = new ArrayList<LocalDate>();
 	private boolean isBusiness;
 	
 	public Guest(){
