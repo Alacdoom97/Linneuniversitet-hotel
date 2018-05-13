@@ -1,16 +1,16 @@
 package controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import view.CheckinWindow;
+import view.CheckInWindow;
 import view.GuestWindow;
 import view.MainWindow;
 import view.RegistrationWindow;
 import view.ReservationWindow;
 public class MainController {
 	
+	CheckInWindow cheWin;
 	RegistrationWindow regWin;
 	ReservationWindow resWin;
-	CheckinWindow cheWin;
 	GuestWindow gueWin;
 	MainWindow main;
 	
@@ -45,6 +45,16 @@ public class MainController {
 					gueWin = new GuestWindow();
 				} catch (Exception e3) {
 					e3.printStackTrace();
+				}
+			}
+		});
+		
+		main.checkinButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				try {
+					cheWin = new CheckInWindow();
+				} catch(Exception e4) {
+					e4.printStackTrace();
 				}
 			}
 		});

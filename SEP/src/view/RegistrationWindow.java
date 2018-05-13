@@ -20,6 +20,7 @@ public class RegistrationWindow {
 	ColumnConstraints columns;
 	RowConstraints rows;
 	GridPane grid;
+	Button accept = new Button();
 	
 	
 	public RegistrationWindow() {
