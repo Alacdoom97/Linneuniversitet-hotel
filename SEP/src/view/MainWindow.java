@@ -16,7 +16,7 @@ public class MainWindow extends Application {
 
 	static MainController winCont;
 	private RegistrationWindow regWin;
-	private CheckinWindow cheWin;
+	private GuestWindow gueWin;
 	private ReservationWindow resWin;
 	public Button guestButton = new Button();
 	public Button reservationButton = new Button();
