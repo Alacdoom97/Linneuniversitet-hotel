@@ -8,11 +8,12 @@ public class GuestList {
 	
 	public GuestList(){
 		guests = new ArrayList<Guest>();
+		size = 0;
 	}
 	
 	public void addToList(Guest guest){
 		guests.add(guest);
-		++size;
+		size++;
 	}
 	
 	public void removeFromList(Guest guest){

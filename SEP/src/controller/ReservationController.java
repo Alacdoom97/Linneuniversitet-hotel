@@ -1,13 +1,17 @@
 package controller;
 
-import java.time.LocalDate;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
-import view.*;
-import model.*;
+import model.Grid;
+import model.GridList;
+import model.Guest;
+import view.CheckInWindow;
+import view.GuestWindow;
+import view.RegistrationWindow;
+import view.ReservationWindow;
 public class ReservationController {
+	CheckInWindow cheWin;
 	ReservationWindow main;
 	RegistrationWindow regWin;
 	GuestWindow guestWin;
@@ -18,6 +22,10 @@ public class ReservationController {
 	public ReservationController(ReservationWindow main){
 		this.main = main;
 		
+	}
+	
+	public ReservationController(CheckInWindow cheWin) {
+		this.cheWin = cheWin;
 	}
 	
 	public void eventHandle(){
@@ -112,6 +120,12 @@ public class ReservationController {
 				}
 			}
 		});
+		
+		
+	}
+	
+	public void checkInHandle() {
+		
 		
 	}
 	
