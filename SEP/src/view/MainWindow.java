@@ -1,6 +1,6 @@
 package view;
 
-import controller.MainWindowController;
+import controller.MainController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,14 +14,15 @@ import javafx.stage.Stage;
 
 public class MainWindow extends Application {
 
-	static MainWindowController winCont;
+	static MainController winCont;
 	private RegistrationWindow regWin;
-	private CheckinWindow cheWin;
+	private GuestWindow gueWin;
 	private ReservationWindow resWin;
 	public Button guestButton = new Button();
 	public Button reservationButton = new Button();
 	public Button checkinButton = new Button();
-	MainWindowController mainC = new MainWindowController(this);
+	public Button guestListButton = new Button();
+	private MainController mainC = new MainController(this);
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -55,7 +56,12 @@ public class MainWindow extends Application {
 		checkinButton.setTranslateX(800);
 		checkinButton.setTranslateY(200);
 		
-		centerPane.getChildren().addAll(guestButton, reservationButton, checkinButton);
+		guestListButton.setText("Guest List");
+		guestListButton.setPrefSize(120, 120);
+		guestListButton.setTranslateX(450);
+		guestListButton.setTranslateY(500);
+		
+		centerPane.getChildren().addAll(guestButton, reservationButton, checkinButton, guestListButton);
 		
 		mainC.eventHandle();
 		
