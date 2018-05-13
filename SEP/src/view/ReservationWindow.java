@@ -1,9 +1,12 @@
 package view;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import controller.ReservationController;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -35,18 +38,31 @@ public class ReservationWindow {
 	public Button confirmB = new Button("Confirm");
 	public Button cancelB = new Button("Cancel");
 	public Button searchButton = new Button("Search");
-	
+	public Button previousButton = new Button("<");
+	public Button nextButton = new Button(">");
 	private ReservationController resControl = new ReservationController(this);
 	public Stage resWin = new Stage();
-
+	final ObservableList<String> months = FXCollections.observableArrayList();
+	public LocalDate dateChecker = LocalDate.now();
+	private DatePicker checkInDate = new DatePicker();
+	private DatePicker checkOutDate = new DatePicker();
+	public Pane pane = new GridPane();
+	public Label monthLabel;
+	public Pane layout = new Pane();
+	public GridPane grid2 = new GridPane();
+	
 	
 	public ReservationWindow(){
 		reservationWin();
 	}
 	
 	public void reservationWin() {
+		
+		months.addAll("January","February","March","April","May","June","July"
+				,"August", "September", "October","November", "December");
+		
 		resWin.setTitle("Reservation Manager");
-		Pane layout = new Pane();
+		
 		GridPane grid = new GridPane();
 		grid.setGridLinesVisible(false);
 		grid.setAlignment(Pos.CENTER);
@@ -90,9 +106,8 @@ public class ReservationWindow {
 		grid.add(roomNrTF, 1, 3);
 		
 		
-		DatePicker checkInDate = new DatePicker();
+		
 		checkInDate.setValue(LocalDate.now());
-		DatePicker checkOutDate = new DatePicker();
 		
 		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
 			@Override
@@ -197,13 +212,47 @@ public class ReservationWindow {
 		grid1.add(cancelB, 0, 15);
 		
 		
-		GridPane grid2 = new GridPane();
-		grid2.setPrefSize(900, 600);
-		grid2.setStyle("-fx-background-color:blue");
-		grid2.setTranslateX(20);
-		grid2.setTranslateY(200);
-		layout.getChildren().addAll(grid, grid1);
 		
+		grid2.setGridLinesVisible(true);
+		grid2.setPrefSize(1000, 625);
+		grid2.setStyle("-fx-background-color:grey");
+		grid2.setTranslateX(20);
+		grid2.setTranslateY(230);
+		
+		int rowMax2 = 31;
+		int colMax2 = 32;
+		
+		for (int i = 0; i < rowMax2; ++i){
+			RowConstraints rowConst = new RowConstraints();
+			rowConst.setPercentHeight(100.0/rowMax2);
+			grid2.getRowConstraints().add(rowConst);
+		}
+		
+		for(int i = 0; i < colMax2; ++i){
+			ColumnConstraints colConst = new ColumnConstraints();
+			colConst.setPercentWidth(100.0/colMax2);
+			grid2.getColumnConstraints().add(colConst);
+		}
+		int y = 0;
+		
+		for(int i = 0; i < 31; ++i){
+			grid2.add(textLabel(Integer.toString(i+1)), i+1, 0);
+		}
+		
+		for(int i = 0; i < 30; ++i){
+			grid2.add(textLabel(Integer.toString(i+1)), 0, i+1);
+		}
+		
+		grid2.add(cellFill("-fx-background-color:green"), 5, 5);
+		
+		
+		pane.setTranslateX(19);
+		pane.setTranslateY(198);
+		pane.setPrefSize(1002, 20);
+		nextButton.setTranslateX(971);
+		pane.getChildren().addAll(nextButton, previousButton);
+		layout.getChildren().addAll(grid, grid1,grid2,pane);
+		monthDisplay(dateChecker);
 		
 		
 		Scene scene = new Scene(layout, 1500, 900);
@@ -222,4 +271,46 @@ public class ReservationWindow {
 		Label tl = new Label(text);
 		return tl;
 	}
+	
+	public void monthDisplay(LocalDate date){
+		monthLabel = new Label(months.get(date.getMonthValue()-1));
+		monthLabel.setTranslateX(475);
+		pane.getChildren().add(monthLabel);
+	}
+	
+	public GridPane newGrid(){
+		GridPane newGp = new GridPane();
+		newGp.setGridLinesVisible(true);
+		newGp.setPrefSize(1000, 625);
+		newGp.setStyle("-fx-background-color:grey");
+		newGp.setTranslateX(20);
+		newGp.setTranslateY(230);
+		
+		int rowMax2 = 31;
+		int colMax2 = 32;
+		
+		for (int i = 0; i < rowMax2; ++i){
+			RowConstraints rowConst = new RowConstraints();
+			rowConst.setPercentHeight(100.0/rowMax2);
+			newGp.getRowConstraints().add(rowConst);
+		}
+		
+		for(int i = 0; i < colMax2; ++i){
+			ColumnConstraints colConst = new ColumnConstraints();
+			colConst.setPercentWidth(100.0/colMax2);
+			newGp.getColumnConstraints().add(colConst);
+		}
+		int y = 0;
+		
+		for(int i = 0; i < 31; ++i){
+			newGp.add(textLabel(Integer.toString(i+1)), i+1, 0);
+		}
+		
+		for(int i = 0; i < 30; ++i){
+			newGp.add(textLabel(Integer.toString(i+1)), 0, i+1);
+		}
+		return newGp;
+	}
+	
+	
 }
