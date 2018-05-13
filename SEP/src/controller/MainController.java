@@ -10,7 +10,6 @@ public class MainController {
 	
 	RegistrationWindow regWin;
 	ReservationWindow resWin;
-	CheckinWindow cheWin;
 	GuestWindow gueWin;
 	MainWindow main;
 	
