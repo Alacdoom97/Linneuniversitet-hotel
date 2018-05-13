@@ -1,22 +1,28 @@
 package view;
 
+
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.Guest;
 
 public class CheckInWindow{
-	public static final ObservableList names = FXCollections.observableArrayList();
-	public static final ObservableList data = FXCollections.observableArrayList();
+	public static final ObservableList<Guest> data = FXCollections.observableArrayList();
+	public static final ObservableList<String> names = FXCollections.observableArrayList();
 	public Button checkIn = new Button();
 	public Button checkOut = new Button();
 	public Stage guestWin = new Stage();
@@ -26,6 +32,7 @@ public class CheckInWindow{
 		cheWin();
 		
 	}
+	@SuppressWarnings("unchecked")
 	public void cheWin(){
 		Pane pane = new Pane();
 		gridy = new GridPane();
@@ -60,29 +67,42 @@ public class CheckInWindow{
 			gridy.getRowConstraints().add(rows);
 		}
 		
-		final ListView listView = new ListView(data);
+		final ListView<Guest> listView = new ListView<Guest>(data);
 		
 		listView.setPrefSize(250, 450);
 		listView.setEditable(true);
 		
-		names.addAll(
-	             "Adam", "Alex", "Alfred", "Albert",
-	             "Brenda", "Connie", "Derek", "Donny", 
-	             "Lynne", "Myrtle", "Rose", "Rudolph", 
-	             "Tony", "Trudy", "Williams", "Zach"
-	        );
+		data.add(new Guest("","Alfred", "Mourney", "Georg Lückligs Väg 22", null, false));
 	         
 	        for (int i = 0; i < names.size(); i++) {
-	            data.add(names.get(i).toString());
+	            names.add(data.get(i).getName().toString() + " " + data.get(i).getLastName().toString());
 	        }
 	        
-	        for (int i = 0; i < names.size(); i++) {
-	            data.add(names.get(i).toString());
-	        }
+	        
 	          
 	        listView.setItems(data);
 	        
+	        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	        	@Override
+	        	public void handle(MouseEvent event) {
+	        		
+	        		if(event.getButton().equals(MouseButton.PRIMARY)) {
+	        			if(event.getClickCount() == 2) {
+	        				Guest guest = listView.getSelectionModel().getSelectedItem();
+	        				if(guest != null) {
+	        					Pane listPane = new Pane();
+	        					Scene listScene = new Scene(pane, 500, 500);
+	        					Stage listStage = new Stage();
+	        					listStage.setScene(listScene);
+	        					listStage.show();
+	        				}
+	        			}
+	        		}
+	        	}
+	        });
 	        
+	       
+	       
 	        
 	        
 	        StackPane root = new StackPane();
