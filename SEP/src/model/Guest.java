@@ -2,9 +2,6 @@ package model;
 
 import java.time.LocalDate;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class Guest {
 	private String companyName;
 	private String name;
@@ -72,16 +69,28 @@ public class Guest {
 	public boolean isBusiness() {
 		return isBusiness;
 	}
+	
+	public String booleanToString(boolean bool) {
+		if(bool == true) {
+			return "Yes";
+		}
+		else {
+			return "No";
+		}
+	}
 
 	public void setBusiness(boolean isBusiness) {
 		this.isBusiness = isBusiness;
 	}
 	
 	public boolean compareTo(Guest guest){
-		if(this.name == guest.getName() && this.birthday == guest.getBirthday()){
+		if(this.name == guest.getName() && this.birthday == guest.getBirthday() 
+				&& this.isBusiness == guest.isBusiness & this.lastName == guest.lastName){
 			return true;
 		}
+		else {
 		return false;
+		}
 	}
 	
 	
