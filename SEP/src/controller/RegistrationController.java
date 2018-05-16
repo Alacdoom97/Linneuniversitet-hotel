@@ -14,8 +14,8 @@ public class RegistrationController {
 	private String adress;
 	private String personalNumber;
 	private ArrayList<LocalDate> bookings = new ArrayList<LocalDate>();
-	private boolean isBusiness;
-	
+	private Boolean isBusiness = null; 
+	private GuestList gl = new GuestList();
 	public RegistrationController(RegistrationWindow main){
 		this.main = main;
 	}
@@ -28,12 +28,43 @@ public class RegistrationController {
 					name = main.name.getText();
 					lastName = main.lastname.getText();
 					adress = main.adress.getText();
-					personalNumber = main.textField.toString();
+					LocalDate localdate = main.textField.getValue();
+					personalNumber = localdate.toString();
+					if(main.comboBox.getValue() == "Business"){
+						isBusiness = true;
+					}
+					else if(main.comboBox.getValue() == "Private") {
+						isBusiness = false;
+					}
+					System.out.println(companyName+","+name+","+ lastName+","+ personalNumber+","+ isBusiness);
+					guestValidation(name,lastName,adress,personalNumber,isBusiness);
 				}catch(Exception e1){
 					e1.printStackTrace();
 				}
 			}
 		});
+		
+		main.cancel.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent e){
+				try{
+					main.regWin.close();
+				}catch(Exception e2){
+					e2.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public boolean guestValidation(String name, String lastname, String adress, String personalnr, Boolean isbusiness){
+		if(name == null || lastname == null|| adress == null || personalnr == null || isbusiness == null ){
+			showError();
+		}
+		return false;
+		
+	}
+	
+	public void showError(){
+		System.err.print("Something is missing, please input all fields!");		
 	}
 
 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.RegistrationController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -20,25 +21,27 @@ public class RegistrationWindow {
 	ColumnConstraints columns;
 	RowConstraints rows;
 	GridPane grid;
-	public Button accept = new Button();
+	public Button accept = new Button("Confirm");
 	public Button cancel = new Button();
 	public TextField name;
 	public TextField companyName;
 	public TextField adress;
 	public TextField lastname;
 	public DatePicker textField = new DatePicker ();
-	
+	public ComboBox<String> comboBox;
+	private RegistrationController regControl = new RegistrationController(this);
+	public Stage regWin = new Stage();
 	public RegistrationWindow() {
 		RegisWindow();
 	}
 	
 	public void RegisWindow() {
-		Stage regWin = new Stage();
+		
 		grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
 		grid.setPadding(new Insets(40, 40, 40, 40));
 		
-		grid.setGridLinesVisible(false);
+		grid.setGridLinesVisible(true);
 		
 		for (int i = 0; i < 3; i++) {
 			/*Creating the Columns and rows */
@@ -58,7 +61,6 @@ public class RegistrationWindow {
 		accept.setPrefSize(120, 60);
 		accept.setTranslateX(100);
 		accept.setTranslateY(50);
-		accept.setText("Confirm");
 		grid.add(accept, 0, 5);
 		
 		cancel.setPrefSize(120, 60);
@@ -72,7 +74,7 @@ public class RegistrationWindow {
 			        "Business",
 			        "Private"
 			    );
-			final ComboBox<String> comboBox = new ComboBox<String>(options);
+			comboBox = new ComboBox(options);
 			
 			Label businessCheck = new Label("Reason for staying? ");
 			businessCheck.setTranslateX(100);
@@ -92,8 +94,11 @@ public class RegistrationWindow {
 		
 		
 		textField.setTranslateX(100);
+		textField.setPromptText("YYYY-MM-DD");
 		grid.add(textField, 1, 4);
 		/*createTextField(": ", 0, 4);*/
+		
+		regControl.eventHandle();
 		
 		
 		Scene regisWindow = new Scene(grid, 600, 800);

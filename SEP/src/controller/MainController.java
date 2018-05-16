@@ -39,15 +39,7 @@ public class MainController {
 			}
 		});
 		
-		main.guestListButton.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				try {
-					gueWin = new GuestWindow();
-				} catch (Exception e3) {
-					e3.printStackTrace();
-				}
-			}
-		});
+		
 		
 		main.checkinButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
