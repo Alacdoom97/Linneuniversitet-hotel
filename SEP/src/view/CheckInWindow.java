@@ -40,7 +40,8 @@ public class CheckInWindow {
 	@SuppressWarnings("unchecked")
 	public void cheWin() {
 		Pane pane = new Pane();
-
+		
+		//Create the buttons and searchBar for the GUI
 		checkIn.setText("Check In");
 		checkIn.setPrefSize(120, 120);
 		checkIn.setTranslateX(125);
@@ -75,18 +76,21 @@ public class CheckInWindow {
 		Guest guest3 = new Guest("", "Stefan", "Bampovits", "Stuborvägen 15", "12345678-9123", false);
 		Guest guest4 = new Guest("", "Hau", "Trinh", "Kunggatan 10", "23456789-1234", false);
 		Guest guest5 = new Guest("", "Vikrant", "Mainali", "Fyllerydsvägen 43C", "34567891-2345", false);
+		Guest guest6 = new Guest("", "Pranav", "Patel", "Lundavägen 44", "19971125-2255", false);
 
 		gueList.addToList(guest1);
 		gueList.addToList(guest2);
 		gueList.addToList(guest3);
 		gueList.addToList(guest4);
 		gueList.addToList(guest5);
+		gueList.addToList(guest6);
 
 		names.add(guest1);
 		names.add(guest2);
 		names.add(guest3);
 		names.add(guest4);
 		names.add(guest5);
+		names.add(guest6);
 
 		for (int i = 0; i < names.size(); i++) {
 			data.add(names.get(i).getName() + " " + names.get(i).getLastName());
@@ -97,25 +101,27 @@ public class CheckInWindow {
 				try {
 					names.clear();
 					data.clear();
-					System.out.println(gueList.getSize());
 					for (int i = 0; i < gueList.getSize(); i++) {
 						Guest guest = gueList.getGuest(i);
-						System.out.println("Guest list size: " + gueList.getSize());
 						if (searchBar.getText().equals(guest.getName()) && searchBar2.getText().equals(guest.getPersNum())) {
 							names.add(guest);
-							data.add(names.get(i).getName() + " " + names.get(i).getLastName());
 						}
+					}
+					
+					for(int i = 0; i < names.size(); i++) {
+						data.add(names.get(i).getName() + " " + names.get(i).getLastName());
 					}
 				} catch (Exception e4) {
 					e4.printStackTrace();
 				}
 			}
 		});
-
-		//resControll.checkInHandle();
+		
+		
 
 		listView.setItems(data);
-
+		
+		//Double click the list to be able to see the 
 		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
