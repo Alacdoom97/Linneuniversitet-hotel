@@ -23,6 +23,7 @@ import model.GuestList;
 public class CheckInWindow {
 	public static final ObservableList<String> data = FXCollections.observableArrayList();
 	public static final ObservableList<Guest> names = FXCollections.observableArrayList();
+	public ListView listView;
 	public Button searchButton = new Button();
 	public Button checkIn = new Button();
 	public Button checkOut = new Button();
@@ -66,7 +67,7 @@ public class CheckInWindow {
 		searchBar2.setTranslateX(300);
 		searchBar2.setTranslateY(130);
 
-		final ListView listView = new ListView(names);
+		listView = new ListView(names);
 
 		listView.setPrefSize(250, 450);
 		listView.setEditable(true);
