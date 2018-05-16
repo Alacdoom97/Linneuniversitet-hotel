@@ -1,18 +1,15 @@
 package view;
 
-import java.time.LocalDate;
-
+import controller.CheckInController;
 import controller.ReservationController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -30,8 +27,19 @@ public class CheckInWindow {
 	public Stage guestWin = new Stage();
 	public TextField searchBar;
 	public TextField searchBar2;
+	public TextField name;
+	public TextField lastName;
+	public TextField address;
+	public TextField birthday;
+	public TextField isBusiness;
+	public Label nameLab;
+	public Label lastNameLab;
+	public Label addressLab;
+	public Label businessLab;
+	public Label birthdayLab;
 	public GuestList gueList;
 	ReservationController resControll = new ReservationController(this);
+	CheckInController cheControll = new CheckInController(this);
 
 	public CheckInWindow() {
 		gueList = new GuestList();
@@ -99,98 +107,12 @@ public class CheckInWindow {
 			}
 		}
 
-		searchButton.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent search) {
-				try {
-					names.clear();
-					data.clear();
-					for (int i = 0; i < gueList.getSize(); i++) {
-						Guest guest = gueList.getGuest(i);
-						if (searchBar.getText().equals(guest.getName())
-								&& searchBar2.getText().equals(guest.getPersNum())) {
-							names.add(guest);
-						}
-					}
-
-					for (int i = 0; i < names.size(); i++) {
-						data.add(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " "
-								+ names.get(i).getLastName());
-					}
-				} catch (Exception e4) {
-					e4.printStackTrace();
-				}
-			}
-		});
+		cheControll.checkInHandle();
 
 		listView.setItems(data);
 
 		// Double click the list to be able to see the
-		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				Guest tempGuest = null;
-				for (int i = 0; i < names.size(); i++) {
-					if (listView.getSelectionModel().getSelectedItem()
-							.equals(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " "
-									+ names.get(i).getLastName())) {
-						tempGuest = names.get(i);
-					}
-				}
-
-				if (tempGuest != null) {
-					Pane listPane = new Pane();
-					Scene listScene = new Scene(listPane, 500, 500);
-					Stage listStage = new Stage();
-
-					Label nameLab = new Label("Name: ");
-					nameLab.setTranslateY(10);
-
-					TextField name = new TextField(tempGuest.getName());
-					name.setEditable(false);
-					name.setTranslateX(60);
-					name.setTranslateY(10);
-
-					Label lastNameLab = new Label("Last Name: ");
-					lastNameLab.setTranslateY(40);
-
-					TextField lastName = new TextField(tempGuest.getLastName());
-					lastName.setEditable(false);
-					lastName.setTranslateX(60);
-					lastName.setTranslateY(40);
-
-					Label addressLab = new Label("Address: ");
-					addressLab.setTranslateY(70);
-
-					TextField address = new TextField(tempGuest.getAdress());
-					address.setEditable(false);
-					address.setTranslateY(70);
-					address.setTranslateX(60);
-
-					Label birthdayLab = new Label("Birthday: ");
-					birthdayLab.setTranslateY(100);
-
-					TextField birthday = new TextField(tempGuest.getPersNum());
-					birthday.setEditable(false);
-					birthday.setTranslateY(100);
-					birthday.setTranslateX(60);
-
-					Label businessLab = new Label("Business stay: ");
-					businessLab.setTranslateY(130);
-
-					TextField isBusiness = new TextField(tempGuest.booleanToString(tempGuest.isBusiness()));
-					isBusiness.setEditable(false);
-					isBusiness.setTranslateY(130);
-					isBusiness.setTranslateX(80);
-
-					listPane.getChildren().addAll(name, nameLab, lastName, lastNameLab, address, addressLab, birthday,
-							birthdayLab, isBusiness, businessLab, checkIn, checkOut);
-					listStage.setScene(listScene);
-					listStage.show();
-				}
-			}
-
-		});
-
+		
 		StackPane root = new StackPane();
 		pane.getChildren().addAll(root, searchBar, searchBar2, searchButton);
 		root.getChildren().add(listView);
