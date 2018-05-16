@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Guest {
+	private int ID;
 	private String companyName;
 	private String name;
 	private String lastName;
@@ -15,7 +16,8 @@ public class Guest {
 	public Guest(){
 		createGuest("", "", "", "", false);
 	}
-	public Guest(String company, String name, String lastName, String address, String personalNumber, boolean isBusiness){
+	public Guest(int ID, String company, String name, String lastName, String address, String personalNumber, boolean isBusiness){
+		this.ID = ID;
 		companyName = company;
 		this.name = name;
 		this.lastName = lastName;
@@ -26,6 +28,14 @@ public class Guest {
 	
 	public void createGuest(String name, String lastname, String adress, String personalNumber, boolean isBusiness){
 		
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 
 	public String getCompanyName() {
@@ -93,6 +103,10 @@ public class Guest {
 		else {
 		return false;
 		}
+	}
+	
+	public String idToString(int ID) {
+		return Integer.toString(ID);
 	}
 	
 	

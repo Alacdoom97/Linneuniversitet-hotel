@@ -40,8 +40,8 @@ public class CheckInWindow {
 	@SuppressWarnings("unchecked")
 	public void cheWin() {
 		Pane pane = new Pane();
-		
-		//Create the buttons and searchBar for the GUI
+
+		// Create the buttons and searchBar for the GUI
 		checkIn.setText("Check In");
 		checkIn.setPrefSize(120, 120);
 		checkIn.setTranslateX(125);
@@ -66,17 +66,17 @@ public class CheckInWindow {
 		searchBar2.setTranslateX(300);
 		searchBar2.setTranslateY(130);
 
-		final ListView listView = new ListView<>(names);
+		final ListView listView = new ListView(names);
 
 		listView.setPrefSize(250, 450);
 		listView.setEditable(true);
 
-		Guest guest1 = new Guest("", "Alfred", "Mourney", "Georg Lückligs Väg 22", "19810423-1234", false);
-		Guest guest2 = new Guest("", "Pranav", "Patel", "Lively Road 25", "19971125-2255", false);
-		Guest guest3 = new Guest("", "Stefan", "Bampovits", "Stuborvägen 15", "12345678-9123", false);
-		Guest guest4 = new Guest("", "Hau", "Trinh", "Kunggatan 10", "23456789-1234", false);
-		Guest guest5 = new Guest("", "Vikrant", "Mainali", "Fyllerydsvägen 43C", "34567891-2345", false);
-		Guest guest6 = new Guest("", "Pranav", "Patel", "Lundavägen 44", "19971125-2255", false);
+		Guest guest1 = new Guest(1, "", "Alfred", "Mourney", "Georg Lückligs Väg 22", "19810423-1234", false);
+		Guest guest2 = new Guest(2, "", "Pranav", "Patel", "Lively Road 25", "19971125-2255", false);
+		Guest guest3 = new Guest(3, "", "Stefan", "Bampovits", "Stuborvägen 15", "12345678-9123", false);
+		Guest guest4 = new Guest(4, "", "Hau", "Trinh", "Kunggatan 10", "23456789-1234", false);
+		Guest guest5 = new Guest(5, "", "Vikrant", "Mainali", "Fyllerydsvägen 43C", "34567891-2345", false);
+		Guest guest6 = new Guest(6, "", "Pranav", "Patel", "Lundavägen 44", "19971125-2255", false);
 
 		gueList.addToList(guest1);
 		gueList.addToList(guest2);
@@ -91,11 +91,13 @@ public class CheckInWindow {
 		names.add(guest4);
 		names.add(guest5);
 		names.add(guest6);
-
-		for (int i = 0; i < names.size(); i++) {
-			data.add(names.get(i).getName() + " " + names.get(i).getLastName());
+		if (data.isEmpty()) {
+			for (int i = 0; i < names.size(); i++) {
+				data.add(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " "
+						+ names.get(i).getLastName());
+			}
 		}
-		
+
 		searchButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent search) {
 				try {
@@ -103,29 +105,37 @@ public class CheckInWindow {
 					data.clear();
 					for (int i = 0; i < gueList.getSize(); i++) {
 						Guest guest = gueList.getGuest(i);
-						if (searchBar.getText().equals(guest.getName()) && searchBar2.getText().equals(guest.getPersNum())) {
+						if (searchBar.getText().equals(guest.getName())
+								&& searchBar2.getText().equals(guest.getPersNum())) {
 							names.add(guest);
 						}
 					}
-					
-					for(int i = 0; i < names.size(); i++) {
-						data.add(names.get(i).getName() + " " + names.get(i).getLastName());
+
+					for (int i = 0; i < names.size(); i++) {
+						data.add(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " "
+								+ names.get(i).getLastName());
 					}
 				} catch (Exception e4) {
 					e4.printStackTrace();
 				}
 			}
 		});
-		
-		
 
 		listView.setItems(data);
-		
-		//Double click the list to be able to see the 
+
+		// Double click the list to be able to see the
 		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				Guest tempGuest = names.get(0);
+				Guest tempGuest = null;
+				for (int i = 0; i < names.size(); i++) {
+					if (listView.getSelectionModel().getSelectedItem()
+							.equals(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " "
+									+ names.get(i).getLastName())) {
+						tempGuest = names.get(i);
+					}
+				}
+
 				if (tempGuest != null) {
 					Pane listPane = new Pane();
 					Scene listScene = new Scene(listPane, 500, 500);
