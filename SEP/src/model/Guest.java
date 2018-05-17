@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Guest {
 	private int ID;
-	private String companyName;
+	private String companyName = null;
 	private String name;
 	private String lastName;
 	private String adress;
@@ -14,12 +14,9 @@ public class Guest {
 	private LocalDate end;
 	private boolean isBusiness;
 	
-	public Guest(){
-		createGuest("", "", "", "", false);
-	}
 	public Guest(int ID, String company, String name, String lastName, String address, String personalNumber, boolean isBusiness){
 		this.ID = ID;
-		companyName = company;
+		this.companyName = company;
 		this.name = name;
 		this.lastName = lastName;
 		this.adress = address;
@@ -27,9 +24,7 @@ public class Guest {
 		this.isBusiness = isBusiness;
 	}
 	
-	public void createGuest(String name, String lastname, String adress, String personalNumber, boolean isBusiness){
-		
-	}
+	
 	
 	public int getID() {
 		return ID;

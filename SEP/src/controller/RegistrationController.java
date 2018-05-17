@@ -18,7 +18,7 @@ public class RegistrationController {
 	private String personalNumber;
 	private ArrayList<LocalDate> bookings = new ArrayList<LocalDate>();
 	private Boolean isBusiness = null; 
-	private GuestList gl = new GuestList();
+	private static GuestList gl = new GuestList();
 	public RegistrationController(RegistrationWindow main){
 		this.main = main;
 		errWin = new ErrorWindow();
@@ -40,8 +40,13 @@ public class RegistrationController {
 					else if(main.comboBox.getValue() == "Private") {
 						isBusiness = false;
 					}
-					guestValidation(name,lastName,adress,personalNumber,isBusiness);
-					System.out.println(name+","+lastName+","+adress+","+personalNumber+","+isBusiness);
+					if(guestValidation(name,lastName,adress,personalNumber,isBusiness)== true){
+						Guest guest = new Guest(gl.getSize()+1,companyName,name,lastName,adress,personalNumber,isBusiness);
+						gl.addToList(guest);
+						System.out.println(gl.getSize());
+					}
+					
+					
 				}catch(Exception e1){
 					e1.printStackTrace();
 				}

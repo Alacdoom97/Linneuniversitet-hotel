@@ -17,7 +17,7 @@ public class ReservationController {
 	GuestWindow guestWin;
 	int dateTrackerPrevious = 1;
 	int dateTrackerNext = 1;
-	GridList gl = new GridList();
+	private static GridList gl = new GridList();
 	GridPane current;
 	public ReservationController(ReservationWindow main){
 		this.main = main;
