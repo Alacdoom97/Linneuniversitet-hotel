@@ -42,7 +42,7 @@ public class RegistrationController {
 					}
 					if(guestValidation(name,lastName,adress,personalNumber,isBusiness)== true){
 						Guest guest = new Guest(gl.getSize()+1,companyName,name,lastName,adress,personalNumber,isBusiness);
-						gl.addToList(guest);
+						mainControl.gueList.addToList(guest);
 						System.out.println(gl.getSize());
 					}
 					
