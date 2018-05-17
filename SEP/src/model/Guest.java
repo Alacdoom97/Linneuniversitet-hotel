@@ -10,7 +10,8 @@ public class Guest {
 	private String lastName;
 	private String adress;
 	private String personalNumber;
-	private ArrayList<LocalDate> bookings = new ArrayList<LocalDate>();
+	private LocalDate start;
+	private LocalDate end;
 	private boolean isBusiness;
 	
 	public Guest(){

@@ -36,8 +36,8 @@ public class RegistrationController {
 					else if(main.comboBox.getValue() == "Private") {
 						isBusiness = false;
 					}
-					System.out.println(companyName+","+name+","+ lastName+","+ personalNumber+","+ isBusiness);
 					guestValidation(name,lastName,adress,personalNumber,isBusiness);
+					
 				}catch(Exception e1){
 					e1.printStackTrace();
 				}
