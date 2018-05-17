@@ -55,13 +55,16 @@ public class RegistrationController {
 		});
 	}
 	
-	public boolean guestValidation(String name, String lastname, String adress, String personalnr, Boolean isbusiness){
-		if(name == null || lastname == null|| adress == null || personalnr == null || isbusiness == null ){
-			showError();
+	public void guestValidation(String name, String lastname, String adress, String personalnr, Boolean isbusiness){
+		for (int i = 0; i < name.length(); i++) {
+			if (Character.isDigit(name.indexOf(i))) {
+				
+			}
 		}
-		return false;
+		}
 		
-	}
+		
+	
 	
 	public void showError(){
 		System.err.print("Something is missing, please input all fields!");		
