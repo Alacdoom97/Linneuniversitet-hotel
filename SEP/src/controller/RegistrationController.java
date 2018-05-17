@@ -7,7 +7,10 @@ import javafx.event.EventHandler;
 import view.*;
 import model.*;
 public class RegistrationController {
+	MainWindow mainWin = new MainWindow();
+	MainController mainControl = new MainController(mainWin);
 	RegistrationWindow main;
+	ErrorWindow errWin;
 	private String companyName;
 	private String name;
 	private String lastName;
@@ -18,6 +21,7 @@ public class RegistrationController {
 	private GuestList gl = new GuestList();
 	public RegistrationController(RegistrationWindow main){
 		this.main = main;
+		errWin = new ErrorWindow();
 	}
 	
 	public void eventHandle(){
@@ -58,7 +62,7 @@ public class RegistrationController {
 	public boolean guestValidation(String name, String lastname, String adress, String personalnr, Boolean isbusiness){
 		for (int i = 0; i < name.length(); i++) {
 			if(!Character.isLetter(name.charAt(i))){
-				showError();
+				errWin.nameError();
 				return false;
 				
 			}
@@ -68,7 +72,7 @@ public class RegistrationController {
 		}
 		for (int i = 0; i < lastname.length(); ++i){
 			if(!Character.isLetter(lastname.charAt(i))){
-				showError();
+				errWin.nameError();
 				return false;
 		}
 		}

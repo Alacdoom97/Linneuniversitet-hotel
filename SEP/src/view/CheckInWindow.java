@@ -1,16 +1,15 @@
 package view;
 
 import controller.CheckInController;
+import controller.MainController;
 import controller.ReservationController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -38,11 +37,13 @@ public class CheckInWindow {
 	public Label businessLab;
 	public Label birthdayLab;
 	public GuestList gueList;
+	MainWindow mainWin =new MainWindow();
 	ReservationController resControll = new ReservationController(this);
 	CheckInController cheControll = new CheckInController(this);
+	MainController mainControl = new MainController(mainWin);
 
 	public CheckInWindow() {
-		gueList = new GuestList();
+		gueList = mainControl.gueList;
 		cheWin();
 	}
 

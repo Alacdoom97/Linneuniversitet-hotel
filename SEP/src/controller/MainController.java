@@ -26,6 +26,8 @@ public class MainController {
 			public void handle(ActionEvent e){
 				try{
 					regWin=new RegistrationWindow();
+					
+					main.guestButton.disableProperty().bind(regWin.regWin.showingProperty());
 				}catch(Exception e1){
 					e1.printStackTrace();
 				}
@@ -36,6 +38,8 @@ public class MainController {
 			public void handle (ActionEvent e){
 				try{
 					resWin = new ReservationWindow();
+					
+					main.reservationButton.disableProperty().bind(resWin.resWin.showingProperty());
 				}catch(Exception e2){
 					e2.printStackTrace();
 				}
@@ -48,6 +52,8 @@ public class MainController {
 			public void handle(ActionEvent e) {
 				try {
 					cheWin = new CheckInWindow();
+					
+					main.checkinButton.disableProperty().bind(cheWin.guestWin.showingProperty());
 				} catch(Exception e4) {
 					e4.printStackTrace();
 				}
