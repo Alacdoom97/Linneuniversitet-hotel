@@ -2,12 +2,10 @@ package view;
 
 import controller.MainController;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -15,9 +13,6 @@ import javafx.stage.Stage;
 public class MainWindow extends Application {
 
 	static MainController winCont;
-	private RegistrationWindow regWin;
-	private GuestWindow gueWin;
-	private ReservationWindow resWin;
 	public Button guestButton = new Button();
 	public Button reservationButton = new Button();
 	public Button checkinButton = new Button();
