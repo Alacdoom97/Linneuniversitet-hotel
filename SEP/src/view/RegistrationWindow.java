@@ -41,7 +41,7 @@ public class RegistrationWindow {
 		grid.setAlignment(Pos.CENTER);
 		grid.setPadding(new Insets(40, 40, 40, 40));
 		
-		grid.setGridLinesVisible(true);
+		grid.setGridLinesVisible(false);
 		
 		for (int i = 0; i < 3; i++) {
 			/*Creating the Columns and rows */

@@ -37,7 +37,7 @@ public class RegistrationController {
 						isBusiness = false;
 					}
 					guestValidation(name,lastName,adress,personalNumber,isBusiness);
-					
+					System.out.println(name+","+lastName+","+adress+","+personalNumber+","+isBusiness);
 				}catch(Exception e1){
 					e1.printStackTrace();
 				}
@@ -56,15 +56,30 @@ public class RegistrationController {
 	}
 	
 	public boolean guestValidation(String name, String lastname, String adress, String personalnr, Boolean isbusiness){
-		if(name == null || lastname == null|| adress == null || personalnr == null || isbusiness == null ){
-			showError();
+		for (int i = 0; i < name.length(); i++) {
+			if(!Character.isLetter(name.charAt(i))){
+				showError();
+				return false;
+				
+			}
+			
+			
+			
 		}
-		return false;
-		
+		for (int i = 0; i < lastname.length(); ++i){
+			if(!Character.isLetter(lastname.charAt(i))){
+				showError();
+				return false;
+		}
+		}
+		return true;
 	}
+		
+		
+	
 	
 	public void showError(){
-		System.err.print("Something is missing, please input all fields!");		
+		System.err.print("name error");		
 	}
 
 }
