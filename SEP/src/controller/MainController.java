@@ -1,6 +1,7 @@
 package controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import model.GuestList;
 import view.CheckInWindow;
 import view.GuestWindow;
 import view.MainWindow;
@@ -13,8 +14,10 @@ public class MainController {
 	ReservationWindow resWin;
 	GuestWindow gueWin;
 	MainWindow main;
+	public GuestList gueList;
 	
 	public MainController(MainWindow main){
+		gueList = new GuestList();
 		this.main = main;
 	}
 	

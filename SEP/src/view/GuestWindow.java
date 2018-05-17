@@ -1,22 +1,25 @@
 package view;
 
-import javafx.application.Application;
+import controller.MainController;
 import javafx.collections.FXCollections;
-import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import model.GuestList;
 
 public class GuestWindow{
 	public static final ObservableList names = FXCollections.observableArrayList();
 	public static final ObservableList data = FXCollections.observableArrayList();
 	public Stage guestWin = new Stage();
+	private GuestList gueList;
+	MainWindow mainWin = new MainWindow();
+	MainController mainCon = new MainController(mainWin);
 
 	public GuestWindow(){
+		gueList = mainCon.gueList;
 		guestWin();
-		
 	}
 	public void guestWin(){
 		final ListView listView = new ListView(data);
