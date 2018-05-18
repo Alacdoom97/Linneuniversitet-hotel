@@ -18,7 +18,7 @@ public class GuestWindow{
 	MainController mainCon = new MainController(mainWin);
 
 	public GuestWindow(){
-		gueList = mainCon.gueList;
+		gueList = mainCon.gl;
 		guestWin();
 	}
 	public void guestWin(){

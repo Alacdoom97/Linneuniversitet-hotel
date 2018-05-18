@@ -14,10 +14,9 @@ public class MainController {
 	ReservationWindow resWin;
 	GuestWindow gueWin;
 	MainWindow main;
-	public GuestList gueList;
+	public static GuestList gl = new GuestList();
 	
 	public MainController(MainWindow main){
-		gueList = new GuestList();
 		this.main = main;
 	}
 	

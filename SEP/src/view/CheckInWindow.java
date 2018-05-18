@@ -43,7 +43,7 @@ public class CheckInWindow {
 	MainController mainControl = new MainController(mainWin);
 
 	public CheckInWindow() {
-		gueList = mainControl.gueList;
+		gueList = mainControl.gl;
 		cheWin();
 	}
 
