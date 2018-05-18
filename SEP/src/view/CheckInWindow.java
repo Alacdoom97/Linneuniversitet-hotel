@@ -81,7 +81,8 @@ public class CheckInWindow {
 		listView.setPrefSize(250, 450);
 		listView.setEditable(true);
 
-		
+		data.clear();
+		names.clear();
 		
 		for(int i = 0; i < gueList.getSize(); ++i){
 			names.add(gueList.getGuest(i));
