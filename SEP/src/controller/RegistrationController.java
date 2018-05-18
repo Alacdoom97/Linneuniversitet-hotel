@@ -42,8 +42,14 @@ public class RegistrationController {
 					}
 					if(guestValidation(name,lastName,adress,personalNumber,isBusiness)== true){
 						Guest guest = new Guest(gl.getSize()+1,companyName,name,lastName,adress,personalNumber,isBusiness);
-						gl.addToList(guest);
-						System.out.println(gl.getSize());
+						if(!gl.getFromList(guest.getName(), guest.getPersNum())){
+							gl.addToList(guest);	
+						}
+						
+						for(int i = 0; i < gl.getSize(); ++i){
+							System.out.println(gl.getGuest(i));
+						}
+						
 					}
 					
 					

@@ -12,5 +12,7 @@ public class ErrorWindow {
 		nameAlert.setContentText("Name can only contain letters!");
 		nameAlert.showAndWait();
 	}
+	
+	
 
 }

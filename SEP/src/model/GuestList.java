@@ -40,5 +40,7 @@ public class GuestList {
 	public Guest getGuest(int i) {
 		return guests.get(i);
 	}
+	
+	
 
 }
