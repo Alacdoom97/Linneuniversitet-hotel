@@ -36,7 +36,7 @@ public class CheckInWindow {
 	public Label addressLab;
 	public Label businessLab;
 	public Label birthdayLab;
-	public GuestList gueList;
+	static public GuestList gueList;
 	MainWindow mainWin =new MainWindow();
 	ReservationController resControll = new ReservationController(this);
 	CheckInController cheControll = new CheckInController(this);
@@ -81,12 +81,7 @@ public class CheckInWindow {
 		listView.setPrefSize(250, 450);
 		listView.setEditable(true);
 
-		Guest guest1 = new Guest(1, "", "Alfred", "Mourney", "Georg Lückligs Väg 22", "19810423-1234", false);
-		Guest guest2 = new Guest(2, "", "Pranav", "Patel", "Lively Road 25", "19971125-2255", false);
-		Guest guest3 = new Guest(3, "", "Stefan", "Bampovits", "Stuborvägen 15", "12345678-9123", false);
-		Guest guest4 = new Guest(4, "", "Hau", "Trinh", "Kunggatan 10", "23456789-1234", false);
-		Guest guest5 = new Guest(5, "", "Vikrant", "Mainali", "Fyllerydsvägen 43C", "34567891-2345", false);
-		Guest guest6 = new Guest(6, "", "Pranav", "Patel", "Lundavägen 44", "19971125-2255", false);
+		
 		
 		for(int i = 0; i < gueList.getSize(); ++i){
 			names.add(gueList.getGuest(i));

@@ -48,12 +48,13 @@ public class RegistrationController {
 							System.out.println(guest.getName()+" "+guest.getLastName()+" "+ guest.getPersNum());
 						}
 						
-						
-						
+											
 
 						
 
 					}
+					
+					main.regWin.close();
 					
 					
 					
