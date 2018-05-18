@@ -9,24 +9,29 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Guest;
+import model.GuestList;
 import view.CheckInWindow;
+import view.GuestWindow;
+import view.ReservationWindow;
 
 public class CheckInController {
 	
-	CheckInWindow cheWin;
+	static CheckInWindow cheWin;
+	static ReservationWindow resWin;
+	public GuestWindow gueWin;
 	
 	public CheckInController(CheckInWindow checkIn) {
 		cheWin = checkIn;
 	}
 	
-	public void checkInHandle() {
+	public void checkInHandle(GuestList gueList) {
 		cheWin.searchButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent search) {
 				try {
 					cheWin.names.clear();
 					cheWin.data.clear();
-					for (int i = 0; i < cheWin.gueList.getSize(); i++) {
-						Guest guest = cheWin.gueList.getGuest(i);
+					for (int i = 0; i < gueList.getSize(); i++) {
+						Guest guest = gueList.getGuest(i);
 						if (cheWin.searchBar.getText().equals(guest.getName())
 								&& cheWin.searchBar2.getText().equals(guest.getPersNum())) {
 							cheWin.names.add(guest);

@@ -36,7 +36,7 @@ public class CheckInWindow {
 	public Label addressLab;
 	public Label businessLab;
 	public Label birthdayLab;
-	static public GuestList gueList;
+	public static GuestList gueList;
 	MainWindow mainWin =new MainWindow();
 	ReservationController resControll = new ReservationController(this);
 	CheckInController cheControll = new CheckInController(this);
@@ -98,7 +98,7 @@ public class CheckInWindow {
 			}
 		}
 
-		cheControll.checkInHandle();
+		cheControll.checkInHandle(gueList);
 
 		listView.setItems(data);
 

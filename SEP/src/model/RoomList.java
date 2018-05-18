@@ -8,7 +8,7 @@ public class RoomList {
 	
 	public void createRooms() {
 		for(int i = 0; i < 10; i++) {
-			Room room = 
+			
 		}
 	}
 }
