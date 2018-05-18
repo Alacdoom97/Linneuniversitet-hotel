@@ -30,7 +30,7 @@ public class GuestList {
 	
 	public boolean getFromList(String name, String date) {
 		for(int i = 0; i < getSize(); i++) {
-			if (name == guests.get(i).getName() && date == guests.get(i).getPersNum()) {
+			if (name.matches(guests.get(i).getName()) && date.matches(guests.get(i).getPersNum())) {
 				return true;
 			}
 		}

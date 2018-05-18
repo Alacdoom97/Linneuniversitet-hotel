@@ -42,20 +42,21 @@ public class RegistrationController {
 					}
 					if(guestValidation(name,lastName,adress,personalNumber,isBusiness)== true){
 						Guest guest = new Guest(gl.getSize()+1,companyName,name,lastName,adress,personalNumber,isBusiness);
-<<<<<<< HEAD
-						if(!gl.getFromList(guest.getName(), guest.getPersNum())){
-							gl.addToList(guest);	
+
+						if(gl.getFromList(guest.getName(), guest.getPersNum())== false){
+							System.out.println(gl.getFromList(guest.getName(), guest.getLastName()));
+							gl.addToList(guest);
+							System.out.println(guest.getName()+" "+guest.getLastName()+" "+ guest.getPersNum());
 						}
 						
-						for(int i = 0; i < gl.getSize(); ++i){
-							System.out.println(gl.getGuest(i));
-						}
 						
-=======
-						mainControl.gueList.addToList(guest);
-						System.out.println(gl.getSize());
->>>>>>> origin/master
+						
+
+						
+
 					}
+					
+					
 					
 					
 				}catch(Exception e1){
