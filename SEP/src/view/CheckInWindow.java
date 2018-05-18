@@ -87,20 +87,14 @@ public class CheckInWindow {
 		Guest guest4 = new Guest(4, "", "Hau", "Trinh", "Kunggatan 10", "23456789-1234", false);
 		Guest guest5 = new Guest(5, "", "Vikrant", "Mainali", "Fyllerydsvägen 43C", "34567891-2345", false);
 		Guest guest6 = new Guest(6, "", "Pranav", "Patel", "Lundavägen 44", "19971125-2255", false);
+		
+		for(int i = 0; i < gueList.getSize(); ++i){
+			names.add(gueList.getGuest(i));
+		}
 
-		gueList.addToList(guest1);
-		gueList.addToList(guest2);
-		gueList.addToList(guest3);
-		gueList.addToList(guest4);
-		gueList.addToList(guest5);
-		gueList.addToList(guest6);
+		
 
-		names.add(guest1);
-		names.add(guest2);
-		names.add(guest3);
-		names.add(guest4);
-		names.add(guest5);
-		names.add(guest6);
+		
 		if (data.isEmpty()) {
 			for (int i = 0; i < names.size(); i++) {
 				data.add(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " "
