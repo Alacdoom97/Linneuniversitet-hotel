@@ -18,6 +18,10 @@ public class GuestWindow{
 	public static final ObservableList<String> data = FXCollections.observableArrayList();
 	public final ListView listView = new ListView(data);
 	public Stage guestWin = new Stage();
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	private static GuestList gueList;
 
 	public TextField searchBar;
