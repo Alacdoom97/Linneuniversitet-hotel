@@ -6,6 +6,7 @@ public class Booking {
 	LocalDate start;
 	LocalDate end;
 	Guest guest;
+	Room room;
 
 	public void setStart(LocalDate start) {
 		this.start = start;
@@ -18,6 +19,10 @@ public class Booking {
 	public void setGuest(Guest guest) {
 		this.guest = guest;
 	}
+	
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 
 	public LocalDate getStart() {
 		return start;
@@ -29,6 +34,10 @@ public class Booking {
 
 	public Guest getGuest() {
 		return guest;
+	}
+	
+	public Room getRoom() {
+		return room;
 	}
 
 }
