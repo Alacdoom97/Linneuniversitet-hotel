@@ -18,8 +18,16 @@ public class ErrorWindow {
 		bDayAlert.setTitle("Error!");
 		bDayAlert.setHeaderText("An Error has occured");
 		bDayAlert.setContentText("Invalid date input");
+		bDayAlert.showAndWait();
 	}
 	
+	public void phoneError(){
+		Alert phoneAlert = new Alert(AlertType.ERROR);
+		phoneAlert.setTitle("Error");
+		phoneAlert.setHeaderText("An Error has occured");
+		phoneAlert.setContentText("Invalid phone number");
+		phoneAlert.showAndWait();
+	}
 	
 	
 
