@@ -2,12 +2,14 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import model.Grid;
 import model.GridList;
 import model.Guest;
 import view.CheckInWindow;
 import view.GuestWindow;
+import view.MainWindow;
 import view.RegistrationWindow;
 import view.ReservationWindow;
 public class ReservationController {
@@ -15,6 +17,7 @@ public class ReservationController {
 	ReservationWindow main;
 	RegistrationWindow regWin;
 	GuestWindow guestWin;
+	MainController mainControl = new MainController(new MainWindow());
 	int dateTrackerPrevious = 1;
 	int dateTrackerNext = 1;
 	private static GridList gl = new GridList();
@@ -26,6 +29,10 @@ public class ReservationController {
 	
 	public ReservationController(CheckInWindow cheWin) {
 		this.cheWin = cheWin;
+	}
+	
+	public ReservationController(GuestWindow gueWin) {
+		this.guestWin = gueWin;
 	}
 	
 	public void eventHandle(){
@@ -54,6 +61,8 @@ public class ReservationController {
 			public void handle(ActionEvent e){
 				try{
 					guestWin = new GuestWindow();
+					
+					guestInputHandle();
 				}catch(Exception e3){
 					e3.printStackTrace();
 				}
@@ -124,9 +133,57 @@ public class ReservationController {
 		
 	}
 	
-	public void checkInHandle() {
+	public void guestInputHandle() {
 		
-		
+		guestWin.searchButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					guestWin.names.clear();
+					guestWin.data.clear();
+					for (int i = 0; i < mainControl.gl.getSize(); i++) {
+						Guest guest = mainControl.gl.getGuest(i);
+						if (guestWin.searchBar.getText().equals(guest.getName())
+								&& guestWin.searchBar2.getText().equals(guest.getPersNum())) {
+							guestWin.names.add(guest);
+						}
+					}
+
+					for (int i = 0; i < guestWin.names.size(); i++) {
+						guestWin.data.add(guestWin.names.get(i).idToString(guestWin.names.get(i).getID()) + " " + guestWin.names.get(i).getName() 
+								+ " " + guestWin.names.get(i).getLastName());
+					}
+				} catch (Exception e4) {
+					e4.printStackTrace();
+				}
+				
+			}
+		});
+		guestWin.listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent listGuest) {
+				main.name.setText("");
+				main.birthday.setText("");
+				main.address.setText("");
+					Guest tempGuest = null;
+					for (int i = 0; i < guestWin.names.size(); i++) {
+						if (guestWin.listView.getSelectionModel().getSelectedItem()
+								.equals(guestWin.names.get(i).idToString(guestWin.names.get(i).getID()) + " " + guestWin.names.get(i).getName() + " "
+										+ guestWin.names.get(i).getLastName())) {
+							tempGuest = guestWin.names.get(i);
+						}
+					}
+					System.out.println("haha");
+					if (tempGuest != null) {
+						main.name.setText(tempGuest.getName());
+						main.birthday.setText(tempGuest.getPersNum());
+						main.address.setText(tempGuest.getAdress());
+					
+					}
+				
+			}
+			
+		});
 	}
 	
 

@@ -40,6 +40,11 @@ public class ReservationWindow {
 	public Button searchButton = new Button("Search");
 	public Button previousButton = new Button("<");
 	public Button nextButton = new Button(">");
+	public Label name = new Label();
+	public Label birthday = new Label();
+	public Label country = new Label();
+	public Label address = new Label();
+	public Label phone = new Label();
 	private ReservationController resControl = new ReservationController(this);
 	public Stage resWin = new Stage();
 	final ObservableList<String> months = FXCollections.observableArrayList();
@@ -50,6 +55,7 @@ public class ReservationWindow {
 	public Label monthLabel;
 	public Pane layout = new Pane();
 	public GridPane grid2 = new GridPane();
+	public GridPane grid1 = new GridPane();
 	
 	
 	public ReservationWindow(){
@@ -166,7 +172,6 @@ public class ReservationWindow {
 		grid.add(cBoxQuality, 1, 2);
 		
 		resControl.eventHandle();
-		GridPane grid1 = new GridPane();
 		grid1.setGridLinesVisible(false);
 		grid1.setPrefSize(400, 800);
 		grid1.setTranslateX(1050);
@@ -201,9 +206,13 @@ public class ReservationWindow {
 		}
 		
 		grid1.add(textLabel("Name"), 0, 1);
+		grid1.add(name, 0, 2);
 		grid1.add(textLabel("Birthdate"), 0, 3);
+		grid1.add(birthday, 0, 4);
 		grid1.add(textLabel("Country"), 0, 5);
+		
 		grid1.add(textLabel("Adress"), 0, 7);
+		grid1.add(address, 0, 8);
 		grid1.add(textLabel("Phone"), 0, 9);
 		
 		confirmB.setTranslateX(200);
