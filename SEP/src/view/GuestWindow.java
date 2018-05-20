@@ -13,7 +13,7 @@ public class GuestWindow{
 	public static final ObservableList names = FXCollections.observableArrayList();
 	public static final ObservableList data = FXCollections.observableArrayList();
 	public Stage guestWin = new Stage();
-	private GuestList gueList;
+	private static GuestList gueList;
 	MainWindow mainWin = new MainWindow();
 	MainController mainCon = new MainController(mainWin);
 

@@ -13,6 +13,12 @@ public class ErrorWindow {
 		nameAlert.showAndWait();
 	}
 	
+	public void birthDayError(){
+		Alert bDayAlert = new Alert(AlertType.ERROR);
+		bDayAlert.setTitle("Error!");
+		bDayAlert.setHeaderText("An Error has occured");
+		bDayAlert.setContentText("Invalid date input");
+	}
 	
 	
 	

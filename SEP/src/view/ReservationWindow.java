@@ -103,7 +103,7 @@ public class ReservationWindow {
 		TextField roomNrTF = new TextField();
 		roomNrTF.setPromptText("Room nr");
 		
-		grid.add(roomNrTF, 1, 3);
+		
 		
 		
 		

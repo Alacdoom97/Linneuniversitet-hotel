@@ -93,6 +93,8 @@ public class RegistrationController {
 				return false;
 		}
 		}
+		
+		
 		return true;
 	}
 		
