@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import model.Guest;
 import model.GuestList;
 import view.CheckInWindow;
+import view.ErrorWindow;
 import view.GuestWindow;
 import view.ReservationWindow;
 
@@ -18,7 +19,9 @@ public class CheckInController {
 	
 	static CheckInWindow cheWin;
 	static ReservationWindow resWin;
+	ErrorWindow errWin = new ErrorWindow();
 	public GuestWindow gueWin;
+	private Guest tempGuest;
 	
 	public CheckInController(CheckInWindow checkIn) {
 		cheWin = checkIn;
@@ -51,7 +54,7 @@ public class CheckInController {
 		cheWin.listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				Guest tempGuest = null;
+				tempGuest = null;
 				for (int i = 0; i < cheWin.names.size(); i++) {
 					if (cheWin.listView.getSelectionModel().getSelectedItem()
 							.equals(cheWin.names.get(i).idToString(cheWin.names.get(i).getID()) + " " + cheWin.names.get(i).getName() + " "
@@ -108,6 +111,32 @@ public class CheckInController {
 					listPane.getChildren().addAll(cheWin.name, cheWin.nameLab, cheWin.lastName, cheWin.lastNameLab, cheWin.address, cheWin.addressLab, cheWin.birthday,
 							cheWin.birthdayLab, cheWin.isBusiness, cheWin.businessLab, cheWin.checkIn, cheWin.checkOut);
 					listStage.setScene(listScene);
+					
+					cheWin.checkIn.setOnAction(new EventHandler<ActionEvent>() {
+
+						@Override
+						public void handle(ActionEvent checkIn) {
+							if (tempGuest.getCheckIn() == false) {
+								tempGuest.setCheckedIn(true);
+								
+								errWin.checkedInAlert();
+							}
+							
+						}
+						
+					});
+					
+					cheWin.checkOut.setOnAction(new EventHandler<ActionEvent>() {
+						
+						@Override
+						public void handle(ActionEvent checkOut) {
+							if (tempGuest.getCheckIn() == true) {
+								tempGuest.setCheckedIn(false);
+								
+								errWin.checkedOutAlert();
+							}
+						}
+					});
 					listStage.show();
 				}
 			}

@@ -29,6 +29,22 @@ public class ErrorWindow {
 		phoneAlert.showAndWait();
 	}
 	
+	public void checkedInAlert() {
+		Alert checkedIn = new Alert(AlertType.CONFIRMATION);
+		checkedIn.setTitle("Success!");
+		checkedIn.setHeaderText("Successfully Checked in");
+		checkedIn.setContentText("Guest has been successfully checked in!");
+		checkedIn.showAndWait();
+	}
+	
+	public void checkedOutAlert() {
+		Alert checkedOut = new Alert(AlertType.CONFIRMATION);
+		checkedOut.setTitle("Success!");
+		checkedOut.setHeaderText("Successfully Checked Out");
+		checkedOut.setContentText("Guest has been successfully checked out!");
+		checkedOut.showAndWait();
+	}
+	
 	
 
 }

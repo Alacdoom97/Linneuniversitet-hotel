@@ -100,15 +100,6 @@ public class CheckInWindow {
 			}
 		}
 		
-		checkIn.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				
-				
-			}
-			
-		});
 
 		cheControll.checkInHandle(gueList);
 
