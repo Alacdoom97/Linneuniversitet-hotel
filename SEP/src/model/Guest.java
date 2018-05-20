@@ -9,17 +9,19 @@ public class Guest {
 	private String name;
 	private String lastName;
 	private String adress;
+	private String phoneNumber;
 	private String personalNumber;
 	private LocalDate start;
 	private LocalDate end;
 	private boolean isBusiness;
 	
-	public Guest(int ID, String company, String name, String lastName, String address, String personalNumber, boolean isBusiness){
+	public Guest(int ID, String company, String name, String lastName, String address, String phoneNumber, String personalNumber, boolean isBusiness){
 		this.ID = ID;
 		this.companyName = company;
 		this.name = name;
 		this.lastName = lastName;
 		this.adress = address;
+		this.phoneNumber = phoneNumber;
 		this.personalNumber = personalNumber;
 		this.isBusiness = isBusiness;
 	}
@@ -64,6 +66,14 @@ public class Guest {
 
 	public void setAdress(String adress) {
 		this.adress = adress;
+	}
+	
+	public void setPhone(String phone){
+		this.phoneNumber = phone;
+	}
+	
+	public String getPhone(){
+		return phoneNumber;
 	}
 
 	public String getPersNum() {

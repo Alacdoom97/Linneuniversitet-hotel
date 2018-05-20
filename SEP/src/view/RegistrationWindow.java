@@ -26,6 +26,7 @@ public class RegistrationWindow {
 	public TextField name;
 	public TextField companyName;
 	public TextField adress;
+	public TextField phoneNumber;
 	public TextField lastname;
 	public DatePicker textField = new DatePicker ();
 	public ComboBox<String> comboBox;
@@ -50,24 +51,24 @@ public class RegistrationWindow {
 			grid.getColumnConstraints().add(columns);
 			
 		}
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 8; i++) {
 			/*Creating the Columns and rows */
 			
 			RowConstraints rows = new RowConstraints();
-			rows.setPercentHeight(100.0/6);
+			rows.setPercentHeight(100.0/8);
 			grid.getRowConstraints().add(rows);
 		}
 		
 		accept.setPrefSize(120, 60);
 		accept.setTranslateX(100);
-		accept.setTranslateY(50);
-		grid.add(accept, 0, 5);
+		accept.setTranslateY(20);
+		grid.add(accept, 0, 7);
 		
 		cancel.setPrefSize(120, 60);
 		cancel.setTranslateX(100);
-		cancel.setTranslateY(50);
+		cancel.setTranslateY(20);
 		cancel.setText("Abort");
-		grid.add(cancel, 1, 5);
+		grid.add(cancel, 1, 7);
 		
 		ObservableList<String> options = 
 			    FXCollections.observableArrayList(
@@ -78,24 +79,24 @@ public class RegistrationWindow {
 			
 			Label businessCheck = new Label("Reason for staying? ");
 			businessCheck.setTranslateX(100);
-			businessCheck.setTranslateY(70);
-			grid.add(businessCheck, 0, 4);
-			comboBox.setTranslateY(70);
+		
+			grid.add(businessCheck, 0, 6);
 			comboBox.setTranslateX(100);
-		grid.add(comboBox, 1, 4);
+		grid.add(comboBox, 1, 6);
 		
 		companyName = createTextField("Company Name: ", 0, 0);
 		name = createTextField("Name: ", 0, 1);
 		lastname = createTextField("Last Name: ", 0, 2);
 		adress = createTextField("Address: ", 0, 3);
-		Label birthLabel= new Label(": ");
+		phoneNumber = createTextField("Phone", 0,4);
+		Label birthLabel= new Label("Birthdate");
 		birthLabel.setTranslateX(100);
-		grid.add(birthLabel, 0, 4);
+		grid.add(birthLabel, 0, 5);
 		
 		
 		textField.setTranslateX(100);
 		textField.setPromptText("YYYY-MM-DD");
-		grid.add(textField, 1, 4);
+		grid.add(textField, 1, 5);
 		/*createTextField(": ", 0, 4);*/
 		
 		regControl.eventHandle();

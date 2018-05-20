@@ -22,6 +22,7 @@ public class ReservationController {
 	int dateTrackerNext = 1;
 	private static GridList gl = new GridList();
 	GridPane current;
+	Guest currentG;
 	public ReservationController(ReservationWindow main){
 		this.main = main;
 		
@@ -165,19 +166,21 @@ public class ReservationController {
 				main.name.setText("");
 				main.birthday.setText("");
 				main.address.setText("");
-					Guest tempGuest = null;
+					Guest currentG = null;
 					for (int i = 0; i < guestWin.names.size(); i++) {
 						if (guestWin.listView.getSelectionModel().getSelectedItem()
 								.equals(guestWin.names.get(i).idToString(guestWin.names.get(i).getID()) + " " + guestWin.names.get(i).getName() + " "
 										+ guestWin.names.get(i).getLastName())) {
-							tempGuest = guestWin.names.get(i);
+							currentG = guestWin.names.get(i);
 						}
 					}
 					System.out.println("haha");
-					if (tempGuest != null) {
-						main.name.setText(tempGuest.getName());
-						main.birthday.setText(tempGuest.getPersNum());
-						main.address.setText(tempGuest.getAdress());
+					System.out.println(currentG.getName());
+					if (currentG != null) {
+						main.name.setText(currentG.getName());
+						main.birthday.setText(currentG.getPersNum());
+						main.address.setText(currentG.getAdress());
+						main.phone.setText(currentG.getPhone());
 					
 					}
 				

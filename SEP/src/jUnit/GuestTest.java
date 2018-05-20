@@ -12,9 +12,9 @@ public class GuestTest {
 	@Test
 	public void CreateGuest() {
 		
-		Guest g1 = new Guest(1, "McDonalds", "Hau", "Trinh", "Furutåvägen", "1993-04-01", true);
-		Guest g2 = new Guest(2, "Burger King", "Pranav", "Patel", "Smultronvägen", "1997-11-25", true);
-		Guest g3 = new Guest(3, "MAX", "Vikrant", "Mainali", "Blåbärsvägen", "1998-12-03", true);
+		Guest g1 = new Guest(1, "McDonalds", "Hau", "Trinh", "Furutåvägen","hhahaha", "1993-04-01", true);
+		Guest g2 = new Guest(2, "Burger King", "Pranav", "Patel", "Smultronvägen","hhahaha", "1997-11-25", true);
+		Guest g3 = new Guest(3, "MAX", "Vikrant", "Mainali", "Blåbärsvägen","hhahaha", "1998-12-03", true);
 		
 		assertEquals(1, g1.getID());
 		assertEquals("McDonalds", g1.getCompanyName());
@@ -41,9 +41,9 @@ public class GuestTest {
 	@Test
 	public void addGuest(){
 		
-		Guest g1 = new Guest(1, "McDonalds", "Hau", "Trinh", "Furutåvägen", "1993-04-01", true);
-		Guest g2 = new Guest(2, "Burger King", "Pranav", "Patel", "Smultronvägen", "1997-11-25", true);
-		Guest g3 = new Guest(3, "MAX", "Vikrant", "Mainali", "Blåbärsvägen", "1998-12-03", true);
+		Guest g1 = new Guest(1, "McDonalds", "Hau", "Trinh", "Furutåvägen","hhahaha", "1993-04-01", true);
+		Guest g2 = new Guest(2, "Burger King", "Pranav", "Patel", "Smultronvägen","hhahaha", "1997-11-25", true);
+		Guest g3 = new Guest(3, "MAX", "Vikrant", "Mainali", "Blåbärsvägen","hhahaha", "1998-12-03", true);
 		
 		GuestList gl = new GuestList();
 		

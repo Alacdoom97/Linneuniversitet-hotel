@@ -214,7 +214,7 @@ public class ReservationWindow {
 		grid1.add(textLabel("Adress"), 0, 7);
 		grid1.add(address, 0, 8);
 		grid1.add(textLabel("Phone"), 0, 9);
-		
+		grid1.add(phone, 0, 10);
 		confirmB.setTranslateX(200);
 		grid1.add(confirmB, 0, 15);
 		cancelB.setTranslateX(280);
