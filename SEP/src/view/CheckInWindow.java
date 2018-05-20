@@ -5,6 +5,8 @@ import controller.MainController;
 import controller.ReservationController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -97,10 +99,22 @@ public class CheckInWindow {
 						+ names.get(i).getLastName());
 			}
 		}
+		
+		checkIn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				
+				
+			}
+			
+		});
 
 		cheControll.checkInHandle(gueList);
 
 		listView.setItems(data);
+		
+		
 
 		// Double click the list to be able to see the
 		
