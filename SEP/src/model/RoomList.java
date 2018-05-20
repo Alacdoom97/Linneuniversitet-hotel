@@ -8,10 +8,10 @@ public class RoomList {
 	private static ArrayList<Room> roomsKalmar = new ArrayList<Room>();
 	
 	public void createRooms() {
-		for(int i = 0; i < 15; i++) {
+		for(int i = 0; i <= 15; i++) {
 			if (i <= 10) {
 				
-			Room roomVaxjo = singleNormalRoom("Växjo", i, 1, false, true);
+			Room roomVaxjo = singleNormalRoom("Växjö", i, 1, false, true);
 			Room roomKalmar = singleNormalRoom("Kalmar", i, 1, false, true);
 			if(i > 3) {
 				roomVaxjo.setAdjoinsRoom(true);
@@ -33,18 +33,18 @@ public class RoomList {
 			}
 		}
 		
-		for (int i = 0; i < 10; i++) {
-			if (i <=6) {
+		for (int i = 16; i < 26; i++) {
+			if (i <= 21) {
 				Room roomVaxjo = doubleNormalRoom("Växjö", i, 1, false, true);
 				Room roomKalmar = doubleNormalRoom("Kalmar", i, 1, false, true);
-				if (i < 3) {
+				if (i < 18) {
 					roomVaxjo.setAdjoinsRoom(true);
 					roomKalmar.setAdjoinsRoom(true);
 				}
 				roomsVaxjo.add(roomVaxjo);
 				roomsKalmar.add(roomKalmar);
 			}
-			else if(i > 6 && i <= 8) {
+			else if(i > 21 && i <= 23) {
 				Room roomVaxjo = doubleQualityRoom("Växjö", i, 2, true, true);
 				Room roomKalmar = doubleQualityRoom("Kalmar", i, 2, true, true);
 				roomsVaxjo.add(roomVaxjo);
@@ -60,14 +60,14 @@ public class RoomList {
 			}
 		}
 		
-		for (int i = 0; i < 5; i++) {
-			if (i <= 3) {
+		for (int i = 26; i < 30; i++) {
+			if (i <= 28) {
 				Room roomVaxjo = tripleNormalRoom("Växjö", i, 1, false, true);
 				Room roomKalmar = tripleNormalRoom("Kalmar", i, 1, false, true);
 				roomsVaxjo.add(roomVaxjo);
 				roomsKalmar.add(roomKalmar);
 			}
-			else if(i == 4) {
+			else if(i == 29) {
 				Room roomVaxjo = tripleQualityRoom("Växjö", i, 2, true, true);
 				Room roomKalmar = tripleQualityRoom("Kalmar", i, 2, true, true);
 				roomsVaxjo.add(roomVaxjo);
