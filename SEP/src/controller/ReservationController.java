@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import main.Main;
 import model.Grid;
 import model.GridList;
 import model.Guest;
@@ -17,6 +18,7 @@ public class ReservationController {
 	ReservationWindow main;
 	RegistrationWindow regWin;
 	GuestWindow guestWin;
+	Main program;
 	MainController mainControl = new MainController(new MainWindow());
 	int dateTrackerPrevious = 1;
 	int dateTrackerNext = 1;
@@ -34,6 +36,10 @@ public class ReservationController {
 	
 	public ReservationController(GuestWindow gueWin) {
 		this.guestWin = gueWin;
+	}
+	
+	public ReservationController(Main program){
+		this.program = program;
 	}
 	
 	public void eventHandle(){
@@ -127,6 +133,16 @@ public class ReservationController {
 					
 				}catch(Exception e5){
 					e5.printStackTrace();
+				}
+			}
+		});
+		
+		main.searchButton.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent e){
+				try{
+					
+				}catch(Exception e6){
+					e6.printStackTrace();
 				}
 			}
 		});

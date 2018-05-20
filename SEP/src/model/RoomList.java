@@ -7,6 +7,10 @@ public class RoomList {
 	private static ArrayList<Room> roomsVaxjo = new ArrayList<Room>();
 	private static ArrayList<Room> roomsKalmar = new ArrayList<Room>();
 	
+	public RoomList() {
+		createRooms();
+	}
+	
 	public void createRooms() {
 		for(int i = 0; i <= 15; i++) {
 			if (i <= 10) {

@@ -158,8 +158,8 @@ public class ReservationWindow {
 		cBoxBeds.setValue("Single Room");
 		grid.add(cBoxBeds, 0, 2);
 		
-		cBoxSmoke.getItems().addAll("Non-smoker", "Smoker");
-		cBoxSmoke.setValue("Non-smoker");
+		cBoxSmoke.getItems().addAll("Non-adjoining", "Adjoining");
+		cBoxSmoke.setValue("Non-adjoining");
 		grid.add(cBoxSmoke, 0, 3);
 		
 		
