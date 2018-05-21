@@ -5,6 +5,7 @@ import java.util.List;
 
 import controller.ReservationController;
 import javafx.application.Application;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -250,6 +251,17 @@ public class ReservationWindow {
 		Pane sp = new Pane();
 		
 		sp.setStyle(color);
+		
+		sp.hoverProperty().addListener((observable, oldValue, show)->{
+			if(show){
+				double x = sp.getLayoutX();
+				double y = sp.getLayoutY();
+				System.out.println("haha");
+				
+			}else{
+				
+			}
+		});
 		return sp;
 	}
 	
