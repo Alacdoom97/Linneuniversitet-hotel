@@ -112,7 +112,7 @@ public class RegistrationWindow {
 		regWin.setScene(regisWindow);
 		regWin.show();
 		
-		saveRegistrationWindow(accept);
+		
 	}
 	
 	public TextField createTextField(String name, int column, int row) {
@@ -126,7 +126,7 @@ public class RegistrationWindow {
 	}
 	
 
-	public void saveRegistrationWindow(Button confirm)
+	/*public void saveRegistrationWindow(Button confirm)
 	{
 		confirm = accept;
 		accept.setOnAction(e -> {
@@ -147,5 +147,5 @@ public class RegistrationWindow {
 			}
 		});
 		cancel.setOnAction(e -> regWin.close());
-	}
+	}*/
 }
