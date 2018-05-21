@@ -1,15 +1,10 @@
 package view;
 
-import java.beans.EventHandler;
 import java.time.LocalDate;
-import java.util.List;
 
 import controller.ReservationController;
-import javafx.application.Application;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,11 +13,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -30,6 +23,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import model.Room;
 
 public class ReservationWindow {
 	final ToggleGroup group = new ToggleGroup();
@@ -37,6 +31,9 @@ public class ReservationWindow {
 	public final ComboBox cBoxQuality = new ComboBox();
 	public final ComboBox cBoxBeds = new ComboBox();
 	public final ComboBox adjoinment = new ComboBox();
+	public ListView roomView;
+	public ObservableList<String> roomsNames = FXCollections.observableArrayList();
+	public ObservableList<Room> roomsList = FXCollections.observableArrayList();
 	public Button guestButton = new Button();
 	public Button newGuestButton = new Button();
 	public Button confirmB = new Button("Confirm");
@@ -44,6 +41,7 @@ public class ReservationWindow {
 	public Button searchButton = new Button("Search");
 	public Button previousButton = new Button("<");
 	public Button nextButton = new Button(">");
+	public Button confirmRoom;
 	public Label name = new Label();
 	public Label birthday = new Label();
 	public Label country = new Label();
@@ -246,6 +244,46 @@ public class ReservationWindow {
 		Scene scene = new Scene(layout, 1600, 900);
 		resWin.setScene(scene);
 		resWin.show();
+		
+	}
+	@SuppressWarnings("unchecked")
+	public void searchButtonActivate() {
+		Pane pane = new Pane();
+		ComboBox sp = new ComboBox();
+		confirmRoom = new Button("Confirm");
+		roomView = new ListView(roomsList);
+		
+		
+		roomsNames.clear();
+		roomsList.clear();
+		
+		for (int i = 0; i < resControl.temp.size(); i++) {
+			roomsList.add(resControl.temp.get(i));
+
+			roomsNames.add(Integer.toString(roomsList.get(i).getRoomNumber()));
+		}
+		confirmRoom.setTranslateX(100);
+		confirmRoom.setTranslateY(200);
+		
+		sp.setTranslateX(50);
+		sp.setTranslateY(100);
+		sp.setPrefWidth(140);
+		sp.setPrefHeight(25);
+		sp.setPromptText("Rooms Available");
+		
+		roomView.setPrefSize(250, 250);
+		roomView.setEditable(true);
+		
+		resControl.searchForRooms();
+		
+		roomView.setItems(roomsNames);
+		sp.getItems().addAll(roomsNames);
+		pane.getChildren().addAll(sp, confirmRoom);
+		
+		Scene roomSearchScene = new Scene(pane, 250, 250);
+		Stage roomSearch = new Stage();
+		roomSearch.setScene(roomSearchScene);
+		roomSearch.show();
 		
 	}
 	

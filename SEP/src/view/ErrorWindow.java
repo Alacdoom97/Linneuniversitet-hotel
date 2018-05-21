@@ -45,6 +45,13 @@ public class ErrorWindow {
 		checkedOut.showAndWait();
 	}
 	
+	public void roomLocatedAlert() {
+		Alert roomLocated = new Alert(AlertType.CONFIRMATION);
+		roomLocated.setTitle("Room Noted!");
+		roomLocated.setContentText("Room has bee succesfully noted down!");
+		roomLocated.showAndWait();
+	}
+	
 	
 
 }

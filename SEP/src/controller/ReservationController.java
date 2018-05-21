@@ -5,23 +5,31 @@ import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import main.Main;
 import model.Grid;
 import model.GridList;
 import model.Guest;
 import model.Room;
 import view.CheckInWindow;
+import view.ErrorWindow;
 import view.GuestWindow;
 import view.MainWindow;
 import view.RegistrationWindow;
 import view.ReservationWindow;
+
 public class ReservationController {
 	CheckInWindow cheWin;
 	ReservationWindow main;
 	RegistrationWindow regWin;
 	GuestWindow guestWin;
+	ErrorWindow errWin = new ErrorWindow();
 	Main program;
 	MainController mainControl = new MainController(new MainWindow());
 	int dateTrackerPrevious = 1;
@@ -32,167 +40,181 @@ public class ReservationController {
 	Guest currentG;
 	private LocalDate arrival;
 	private LocalDate departure;
+	public static ArrayList<Room> temp;
 	int quality;
 	boolean adjoinment;
 	int roomtype;
-	public ReservationController(ReservationWindow main){
+	private Room tempRoom;
+
+	public ReservationController(ReservationWindow main) {
 		this.main = main;
-		
+
 	}
-	
+
 	public ReservationController(CheckInWindow cheWin) {
 		this.cheWin = cheWin;
 	}
-	
+
 	public ReservationController(GuestWindow gueWin) {
 		this.guestWin = gueWin;
 	}
-	
-	public ReservationController(Main program){
+
+	public ReservationController(Main program) {
 		this.program = program;
 	}
-	
-	public void eventHandle(){
-		main.newGuestButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				try{
-					regWin=new RegistrationWindow();
-				}catch(Exception e1){
+
+	public void eventHandle() {
+		main.newGuestButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				try {
+					regWin = new RegistrationWindow();
+				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		
-		
-		main.cancelB.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				try{
+
+		main.cancelB.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				try {
 					main.resWin.close();
-				}catch(Exception e2){
+				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
 			}
 		});
-		
-		main.guestButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				try{
+
+		main.guestButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				try {
 					guestWin = new GuestWindow();
-					
+
 					guestInputHandle();
-				}catch(Exception e3){
+				} catch (Exception e3) {
 					e3.printStackTrace();
 				}
 			}
 		});
-		
-		main.nextButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				try{
+
+		main.nextButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				try {
 					main.layout.getChildren().remove(main.grid2);
 					main.pane.getChildren().remove(main.monthLabel);
 					main.monthDisplay(main.dateChecker.plusMonths(1));
 					grid = new Grid();
 					grid.Grid(main.dateChecker, main.grid2);
-					
-					if(gl.contains(main.dateChecker) == false){
+
+					if (gl.contains(main.dateChecker) == false) {
 						gl.gridAdd(grid);
 						System.out.println("added");
 					}
 					main.dateChecker = main.dateChecker.plusMonths(1);
-					
-					if(gl.contains(main.dateChecker)){
+
+					if (gl.contains(main.dateChecker)) {
 						main.grid2 = gl.gridGet(main.dateChecker).getGrid();
-					}else{
+					} else {
 						main.grid2 = main.newGrid();
 						main.gridFill(main.grid2);
 					}
-					
-					
+
 					main.layout.getChildren().add(main.grid2);
-					
-					
-					
-				}catch(Exception e4){
+
+				} catch (Exception e4) {
 					e4.printStackTrace();
 				}
 			}
 		});
-		
-		main.previousButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				try{
-					
+
+		main.previousButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				try {
+
 					main.layout.getChildren().remove(main.grid2);
 					main.pane.getChildren().remove(main.monthLabel);
 					main.monthDisplay(main.dateChecker.minusMonths(1));
 					Grid grid = new Grid();
 					grid.Grid(main.dateChecker, main.grid2);
-					
-					if(gl.contains(main.dateChecker) == false){
+
+					if (gl.contains(main.dateChecker) == false) {
 						gl.gridAdd(grid);
 						System.out.println("added");
 					}
-					
+
 					main.dateChecker = main.dateChecker.minusMonths(1);
-					
-					if(gl.contains(main.dateChecker)){
+
+					if (gl.contains(main.dateChecker)) {
 						main.grid2 = gl.gridGet(main.dateChecker).getGrid();
-					}else{
+					} else {
 						main.grid2 = main.newGrid();
 						main.gridFill(main.grid2);
 					}
 					main.layout.getChildren().add(main.grid2);
-					
-				}catch(Exception e5){
+
+				} catch (Exception e5) {
 					e5.printStackTrace();
 				}
 			}
 		});
-		
-		main.searchButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				try{
-					if (main.cBoxBeds.getValue() == "Single Room"){
+
+		main.searchButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				try {
+					if (main.cBoxBeds.getValue() == "Single Room") {
 						roomtype = 1;
-					}else if(main.cBoxBeds.getValue() == "Double Room"){
+					} else if (main.cBoxBeds.getValue() == "Double Room") {
 						roomtype = 2;
-					}else if(main.cBoxBeds.getValue() == "Triple Room"){
+					} else if (main.cBoxBeds.getValue() == "Triple Room") {
 						roomtype = 3;
 					}
-					
-					if (main.cBoxQuality.getValue() == "1-Star"){
+
+					if (main.cBoxQuality.getValue() == "1-Star") {
 						quality = 1;
-					}else if(main.cBoxQuality.getValue() == "2-Star"){
+					} else if (main.cBoxQuality.getValue() == "2-Star") {
 						quality = 2;
-					}else if(main.cBoxQuality.getValue() == "3-Star"){
+					} else if (main.cBoxQuality.getValue() == "3-Star") {
 						quality = 3;
 					}
-					
-					if(main.adjoinment.getValue().equals("Adjoining")){
+
+					if (main.adjoinment.getValue().equals("Adjoining")) {
 						adjoinment = true;
-					}else{
+					} else {
 						adjoinment = false;
 					}
-					
+
 					arrival = main.checkInDate.getValue();
 					departure = main.checkOutDate.getValue();
+
+					temp = Main.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
 					
-					ArrayList<Room> temp = program.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
-					
-					
-					
-				}catch(Exception e6){
+					main.searchButtonActivate();
+
+				} catch (Exception e6) {
 					e6.printStackTrace();
 				}
+
 			}
+
 		});
-		
-		
 	}
-	
+
+	public void searchForRooms() {
+		main.roomView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent roomSearch) {
+				tempRoom = null;
+				for (int i = 0; i < main.roomsList.size(); i++) {
+					if (main.roomView.getSelectionModel().getSelectedItem()
+							.equals(Integer.toString(main.roomsList.get(i).getRoomNumber()))) {
+						tempRoom = main.roomsList.get(i);
+					}
+				}
+			}
+
+		});
+	}
+
 	public void guestInputHandle() {
-		
+
 		guestWin.searchButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -208,13 +230,13 @@ public class ReservationController {
 					}
 
 					for (int i = 0; i < guestWin.names.size(); i++) {
-						guestWin.data.add(guestWin.names.get(i).idToString(guestWin.names.get(i).getID()) + " " + guestWin.names.get(i).getName() 
-								+ " " + guestWin.names.get(i).getLastName());
+						guestWin.data.add(guestWin.names.get(i).idToString(guestWin.names.get(i).getID()) + " "
+								+ guestWin.names.get(i).getName() + " " + guestWin.names.get(i).getLastName());
 					}
 				} catch (Exception e4) {
 					e4.printStackTrace();
 				}
-				
+
 			}
 		});
 		guestWin.listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -223,28 +245,26 @@ public class ReservationController {
 				main.name.setText("");
 				main.birthday.setText("");
 				main.address.setText("");
-					Guest currentG = null;
-					for (int i = 0; i < guestWin.names.size(); i++) {
-						if (guestWin.listView.getSelectionModel().getSelectedItem()
-								.equals(guestWin.names.get(i).idToString(guestWin.names.get(i).getID()) + " " + guestWin.names.get(i).getName() + " "
-										+ guestWin.names.get(i).getLastName())) {
-							currentG = guestWin.names.get(i);
-						}
+				Guest currentG = null;
+				for (int i = 0; i < guestWin.names.size(); i++) {
+					if (guestWin.listView.getSelectionModel().getSelectedItem()
+							.equals(guestWin.names.get(i).idToString(guestWin.names.get(i).getID()) + " "
+									+ guestWin.names.get(i).getName() + " " + guestWin.names.get(i).getLastName())) {
+						currentG = guestWin.names.get(i);
 					}
-					System.out.println("haha");
-					System.out.println(currentG.getName());
-					if (currentG != null) {
-						main.name.setText(currentG.getName());
-						main.birthday.setText(currentG.getPersNum());
-						main.address.setText(currentG.getAdress());
-						main.phone.setText(currentG.getPhone());
-					
-					}
-				
+				}
+				System.out.println("haha");
+				System.out.println(currentG.getName());
+				if (currentG != null) {
+					main.name.setText(currentG.getName());
+					main.birthday.setText(currentG.getPersNum());
+					main.address.setText(currentG.getAdress());
+					main.phone.setText(currentG.getPhone());
+
+				}
+
 			}
-			
+
 		});
 	}
-	
-
 }

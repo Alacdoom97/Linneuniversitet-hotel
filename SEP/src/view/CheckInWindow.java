@@ -125,13 +125,13 @@ public class CheckInWindow {
 				data.add(names.get(i).getName() + " " + names.get(i).getLastName());
 			}
 		}
-
+		// click the list to be able to see the guest info
 		cheControll.checkInHandle(gueList);
 		
 
 		listView.setItems(data);
 
-		// Double click the list to be able to see the
+		
 
 		StackPane root = new StackPane();
 		pane.getChildren().addAll(root, searchBar, searchBar2, searchButton);
