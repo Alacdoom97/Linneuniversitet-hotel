@@ -17,7 +17,7 @@ public class GuestTest {
 		Guest g3 = new Guest(3, "MAX", "Vikrant", "Mainali", "Blåbärsvägen","hhahaha", "1998-12-03", true);
 		
 		assertEquals(1, g1.getID());
-		assertEquals("McDonalds", g1.getCompanyName());
+		assertEquals("McDonalds", g1.getCompanyName()); 
 		assertEquals("Hau", g1.getName());
 		assertEquals("Trinh", g1.getLastName());
 		assertEquals("Furutåvägen", g1.getAdress());

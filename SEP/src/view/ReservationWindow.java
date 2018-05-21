@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -30,9 +31,9 @@ import javafx.util.Callback;
 public class ReservationWindow {
 	final ToggleGroup group = new ToggleGroup();
 	final ToggleGroup group1 = new ToggleGroup();
-	final ComboBox cBoxQuality = new ComboBox();
-	final ComboBox cBoxBeds = new ComboBox();
-	final ComboBox cBoxSmoke = new ComboBox();
+	public final ComboBox cBoxQuality = new ComboBox();
+	public final ComboBox cBoxBeds = new ComboBox();
+	public final ComboBox adjoinment = new ComboBox();
 	public Button guestButton = new Button();
 	public Button newGuestButton = new Button();
 	public Button confirmB = new Button("Confirm");
@@ -49,8 +50,8 @@ public class ReservationWindow {
 	public Stage resWin = new Stage();
 	final ObservableList<String> months = FXCollections.observableArrayList();
 	public LocalDate dateChecker = LocalDate.now();
-	private DatePicker checkInDate = new DatePicker();
-	private DatePicker checkOutDate = new DatePicker();
+	public DatePicker checkInDate = new DatePicker();
+	public DatePicker checkOutDate = new DatePicker();
 	public Pane pane = new GridPane();
 	public Label monthLabel;
 	public Pane layout = new Pane();
@@ -70,7 +71,7 @@ public class ReservationWindow {
 		resWin.setTitle("Reservation Manager");
 		
 		GridPane grid = new GridPane();
-		grid.setGridLinesVisible(false);
+		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(20);
 		grid.setPadding(new Insets(40,20,20,20));
@@ -158,9 +159,9 @@ public class ReservationWindow {
 		cBoxBeds.setValue("Single Room");
 		grid.add(cBoxBeds, 0, 2);
 		
-		cBoxSmoke.getItems().addAll("Non-adjoining", "Adjoining");
-		cBoxSmoke.setValue("Non-adjoining");
-		grid.add(cBoxSmoke, 0, 3);
+		adjoinment.getItems().addAll("Non-adjoining", "Adjoining");
+		adjoinment.setValue("Non-adjoining");
+		grid.add(adjoinment, 0, 3);
 		
 		
 		
@@ -229,7 +230,7 @@ public class ReservationWindow {
 		grid2.setTranslateY(230);
 		
 		int rowMax2 = 31;
-		int colMax2 = 32;
+		int colMax2 = 31;
 		
 		for (int i = 0; i < rowMax2; ++i){
 			RowConstraints rowConst = new RowConstraints();
@@ -244,13 +245,11 @@ public class ReservationWindow {
 		}
 		int y = 0;
 		
-		for(int i = 0; i < 31; ++i){
-			grid2.add(textLabel(Integer.toString(i+1)), i+1, 0);
+		for(int i = 0; i < colMax2; ++i){
+			grid2.add(textLabel(Integer.toString(i+1)), i, 0);
 		}
 		
-		for(int i = 0; i < 30; ++i){
-			grid2.add(textLabel(Integer.toString(i+1)), 0, i+1);
-		}
+		
 		
 		grid2.add(cellFill("-fx-background-color:green"), 5, 5);
 		
@@ -270,8 +269,9 @@ public class ReservationWindow {
 		
 	}
 	
-	public StackPane cellFill(String color){
-		StackPane sp = new StackPane();
+	public Pane cellFill(String color){
+		Pane sp = new Pane();
+		
 		sp.setStyle(color);
 		return sp;
 	}
@@ -309,16 +309,20 @@ public class ReservationWindow {
 			colConst.setPercentWidth(100.0/colMax2);
 			newGp.getColumnConstraints().add(colConst);
 		}
-		int y = 0;
 		
+		
+		
+		return newGp;
+	}
+	
+	public void gridFill(GridPane grid){
 		for(int i = 0; i < 31; ++i){
-			newGp.add(textLabel(Integer.toString(i+1)), i+1, 0);
+			grid.add(textLabel(Integer.toString(i+1)), i+1, 0);
 		}
 		
 		for(int i = 0; i < 30; ++i){
-			newGp.add(textLabel(Integer.toString(i+1)), 0, i+1);
+			grid.add(textLabel(Integer.toString(i+1)), 0, i+1);
 		}
-		return newGp;
 	}
 	
 	

@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -23,8 +25,14 @@ public class ReservationController {
 	int dateTrackerPrevious = 1;
 	int dateTrackerNext = 1;
 	private static GridList gl = new GridList();
+	private Grid grid;
 	GridPane current;
 	Guest currentG;
+	private LocalDate arrival;
+	private LocalDate departure;
+	int quality;
+	boolean adjoinment;
+	String roomtype;
 	public ReservationController(ReservationWindow main){
 		this.main = main;
 		
@@ -82,7 +90,7 @@ public class ReservationController {
 					main.layout.getChildren().remove(main.grid2);
 					main.pane.getChildren().remove(main.monthLabel);
 					main.monthDisplay(main.dateChecker.plusMonths(1));
-					Grid grid = new Grid();
+					grid = new Grid();
 					grid.Grid(main.dateChecker, main.grid2);
 					
 					if(gl.contains(main.dateChecker) == false){
@@ -95,6 +103,7 @@ public class ReservationController {
 						main.grid2 = gl.gridGet(main.dateChecker).getGrid();
 					}else{
 						main.grid2 = main.newGrid();
+						main.gridFill(main.grid2);
 					}
 					
 					
@@ -111,6 +120,7 @@ public class ReservationController {
 		main.previousButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
 				try{
+					
 					main.layout.getChildren().remove(main.grid2);
 					main.pane.getChildren().remove(main.monthLabel);
 					main.monthDisplay(main.dateChecker.minusMonths(1));
@@ -128,6 +138,7 @@ public class ReservationController {
 						main.grid2 = gl.gridGet(main.dateChecker).getGrid();
 					}else{
 						main.grid2 = main.newGrid();
+						main.gridFill(main.grid2);
 					}
 					main.layout.getChildren().add(main.grid2);
 					
@@ -140,6 +151,11 @@ public class ReservationController {
 		main.searchButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
 				try{
+					main.layout.getChildren().remove(main.grid2);
+					main.grid2 = main.newGrid();
+					main.layout.getChildren().add(main.grid2);
+					
+					
 					
 				}catch(Exception e6){
 					e6.printStackTrace();
