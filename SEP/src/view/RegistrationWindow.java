@@ -1,6 +1,6 @@
 package view;
 
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 import controller.RegistrationController;
 import database.SQLConnection;
