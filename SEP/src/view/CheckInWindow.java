@@ -1,8 +1,12 @@
 package view;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import controller.CheckInController;
 import controller.MainController;
 import controller.ReservationController;
+import database.SQLConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,14 +38,14 @@ public class CheckInWindow {
 	public TextField phone;
 	public TextField birthday;
 	public TextField isBusiness;
-	public Label phoneLab;
 	public Label nameLab;
 	public Label lastNameLab;
 	public Label addressLab;
+	public Label phoneLab;
 	public Label businessLab;
 	public Label birthdayLab;
 	public static GuestList gueList;
-	MainWindow mainWin =new MainWindow();
+	MainWindow mainWin = new MainWindow();
 	ReservationController resControll = new ReservationController(this);
 	CheckInController cheControll = new CheckInController(this);
 	MainController mainControl = new MainController(mainWin);
@@ -57,14 +61,14 @@ public class CheckInWindow {
 
 		// Create the buttons and searchBar for the GUI
 		checkIn.setText("Check In");
-		checkIn.setPrefSize(120, 60);
+		checkIn.setPrefSize(120, 120);
 		checkIn.setTranslateX(125);
-		checkIn.setTranslateY(400);
+		checkIn.setTranslateY(300);
 
 		checkOut.setText("Check Out");
-		checkOut.setPrefSize(120, 60);
+		checkOut.setPrefSize(120, 120);
 		checkOut.setTranslateX(275);
-		checkOut.setTranslateY(400);
+		checkOut.setTranslateY(300);
 
 		searchButton.setText("Search");
 		searchButton.setTranslateX(300);
@@ -85,32 +89,49 @@ public class CheckInWindow {
 		listView.setPrefSize(250, 450);
 		listView.setEditable(true);
 
-		data.clear();
-		names.clear();
-		
-		for(int i = 0; i < gueList.getSize(); ++i){
+
+		/*for (int i = 0; i < gueList.getSize(); ++i) {
 			names.add(gueList.getGuest(i));
 		}
+		data.clear();
+		names.clear();*/
 
-		
+		SQLConnection sq = new SQLConnection();
+		String query = "SELECT * from GuestList";
+		ResultSet rs = sq.importData(query);
 
-		
+		try {
+			while (rs.next()) {
+				int ID = rs.getInt("ID");
+				String companyName = rs.getString("companyName");
+				String firstName = rs.getString("name");
+				String lastName = rs.getString("lastname");
+				String address = rs.getString("adress");
+				String phoneNumber = rs.getString("phoneNumber");
+				String birthday = rs.getString("dateOfBirth");
+				Boolean isBusiness = rs.getBoolean("businessCheck");
+				Guest guest = new Guest(ID, companyName, firstName, lastName, address, phoneNumber, birthday,
+						isBusiness, false);
+
+				names.add(guest);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (data.isEmpty()) {
 			for (int i = 0; i < names.size(); i++) {
-				data.add(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " "
-						+ names.get(i).getLastName());
+				data.add(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " " + names.get(i).getLastName());
 			}
 		}
-		
 
 		cheControll.checkInHandle(gueList);
 
 		listView.setItems(data);
-		
-		
 
 		// Double click the list to be able to see the
-		
+
 		StackPane root = new StackPane();
 		pane.getChildren().addAll(root, searchBar, searchBar2, searchButton);
 		root.getChildren().add(listView);

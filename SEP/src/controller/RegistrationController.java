@@ -12,6 +12,7 @@ public class RegistrationController {
 	MainController mainControl = new MainController(mainWin);
 	RegistrationWindow main;
 	ErrorWindow errWin;
+	private int ID;
 	private String companyName;
 	private String name;
 	private String lastName;
@@ -48,7 +49,8 @@ public class RegistrationController {
 					boolean validateGuest = guestValidation(name,lastName,adress,phoneNumber, personalNumber,isBusiness);
 					
 					if(validateGuest == true){
-						Guest guest = new Guest(mainControl.gl.getSize()+1,companyName,name,lastName,adress,phoneNumber,personalNumber,isBusiness, isCheckedIn);
+						ID = mainControl.gl.getSize()+1;
+						Guest guest = new Guest(ID,companyName,name,lastName,adress,phoneNumber,personalNumber,isBusiness, isCheckedIn);
 
 						if(mainControl.gl.getFromList(guest.getName(), guest.getPersNum())== false){
 							System.out.println(mainControl.gl.getFromList(guest.getName(), guest.getLastName()));
@@ -60,8 +62,8 @@ public class RegistrationController {
 					
 					try
 					{	
-					String query = "INSERT INTO GuestList(companyName,name,lastName,adress,phoneNumber,dateOfBirth,businessCheck,checkedIn)"
-							+ "values('"+companyName +"','"+name+"','"+
+					String query = "INSERT INTO GuestList(ID,companyName,name,lastName,adress,phoneNumber,dateOfBirth,businessCheck,checkedIn)"
+							+ "values('"+ID+"','"+companyName +"','"+name+"','"+
 							lastName+"','"+adress+"','"+phoneNumber+"','"+
 							localdate.toString()+"','"+
 							isBusiness.toString() + "','"+Boolean.toString(isCheckedIn) +"')";
