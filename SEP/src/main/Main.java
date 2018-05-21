@@ -9,8 +9,13 @@ import view.MainWindow;
 
 public class Main {
 	public GuestList gl = new GuestList();
+
 	public static RoomList rl = new RoomList();
 	
+
+
+	
+	public Booking bl = new Booking();
 
 	ReservationController rc = new ReservationController(this);
 
@@ -18,6 +23,7 @@ public class Main {
 	
 
 	public static void main(String[] args){
+	
 		Application.launch(MainWindow.class);
 		
 		

@@ -17,6 +17,10 @@ public class Guest {
 	private boolean isBusiness;
 	private boolean isCheckedIn;
 	
+	public Guest() {
+		
+	}
+	
 	public Guest(int ID, String company, String name, String lastName, String address, String phoneNumber, String personalNumber, boolean isBusiness, boolean isCheckin){
 		this.ID = ID;
 		this.companyName = company;

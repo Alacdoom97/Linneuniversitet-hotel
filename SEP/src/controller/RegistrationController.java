@@ -18,7 +18,7 @@ public class RegistrationController {
 	private String adress;
 	private String phoneNumber;
 	private String personalNumber;
-	private SQLConnection sql = new SQLConnection();;
+	private SQLConnection sql = new SQLConnection();
 	private ArrayList<LocalDate> bookings = new ArrayList<LocalDate>();
 	private Boolean isBusiness = null;
 	private boolean isCheckedIn = false;
