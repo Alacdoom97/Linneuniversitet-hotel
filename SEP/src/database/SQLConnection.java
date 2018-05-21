@@ -44,7 +44,8 @@ public class SQLConnection
 		}
 	}
 	
-	 public ResultSet execute(String sqlQuery) {
+	 public ResultSet execute(String sqlQuery) 
+	 {
 	        if (conn == null)
 	            DBConnector();
 	        ResultSet rs = null;
@@ -58,7 +59,8 @@ public class SQLConnection
 	        return rs;
 	    }
 
-	    public ResultSet executeWithParameters(String sqlQuery, ArrayList parameters) {
+	    public ResultSet executeWithParameters(String sqlQuery, ArrayList parameters)
+	    {
 	        if (conn == null)
 	            DBConnector();
 	        ResultSet rs = null;
@@ -75,16 +77,20 @@ public class SQLConnection
 	        return rs;
 	    }
 
-	    public ResultSet update(String sqlQuery) {
+	    public ResultSet update(String sqlQuery) 
+	    {
 	        if (conn == null)
 	            DBConnector();
 	        ResultSet rs = null;
-	        try {
+	        try
+	        {
 	            PreparedStatement stat = conn.prepareStatement(sqlQuery, ResultSet.TYPE_SCROLL_SENSITIVE,
 	                    ResultSet.CONCUR_UPDATABLE);
 	            stat.execute();
 	            rs = stat.getResultSet();
-	        } catch (SQLException e) {
+	        } 
+	        catch (SQLException e) 
+	        {
 	            e.printStackTrace();
 	        }
 	        return rs;
