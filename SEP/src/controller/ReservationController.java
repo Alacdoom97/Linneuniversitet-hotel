@@ -32,7 +32,7 @@ public class ReservationController {
 	private LocalDate departure;
 	int quality;
 	boolean adjoinment;
-	String roomtype;
+	int roomtype;
 	public ReservationController(ReservationWindow main){
 		this.main = main;
 		
@@ -151,9 +151,13 @@ public class ReservationController {
 		main.searchButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
 				try{
-					main.layout.getChildren().remove(main.grid2);
-					main.grid2 = main.newGrid();
-					main.layout.getChildren().add(main.grid2);
+					if (main.cBoxBeds.getValue() == "Single Room"){
+						roomtype = 1;
+					}else if(main.cBoxBeds.getValue() == "Double Room"){
+						roomtype = 2;
+					}else if(main.cBoxBeds.getValue() == "Triple Room"){
+						roomtype = 3;
+					}
 					
 					
 					

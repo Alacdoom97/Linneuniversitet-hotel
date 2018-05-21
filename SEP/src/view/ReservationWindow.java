@@ -71,7 +71,7 @@ public class ReservationWindow {
 		resWin.setTitle("Reservation Manager");
 		
 		GridPane grid = new GridPane();
-		grid.setGridLinesVisible(true);
+		grid.setGridLinesVisible(false);
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(20);
 		grid.setPadding(new Insets(40,20,20,20));
@@ -175,7 +175,7 @@ public class ReservationWindow {
 		resControl.eventHandle();
 		grid1.setGridLinesVisible(false);
 		grid1.setPrefSize(400, 800);
-		grid1.setTranslateX(1050);
+		grid1.setTranslateX(1150);
 		grid1.setTranslateY(35);
 		
 		int rowMax1 = 16;
@@ -223,47 +223,24 @@ public class ReservationWindow {
 		
 		
 		
-		grid2.setGridLinesVisible(true);
-		grid2.setPrefSize(1000, 625);
-		grid2.setStyle("-fx-background-color:grey");
-		grid2.setTranslateX(20);
-		grid2.setTranslateY(230);
-		
-		int rowMax2 = 31;
-		int colMax2 = 31;
-		
-		for (int i = 0; i < rowMax2; ++i){
-			RowConstraints rowConst = new RowConstraints();
-			rowConst.setPercentHeight(100.0/rowMax2);
-			grid2.getRowConstraints().add(rowConst);
-		}
-		
-		for(int i = 0; i < colMax2; ++i){
-			ColumnConstraints colConst = new ColumnConstraints();
-			colConst.setPercentWidth(100.0/colMax2);
-			grid2.getColumnConstraints().add(colConst);
-		}
-		int y = 0;
-		
-		for(int i = 0; i < colMax2; ++i){
-			grid2.add(textLabel(Integer.toString(i+1)), i, 0);
-		}
+		grid2 = newGrid();
+		gridFill(grid2);
 		
 		
 		
 		grid2.add(cellFill("-fx-background-color:green"), 5, 5);
 		
 		
-		pane.setTranslateX(19);
+		pane.setTranslateX(98);
 		pane.setTranslateY(198);
 		pane.setPrefSize(1002, 20);
-		nextButton.setTranslateX(971);
+		nextButton.setTranslateX(972);
 		pane.getChildren().addAll(nextButton, previousButton);
-		layout.getChildren().addAll(grid, grid1,grid2,pane);
+		layout.getChildren().addAll(grid, grid1,grid2,pane,hotelGrid());
 		monthDisplay(dateChecker);
 		
 		
-		Scene scene = new Scene(layout, 1500, 900);
+		Scene scene = new Scene(layout, 1600, 900);
 		resWin.setScene(scene);
 		resWin.show();
 		
@@ -292,7 +269,7 @@ public class ReservationWindow {
 		newGp.setGridLinesVisible(true);
 		newGp.setPrefSize(1000, 625);
 		newGp.setStyle("-fx-background-color:grey");
-		newGp.setTranslateX(20);
+		newGp.setTranslateX(99);
 		newGp.setTranslateY(230);
 		
 		int rowMax2 = 31;
@@ -317,12 +294,39 @@ public class ReservationWindow {
 	
 	public void gridFill(GridPane grid){
 		for(int i = 0; i < 31; ++i){
-			grid.add(textLabel(Integer.toString(i)), i+1, 0);
+			grid.add(textLabel(Integer.toString(i+1)), i, 0);
 		}
 		
-		for(int i = 0; i < 30; ++i){
-			grid.add(textLabel(Integer.toString(i+1)), 0, i+1);
+		
+	}
+	
+	public GridPane hotelGrid(){
+		GridPane hGrid = new GridPane();
+		hGrid.setGridLinesVisible(true);
+		hGrid.setPrefSize(50, 630);
+		hGrid.setStyle("-fx-background-color:Grey");
+		hGrid.setTranslateY(251);
+		hGrid.setTranslateX(47);
+		int rowMax = 30;
+		int colMax = 1;
+		
+		for (int i = 0; i < rowMax; ++i){
+			RowConstraints rowConst = new RowConstraints();
+			rowConst.setPercentHeight(100.0/rowMax);
+			hGrid.getRowConstraints().add(rowConst);
 		}
+		
+		for(int i = 0; i < colMax; ++i){
+			ColumnConstraints colConst = new ColumnConstraints();
+			colConst.setPercentWidth(100.0/colMax);
+			hGrid.getColumnConstraints().add(colConst);
+		}
+		
+		for(int i = 1; i < 31; ++i){
+			hGrid.add(textLabel(Integer.toString(i)), 0, i-1);
+		}
+		
+		return hGrid;
 	}
 	
 	
