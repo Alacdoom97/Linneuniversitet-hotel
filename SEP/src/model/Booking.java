@@ -1,12 +1,18 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Booking {
+	ArrayList<Booking> bookings;
 	LocalDate start;
 	LocalDate end;
 	Guest guest;
 	Room room;
+	
+	public Booking() {
+		bookings = new ArrayList<Booking>();
+	}
 
 	public void setStart(LocalDate start) {
 		this.start = start;
