@@ -46,6 +46,7 @@ public class SQLConnection
 	            PreparedStatement stat = conn.prepareStatement(sqlQuery);
 	            stat.execute();
 	            rs = stat.getResultSet();
+	            DBDisconnector();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
