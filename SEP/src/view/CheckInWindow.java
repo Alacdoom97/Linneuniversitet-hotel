@@ -127,6 +127,7 @@ public class CheckInWindow {
 		}
 
 		cheControll.checkInHandle(gueList);
+		
 
 		listView.setItems(data);
 
