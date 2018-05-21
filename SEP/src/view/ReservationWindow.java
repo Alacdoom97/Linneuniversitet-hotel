@@ -1,5 +1,6 @@
 package view;
 
+import java.beans.EventHandler;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -252,16 +254,6 @@ public class ReservationWindow {
 		
 		sp.setStyle(color);
 		
-		sp.hoverProperty().addListener((observable, oldValue, show)->{
-			if(show){
-				double x = sp.getLayoutX();
-				double y = sp.getLayoutY();
-				System.out.println("haha");
-				
-			}else{
-				
-			}
-		});
 		return sp;
 	}
 	
