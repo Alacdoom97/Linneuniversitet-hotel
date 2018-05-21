@@ -1,6 +1,9 @@
 package view;
 
+import java.time.format.DateTimeFormatter;
+
 import controller.RegistrationController;
+import database.SQLConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -21,6 +24,7 @@ public class RegistrationWindow {
 	ColumnConstraints columns;
 	RowConstraints rows;
 	GridPane grid;
+	SQLConnection sql = new SQLConnection();
 	public Button accept = new Button("Confirm");
 	public Button cancel = new Button();
 	public TextField name;
@@ -28,7 +32,9 @@ public class RegistrationWindow {
 	public TextField adress;
 	public TextField phoneNumber;
 	public TextField lastname;
-	public DatePicker textField = new DatePicker ();
+	public Label businessCheck;
+	public boolean checkedIn = false;
+	public DatePicker dateOfBirth = new DatePicker ();
 	public ComboBox<String> comboBox;
 	private RegistrationController regControl = new RegistrationController(this);
 	public Stage regWin = new Stage();
@@ -77,26 +83,26 @@ public class RegistrationWindow {
 			    );
 			comboBox = new ComboBox(options);
 			
-			Label businessCheck = new Label("Reason for staying? ");
+			businessCheck = new Label("Reason for staying?");
 			businessCheck.setTranslateX(100);
 		
 			grid.add(businessCheck, 0, 6);
 			comboBox.setTranslateX(100);
-		grid.add(comboBox, 1, 6);
+			grid.add(comboBox, 1, 6);
 		
 		companyName = createTextField("Company Name: ", 0, 0);
 		name = createTextField("Name: ", 0, 1);
 		lastname = createTextField("Last Name: ", 0, 2);
 		adress = createTextField("Address: ", 0, 3);
-		phoneNumber = createTextField("Phone", 0,4);
-		Label birthLabel= new Label("Birthdate");
+		phoneNumber = createTextField("Phone: ", 0,4);
+		Label birthLabel= new Label("Birth date: ");
 		birthLabel.setTranslateX(100);
 		grid.add(birthLabel, 0, 5);
 		
 		
-		textField.setTranslateX(100);
-		textField.setPromptText("YYYY-MM-DD");
-		grid.add(textField, 1, 5);
+		dateOfBirth.setTranslateX(100);
+		dateOfBirth.setPromptText("YYYY-MM-DD");
+		grid.add(dateOfBirth, 1, 5);
 		/*createTextField(": ", 0, 4);*/
 		
 		regControl.eventHandle();
@@ -105,6 +111,8 @@ public class RegistrationWindow {
 		Scene regisWindow = new Scene(grid, 600, 800);
 		regWin.setScene(regisWindow);
 		regWin.show();
+		
+		saveRegistrationWindow(accept);
 	}
 	
 	public TextField createTextField(String name, int column, int row) {
@@ -114,10 +122,30 @@ public class RegistrationWindow {
 		TextField textField = new TextField ();
 		textField.setTranslateX(100);
 		grid.add(textField, column+1, row);
-		return textField;
-		
+		return textField;		
 	}
-
 	
 
+	public void saveRegistrationWindow(Button confirm)
+	{
+		confirm = accept;
+		accept.setOnAction(e -> {
+			try
+			{
+				String query = "INSERT INTO GuestList(companyName,name,lastName,adress,phoneNumber,dateOfBirth,businessCheck,checkedIn)"
+						+ "values('"+companyName.getText() +"','"+name.getText()+"','"+
+						lastname.getText()+"','"+adress.getText()+"','"+phoneNumber.getText()+"','"+
+						dateOfBirth.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+"','"+
+						businessCheck.getText()+"','"+checkedIn+"')";
+				
+				sql.execute(query);
+				regWin.close();
+			}
+			catch (Exception ex) 
+			{
+				ex.printStackTrace();
+			}
+		});
+		cancel.setOnAction(e -> regWin.close());
+	}
 }

@@ -34,7 +34,7 @@ public class RegistrationController {
 					lastName = main.lastname.getText();
 					adress = main.adress.getText();
 					phoneNumber = main.phoneNumber.getText();
-					LocalDate localdate = main.textField.getValue();
+					LocalDate localdate = main.dateOfBirth.getValue();
 					personalNumber = localdate.toString();
 					
 					if(main.comboBox.getValue() == "Business"){

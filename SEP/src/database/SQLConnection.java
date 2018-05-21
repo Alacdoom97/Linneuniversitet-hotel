@@ -16,23 +16,16 @@ public class SQLConnection
 	Statement stmt = null;
 	DatabaseMetaData meta;
 	
-	public static void main (String[] args)
-	{
-		SQLConnection sq = new SQLConnection();
-		
-		sq.CheckConnection();
-	}
-	
 	public SQLConnection()
 	{
 		DBConnector();
 		
 		try {
 			meta = conn.getMetaData();
-			ResultSet tables = meta.getTables(null, null, "HotelDatabase", null);
+			ResultSet tables = meta.getTables(null, null, "GuestList", null);
 			if(tables.next())
 			{
-				System.out.println("already exists");
+				//System.out.println("already exists");
 			}
 			else
 			{
@@ -77,12 +70,12 @@ public class SQLConnection
 	        return rs;
 	    }
 
-	    public ResultSet update(String sqlQuery) 
+	    public ResultSet update(String sqlQuery)
 	    {
 	        if (conn == null)
 	            DBConnector();
 	        ResultSet rs = null;
-	        try
+	        try 
 	        {
 	            PreparedStatement stat = conn.prepareStatement(sqlQuery, ResultSet.TYPE_SCROLL_SENSITIVE,
 	                    ResultSet.CONCUR_UPDATABLE);
@@ -136,12 +129,15 @@ public class SQLConnection
 		try
 		{
 			stmt = conn.createStatement();
-			String table = "CREATE TABLE `HotelDatabase` (\r\n" + 
+			String table = "CREATE TABLE `GuestList` (\r\n" + 
 					"	`companyName`	TEXT NOT NULL,\r\n" + 
 					"	`name`	TEXT NOT NULL,\r\n" + 
 					"	`lastname`	TEXT NOT NULL,\r\n" + 
-					"	`adress`	TEXT NOT NULL\r\n" + 
-					"	`dob`		TEXT NOT NULL\r\n" +
+					"	`adress`	TEXT NOT NULL,\r\n" + 
+					"	`phoneNumber`	TEXT NOT NULL,\r\n" + 
+					"	`dateOfBirth`		TEXT NOT NULL,\r\n" +
+					"	`businessCheck`		TEXT NOT NULL,\r\n" +
+					"	`checkedIn`		TEXT NOT NULL\r\n" +
 					")";
 			stmt.executeUpdate(table);
 		}
