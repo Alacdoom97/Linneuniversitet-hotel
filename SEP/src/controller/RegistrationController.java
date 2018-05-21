@@ -2,6 +2,7 @@ package controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import database.SQLConnection;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import view.*;
@@ -17,6 +18,7 @@ public class RegistrationController {
 	private String adress;
 	private String phoneNumber;
 	private String personalNumber;
+	private SQLConnection sql = new SQLConnection();;
 	private ArrayList<LocalDate> bookings = new ArrayList<LocalDate>();
 	private Boolean isBusiness = null;
 	private boolean isCheckedIn = false;
@@ -43,7 +45,6 @@ public class RegistrationController {
 					else if(main.comboBox.getValue() == "Private") {
 						isBusiness = false;
 					}
-					
 					boolean validateGuest = guestValidation(name,lastName,adress,phoneNumber, personalNumber,isBusiness);
 					
 					if(validateGuest == true){
@@ -53,19 +54,24 @@ public class RegistrationController {
 							System.out.println(mainControl.gl.getFromList(guest.getName(), guest.getLastName()));
 							mainControl.gl.addToList(guest);
 							System.out.println(guest.getName()+" "+guest.getLastName()+" "+ guest.getPersNum());
-							main.regWin.close();
 						}
-						
-											
-
-						
-
 					}
 					
 					
+					try
+					{	
+					String query = "INSERT INTO GuestList(companyName,name,lastName,adress,phoneNumber,dateOfBirth,businessCheck,checkedIn)"
+							+ "values('"+companyName +"','"+name+"','"+
+							lastName+"','"+adress+"','"+phoneNumber+"','"+
+							localdate.toString()+"','"+
+							isBusiness.toString() + "','"+Boolean.toString(isCheckedIn) +"')";
+					sql.execute(query);
 					
-					
-					
+					}
+					catch (Exception ex) 
+					{
+						ex.printStackTrace();
+					}
 					
 				}catch(Exception e1){
 					e1.printStackTrace();
