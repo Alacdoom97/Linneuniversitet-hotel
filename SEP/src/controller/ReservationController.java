@@ -1,6 +1,7 @@
 package controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +11,7 @@ import main.Main;
 import model.Grid;
 import model.GridList;
 import model.Guest;
+import model.Room;
 import view.CheckInWindow;
 import view.GuestWindow;
 import view.MainWindow;
@@ -172,7 +174,11 @@ public class ReservationController {
 					}else{
 						adjoinment = false;
 					}
-					program.rl.roomSearchV(quality, roomtype, adjoinment);
+					
+					arrival = main.checkInDate.getValue();
+					departure = main.checkOutDate.getValue();
+					
+					ArrayList<Room> temp = program.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
 					
 					
 					
