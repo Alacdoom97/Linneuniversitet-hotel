@@ -24,7 +24,6 @@ public class RegistrationWindow {
 	ColumnConstraints columns;
 	RowConstraints rows;
 	GridPane grid;
-	SQLConnection sql = new SQLConnection();
 	public Button accept = new Button("Confirm");
 	public Button cancel = new Button();
 	public TextField name;
@@ -97,7 +96,7 @@ public class RegistrationWindow {
 		phoneNumber = createTextField("Phone: ", 0,4);
 		Label birthLabel= new Label("Birth date: ");
 		birthLabel.setTranslateX(100);
-		grid.add(birthLabel, 0, 5);
+		grid.add(birthLabel, 0, 5);		
 		
 		
 		dateOfBirth.setTranslateX(100);
@@ -124,28 +123,4 @@ public class RegistrationWindow {
 		grid.add(textField, column+1, row);
 		return textField;		
 	}
-	
-
-	/*public void saveRegistrationWindow(Button confirm)
-	{
-		confirm = accept;
-		accept.setOnAction(e -> {
-			try
-			{
-				String query = "INSERT INTO GuestList(companyName,name,lastName,adress,phoneNumber,dateOfBirth,businessCheck,checkedIn)"
-						+ "values('"+companyName.getText() +"','"+name.getText()+"','"+
-						lastname.getText()+"','"+adress.getText()+"','"+phoneNumber.getText()+"','"+
-						dateOfBirth.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+"','"+
-						businessCheck.getText()+"','"+checkedIn+"')";
-				
-				sql.execute(query);
-				regWin.close();
-			}
-			catch (Exception ex) 
-			{
-				ex.printStackTrace();
-			}
-		});
-		cancel.setOnAction(e -> regWin.close());
-	}*/
 }

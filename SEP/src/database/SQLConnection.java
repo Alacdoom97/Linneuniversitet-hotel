@@ -41,15 +41,17 @@ public class SQLConnection
 	 {
 	        if (conn == null)
 	            DBConnector();
+	        
 	        ResultSet rs = null;
 	        try {
 	            PreparedStatement stat = conn.prepareStatement(sqlQuery);
 	            stat.execute();
-	            rs = stat.getResultSet();
-	            DBDisconnector();
-	        } catch (SQLException e) {
+	          rs = stat.getResultSet();
+	        } 
+	        catch (SQLException e) {
 	            e.printStackTrace();
 	        }
+	        DBDisconnector();
 	        return rs;
 	    }
 
@@ -68,6 +70,7 @@ public class SQLConnection
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
+	        DBDisconnector();
 	        return rs;
 	    }
 

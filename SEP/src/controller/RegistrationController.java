@@ -54,22 +54,24 @@ public class RegistrationController {
 							System.out.println(mainControl.gl.getFromList(guest.getName(), guest.getLastName()));
 							mainControl.gl.addToList(guest);
 							System.out.println(guest.getName()+" "+guest.getLastName()+" "+ guest.getPersNum());
-							
-							try
-							{	
-							String query = "INSERT INTO GuestList(companyName,name,lastName,adress,phoneNumber,dateOfBirth,businessCheck,checkedIn)"
-									+ "values('"+companyName +"','"+name+"','"+
-									lastName+"','"+adress+"','"+phoneNumber+"','"+
-									localdate.toString()+"','"+
-									isBusiness.toString()+"','"+Boolean.toString(isCheckedIn) +"')";
-							sql.execute(query);
-							}
-							catch (Exception ex) 
-							{
-								ex.printStackTrace();
-							}
 						}
 					}
+					
+					
+					try
+					{	
+					String query = "INSERT INTO GuestList(companyName,name,lastName,adress,phoneNumber,dateOfBirth,businessCheck,checkedIn)"
+							+ "values('"+companyName +"','"+name+"','"+
+							lastName+"','"+adress+"','"+phoneNumber+"','"+
+							localdate.toString()+"','"+
+							isBusiness.toString() + "','"+Boolean.toString(isCheckedIn) +"')";
+					sql.execute(query);
+					}
+					catch (Exception ex) 
+					{
+						ex.printStackTrace();
+					}
+					
 				}catch(Exception e1){
 					e1.printStackTrace();
 				}
