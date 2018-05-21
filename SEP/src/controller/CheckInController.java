@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Guest;
 import model.GuestList;
@@ -22,7 +23,9 @@ public class CheckInController {
 	ErrorWindow errWin = new ErrorWindow();
 	public GuestWindow gueWin;
 	private Guest tempGuest;
-	
+	private Label status1 = new Label();
+	Pane listPane;
+	private Label status = new Label("Status:");
 	public CheckInController(CheckInWindow checkIn) {
 		cheWin = checkIn;
 	}
@@ -64,9 +67,24 @@ public class CheckInController {
 				}
 
 				if (tempGuest != null) {
-					Pane listPane = new Pane();
+					listPane = new Pane();
 					Scene listScene = new Scene(listPane, 500, 500);
 					Stage listStage = new Stage();
+					
+					
+					status.setTranslateX(300);
+					status.setTranslateY(10);
+					
+					if(tempGuest.getCheckIn()){
+						status1.setText("Checked in");
+						status1.setTextFill(Color.GREEN);
+					}else{
+						status1.setText("Not checked in");
+						status1.setTextFill(Color.RED);
+					}
+					
+					status1.setTranslateX(360);
+					status1.setTranslateY(10);
 
 					cheWin.nameLab = new Label("Name: ");
 					cheWin.nameLab.setTranslateY(10);
@@ -107,9 +125,11 @@ public class CheckInController {
 					cheWin.isBusiness.setEditable(false);
 					cheWin.isBusiness.setTranslateY(130);
 					cheWin.isBusiness.setTranslateX(80);
+					
+					
 
 					listPane.getChildren().addAll(cheWin.name, cheWin.nameLab, cheWin.lastName, cheWin.lastNameLab, cheWin.address, cheWin.addressLab, cheWin.birthday,
-							cheWin.birthdayLab, cheWin.isBusiness, cheWin.businessLab, cheWin.checkIn, cheWin.checkOut);
+							cheWin.birthdayLab, cheWin.isBusiness, cheWin.businessLab, cheWin.checkIn, cheWin.checkOut,status,status1);
 					listStage.setScene(listScene);
 					
 					cheWin.checkIn.setOnAction(new EventHandler<ActionEvent>() {
@@ -118,8 +138,11 @@ public class CheckInController {
 						public void handle(ActionEvent checkIn) {
 							if (tempGuest.getCheckIn() == false) {
 								tempGuest.setCheckedIn(true);
-								
+								status1.setText("Checked in");
+								status1.setTextFill(Color.GREEN);
 								errWin.checkedInAlert();
+								listPane.getChildren().remove(status1);
+								listPane.getChildren().add(status1);
 							}
 							
 						}
