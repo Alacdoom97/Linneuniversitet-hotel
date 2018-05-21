@@ -20,8 +20,6 @@ public class Booking {
 	public Booking(){
 		
 	}
-	
-	
 
 	public void setStart(LocalDate start) {
 		this.start = start;

@@ -17,7 +17,7 @@ public class RoomList {
 				
 			Room roomVaxjo = singleNormalRoom("Växjö", i, 1, false, true);
 			Room roomKalmar = singleNormalRoom("Kalmar", i, 1, false, true);
-			if(i > 3) {
+			if(i < 3) {
 				roomVaxjo.setAdjoinsRoom(true);
 				roomKalmar.setAdjoinsRoom(true);
 			}
@@ -64,7 +64,7 @@ public class RoomList {
 			}
 		}
 		
-		for (int i = 26; i < 30; i++) {
+		for (int i = 26; i <= 30; i++) {
 			if (i <= 28) {
 				Room roomVaxjo = tripleNormalRoom("Växjö", i, 1, false, true);
 				Room roomKalmar = tripleNormalRoom("Kalmar", i, 1, false, true);
@@ -171,12 +171,16 @@ public class RoomList {
 		return room;
 	}
 	
-	public void roomSearchV(int quality, int bed, boolean adjoin){
+	public ArrayList<Room> roomSearchV(int quality, int bed, boolean adjoin){
+		ArrayList<Room> tempRoomList = new ArrayList<Room>();
 		for(int i= 0; i < roomsVaxjo.size(); ++i){
 			if(quality == roomsVaxjo.get(i).getQuality() && bed == roomsVaxjo.get(i).getFloor() && adjoin == roomsVaxjo.get(i).getAdjoinRoom()){
 				System.out.println(roomsVaxjo.get(i).getRoomNumber());
+				tempRoomList.add(roomsVaxjo.get(i));
 			}
 		}
+		
+		return tempRoomList;
 	
 	}
 	
