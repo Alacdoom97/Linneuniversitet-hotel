@@ -13,6 +13,13 @@ public class Booking {
 	public Booking() {
 		bookings = new ArrayList<Booking>();
 	}
+	
+	public Booking(LocalDate start, LocalDate end, Guest guest, Room room) {
+		this.start = start;
+		this.end = end;
+		this.guest = guest;
+		this.room = room;
+	}
 
 	public void setStart(LocalDate start) {
 		this.start = start;
@@ -44,6 +51,10 @@ public class Booking {
 	
 	public Room getRoom() {
 		return room;
+	}
+	
+	public void addBooking(Booking booking) {
+		bookings.add(booking);
 	}
 
 }
