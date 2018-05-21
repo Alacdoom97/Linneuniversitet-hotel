@@ -296,7 +296,7 @@ public class ReservationWindow {
 		newGp.setTranslateY(230);
 		
 		int rowMax2 = 31;
-		int colMax2 = 32;
+		int colMax2 = 31;
 		
 		for (int i = 0; i < rowMax2; ++i){
 			RowConstraints rowConst = new RowConstraints();
@@ -317,7 +317,7 @@ public class ReservationWindow {
 	
 	public void gridFill(GridPane grid){
 		for(int i = 0; i < 31; ++i){
-			grid.add(textLabel(Integer.toString(i+1)), i+1, 0);
+			grid.add(textLabel(Integer.toString(i)), i+1, 0);
 		}
 		
 		for(int i = 0; i < 30; ++i){
