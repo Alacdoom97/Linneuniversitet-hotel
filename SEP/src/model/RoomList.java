@@ -12,7 +12,7 @@ public class RoomList {
 	}
 	
 	public void createRooms() {
-		for(int i = 0; i <= 15; i++) {
+		for(int i = 1; i <= 15; i++) {
 			if (i <= 10) {
 				
 			Room roomVaxjo = singleNormalRoom("Växjö", i, 1, false, true);
@@ -169,6 +169,15 @@ public class RoomList {
 		
 		
 		return room;
+	}
+	
+	public void roomSearchV(int quality, int bed, boolean adjoin){
+		for(int i= 0; i < roomsVaxjo.size(); ++i){
+			if(quality == roomsVaxjo.get(i).getQuality() && bed == roomsVaxjo.get(i).getFloor() && adjoin == roomsVaxjo.get(i).getAdjoinRoom()){
+				System.out.println(roomsVaxjo.get(i).getRoomNumber());
+			}
+		}
+	
 	}
 	
 }

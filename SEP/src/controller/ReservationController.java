@@ -159,6 +159,21 @@ public class ReservationController {
 						roomtype = 3;
 					}
 					
+					if (main.cBoxQuality.getValue() == "1-Star"){
+						quality = 1;
+					}else if(main.cBoxQuality.getValue() == "2-Star"){
+						quality = 2;
+					}else if(main.cBoxQuality.getValue() == "3-Star"){
+						quality = 3;
+					}
+					
+					if(main.adjoinment.getValue().equals("Adjoining")){
+						adjoinment = true;
+					}else{
+						adjoinment = false;
+					}
+					program.rl.roomSearchV(quality, roomtype, adjoinment);
+					
 					
 					
 				}catch(Exception e6){

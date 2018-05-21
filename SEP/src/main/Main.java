@@ -9,8 +9,8 @@ import view.MainWindow;
 
 public class Main {
 	public GuestList gl = new GuestList();
-	public RoomList rl = new RoomList();
-	public Booking bl = new Booking();
+	public static RoomList rl = new RoomList();
+	
 
 	ReservationController rc = new ReservationController(this);
 

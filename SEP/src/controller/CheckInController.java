@@ -1,12 +1,17 @@
 package controller;
 
+import java.time.LocalTime;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Guest;
@@ -24,7 +29,8 @@ public class CheckInController {
 	public GuestWindow gueWin;
 	private Guest tempGuest;
 	private Label status1 = new Label();
-	Pane listPane;
+	private Pane listPane;
+	private GridPane gp = new GridPane();
 	private Label status = new Label("Status:");
 	public CheckInController(CheckInWindow checkIn) {
 		cheWin = checkIn;
@@ -68,6 +74,22 @@ public class CheckInController {
 
 				if (tempGuest != null) {
 					listPane = new Pane();
+					
+					gp.setGridLinesVisible(true);
+					gp.setPrefSize(500, 150);
+					gp.setTranslateY(230);
+					
+					for (int i = 0; i < 4; ++i){
+						RowConstraints rowConst = new RowConstraints();
+						rowConst.setPercentHeight(100.0/4);
+						gp.getRowConstraints().add(rowConst);
+					}
+					
+					for(int i = 0; i < 2; ++i){
+						ColumnConstraints colConst = new ColumnConstraints();
+						colConst.setPercentWidth(100.0/2);
+						gp.getColumnConstraints().add(colConst);
+					}
 					Scene listScene = new Scene(listPane, 500, 500);
 					Stage listStage = new Stage();
 					
@@ -79,7 +101,7 @@ public class CheckInController {
 						status1.setText("Checked in");
 						status1.setTextFill(Color.GREEN);
 					}else{
-						status1.setText("Not checked in");
+						status1.setText("Checked out");
 						status1.setTextFill(Color.RED);
 					}
 					
@@ -91,7 +113,7 @@ public class CheckInController {
 
 					cheWin.name = new TextField(tempGuest.getName());
 					cheWin.name.setEditable(false);
-					cheWin.name.setTranslateX(80);
+					cheWin.name.setTranslateX(90);
 					cheWin.name.setTranslateY(10);
 
 					cheWin.lastNameLab = new Label("Last Name: ");
@@ -99,7 +121,7 @@ public class CheckInController {
 
 					cheWin.lastName = new TextField(tempGuest.getLastName());
 					cheWin.lastName.setEditable(false);
-					cheWin.lastName.setTranslateX(80);
+					cheWin.lastName.setTranslateX(90);
 					cheWin.lastName.setTranslateY(40);
 
 					cheWin.addressLab = new Label("Address: ");
@@ -108,28 +130,36 @@ public class CheckInController {
 					cheWin.address = new TextField(tempGuest.getAdress());
 					cheWin.address.setEditable(false);
 					cheWin.address.setTranslateY(70);
-					cheWin.address.setTranslateX(80);
-
+					cheWin.address.setTranslateX(90);
+					
+					cheWin.phoneLab = new Label("Phone: ");
+					cheWin.phoneLab.setTranslateY(100);
+					cheWin.phone = new TextField(tempGuest.getPhone());
+					cheWin.phone.setEditable(false);
+					cheWin.phone.setTranslateY(100);
+					cheWin.phone.setTranslateX(90);
+					
 					cheWin.birthdayLab = new Label("Birthday: ");
-					cheWin.birthdayLab.setTranslateY(100);
+					cheWin.birthdayLab.setTranslateY(130);
 
 					cheWin.birthday = new TextField(tempGuest.getPersNum());
 					cheWin.birthday.setEditable(false);
-					cheWin.birthday.setTranslateY(100);
-					cheWin.birthday.setTranslateX(80);
+					cheWin.birthday.setTranslateY(130);
+					cheWin.birthday.setTranslateX(90);
 
 					cheWin.businessLab = new Label("Business stay: ");
-					cheWin.businessLab.setTranslateY(130);
+					cheWin.businessLab.setTranslateY(160);
+					
 
 					cheWin.isBusiness = new TextField(tempGuest.booleanToString(tempGuest.isBusiness()));
 					cheWin.isBusiness.setEditable(false);
-					cheWin.isBusiness.setTranslateY(130);
-					cheWin.isBusiness.setTranslateX(80);
+					cheWin.isBusiness.setTranslateY(160);
+					cheWin.isBusiness.setTranslateX(90);
 					
 					
 
 					listPane.getChildren().addAll(cheWin.name, cheWin.nameLab, cheWin.lastName, cheWin.lastNameLab, cheWin.address, cheWin.addressLab, cheWin.birthday,
-							cheWin.birthdayLab, cheWin.isBusiness, cheWin.businessLab, cheWin.checkIn, cheWin.checkOut,status,status1);
+							cheWin.birthdayLab,gp, cheWin.isBusiness, cheWin.businessLab, cheWin.checkIn, cheWin.checkOut,status,status1, cheWin.phone, cheWin.phoneLab);
 					listStage.setScene(listScene);
 					
 					cheWin.checkIn.setOnAction(new EventHandler<ActionEvent>() {
@@ -143,6 +173,7 @@ public class CheckInController {
 								errWin.checkedInAlert();
 								listPane.getChildren().remove(status1);
 								listPane.getChildren().add(status1);
+								System.out.println(LocalTime.now());
 							}
 							
 						}
@@ -155,8 +186,11 @@ public class CheckInController {
 						public void handle(ActionEvent checkOut) {
 							if (tempGuest.getCheckIn() == true) {
 								tempGuest.setCheckedIn(false);
-								
+								status1.setText("Checked out");
+								status1.setTextFill(Color.RED);
 								errWin.checkedOutAlert();
+								listPane.getChildren().remove(status1);
+								listPane.getChildren().add(status1);
 							}
 						}
 					});

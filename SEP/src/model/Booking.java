@@ -10,8 +10,11 @@ public class Booking {
 	Guest guest;
 	Room room;
 	
-	public Booking() {
-		bookings = new ArrayList<Booking>();
+	public Booking(LocalDate start, LocalDate end, Guest guest, Room room) {
+		this.start = start;
+		this.end = end;
+		this.guest = guest;
+		this.room = room;
 	}
 
 	public void setStart(LocalDate start) {

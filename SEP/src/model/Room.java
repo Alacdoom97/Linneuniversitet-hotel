@@ -74,8 +74,15 @@ public class Room {
 		this.availability = availability;
 	}
 	
-	public boolean setAdjoinsRoom(boolean setAdjoins) {
-		return setAdjoins;
+	public void setAdjoinsRoom(boolean setAdjoins) {
+		this.adjoinsRoom = setAdjoins;
 	}
+	
+	public boolean getAdjoinRoom(){
+		return adjoinsRoom;
+	}
+	
+	
+	
 
 }

@@ -11,8 +11,9 @@ public class Guest {
 	private String adress;
 	private String phoneNumber;
 	private String personalNumber;
-	private LocalDate start;
-	private LocalDate end;
+	private Booking booking = null;
+	private String checkinTime;
+	private String checkoutTime;
 	private boolean isBusiness;
 	private boolean isCheckedIn;
 	
@@ -121,10 +122,33 @@ public class Guest {
 		}
 	}
 	
+	public void setCheckInTime(LocalDate time){
+		checkinTime = time.toString();
+	}
+	
+	public void setCheckOutTime(LocalDate time){
+		checkoutTime = time.toString();
+	}
+	
+	public String getCheckInTime(){
+		return checkinTime;
+	}
+	
+	public String getCheckOutTime(){
+		return checkoutTime;
+	}
+	
 	public String idToString(int ID) {
 		return Integer.toString(ID);
 	}
 	
+	public void setBooking(Booking booking){
+		this.booking = booking;
+	}
+	
+	public Booking getBooking(){
+		return booking;
+	}
 	
 
 }

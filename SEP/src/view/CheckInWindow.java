@@ -31,8 +31,10 @@ public class CheckInWindow {
 	public TextField name;
 	public TextField lastName;
 	public TextField address;
+	public TextField phone;
 	public TextField birthday;
 	public TextField isBusiness;
+	public Label phoneLab;
 	public Label nameLab;
 	public Label lastNameLab;
 	public Label addressLab;
@@ -55,14 +57,14 @@ public class CheckInWindow {
 
 		// Create the buttons and searchBar for the GUI
 		checkIn.setText("Check In");
-		checkIn.setPrefSize(120, 120);
+		checkIn.setPrefSize(120, 60);
 		checkIn.setTranslateX(125);
-		checkIn.setTranslateY(300);
+		checkIn.setTranslateY(400);
 
 		checkOut.setText("Check Out");
-		checkOut.setPrefSize(120, 120);
+		checkOut.setPrefSize(120, 60);
 		checkOut.setTranslateX(275);
-		checkOut.setTranslateY(300);
+		checkOut.setTranslateY(400);
 
 		searchButton.setText("Search");
 		searchButton.setTranslateX(300);
