@@ -122,7 +122,7 @@ public class CheckInWindow {
 		}
 		if (data.isEmpty()) {
 			for (int i = 0; i < names.size(); i++) {
-				data.add(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " " + names.get(i).getLastName());
+				data.add(names.get(i).getName() + " " + names.get(i).getLastName());
 			}
 		}
 

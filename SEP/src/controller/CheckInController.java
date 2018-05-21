@@ -51,7 +51,7 @@ public class CheckInController {
 					}
 
 					for (int i = 0; i < cheWin.names.size(); i++) {
-						cheWin.data.add(cheWin.names.get(i).idToString(cheWin.names.get(i).getID()) + " " + cheWin.names.get(i).getName() + " "
+						cheWin.data.add(cheWin.names.get(i).getName() + " "
 								+ cheWin.names.get(i).getLastName());
 					}
 				} catch (Exception e4) {
@@ -66,7 +66,7 @@ public class CheckInController {
 				tempGuest = null;
 				for (int i = 0; i < cheWin.names.size(); i++) {
 					if (cheWin.listView.getSelectionModel().getSelectedItem()
-							.equals(cheWin.names.get(i).idToString(cheWin.names.get(i).getID()) + " " + cheWin.names.get(i).getName() + " "
+							.equals(cheWin.names.get(i).getName() + " "
 									+ cheWin.names.get(i).getLastName())) {
 						tempGuest = cheWin.names.get(i);
 					}
@@ -75,7 +75,7 @@ public class CheckInController {
 				if (tempGuest != null) {
 					listPane = new Pane();
 					
-					gp.setGridLinesVisible(true);
+					gp.setGridLinesVisible(false);
 					gp.setPrefSize(500, 150);
 					gp.setTranslateY(230);
 					
