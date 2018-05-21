@@ -18,7 +18,8 @@ public class RegistrationController {
 	private String phoneNumber;
 	private String personalNumber;
 	private ArrayList<LocalDate> bookings = new ArrayList<LocalDate>();
-	private Boolean isBusiness = null; 
+	private Boolean isBusiness = null;
+	private boolean isCheckedIn = false;
 	public RegistrationController(RegistrationWindow main){
 		this.main = main;
 		errWin = new ErrorWindow();
@@ -35,6 +36,7 @@ public class RegistrationController {
 					phoneNumber = main.phoneNumber.getText();
 					LocalDate localdate = main.textField.getValue();
 					personalNumber = localdate.toString();
+					
 					if(main.comboBox.getValue() == "Business"){
 						isBusiness = true;
 					}
@@ -45,7 +47,7 @@ public class RegistrationController {
 					boolean validateGuest = guestValidation(name,lastName,adress,phoneNumber, personalNumber,isBusiness);
 					
 					if(validateGuest == true){
-						Guest guest = new Guest(mainControl.gl.getSize()+1,companyName,name,lastName,adress,phoneNumber,personalNumber,isBusiness);
+						Guest guest = new Guest(mainControl.gl.getSize()+1,companyName,name,lastName,adress,phoneNumber,personalNumber,isBusiness, isCheckedIn);
 
 						if(mainControl.gl.getFromList(guest.getName(), guest.getPersNum())== false){
 							System.out.println(mainControl.gl.getFromList(guest.getName(), guest.getLastName()));

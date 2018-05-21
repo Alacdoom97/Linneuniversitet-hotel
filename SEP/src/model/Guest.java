@@ -14,8 +14,9 @@ public class Guest {
 	private LocalDate start;
 	private LocalDate end;
 	private boolean isBusiness;
+	private boolean isCheckedIn;
 	
-	public Guest(int ID, String company, String name, String lastName, String address, String phoneNumber, String personalNumber, boolean isBusiness){
+	public Guest(int ID, String company, String name, String lastName, String address, String phoneNumber, String personalNumber, boolean isBusiness, boolean isCheckin){
 		this.ID = ID;
 		this.companyName = company;
 		this.name = name;
@@ -24,6 +25,7 @@ public class Guest {
 		this.phoneNumber = phoneNumber;
 		this.personalNumber = personalNumber;
 		this.isBusiness = isBusiness;
+		this.isCheckedIn = isCheckedIn;
 	}
 	
 	
@@ -99,6 +101,14 @@ public class Guest {
 
 	public void setBusiness(boolean isBusiness) {
 		this.isBusiness = isBusiness;
+	}
+	
+	public boolean getCheckIn() {
+		return isCheckedIn;
+	}
+	
+	public void setCheckedIn(boolean isCheckedIn) {
+		this.isCheckedIn = isCheckedIn;
 	}
 	
 	public boolean compareTo(Guest guest){
