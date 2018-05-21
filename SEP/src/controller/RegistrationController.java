@@ -66,7 +66,7 @@ public class RegistrationController {
 							localdate.toString()+"','"+
 							isBusiness.toString() + "','"+Boolean.toString(isCheckedIn) +"')";
 					sql.execute(query);
-					
+					main.regWin.close();
 					}
 					catch (Exception ex) 
 					{
