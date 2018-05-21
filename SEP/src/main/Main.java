@@ -8,7 +8,7 @@ import model.RoomList;
 import view.MainWindow;
 
 public class Main {
-	public GuestList gl = new GuestList();
+	public static GuestList gl = new GuestList();
 
 	public static RoomList rl = new RoomList();
 	

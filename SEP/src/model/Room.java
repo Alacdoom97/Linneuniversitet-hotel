@@ -7,7 +7,7 @@ public class Room {
 	private int roomNumber;
 	private int quality;
 	private int floor;
-	private static ArrayList<Booking> bookings = new ArrayList();
+	public static ArrayList<Booking> bookings = new ArrayList();
 	private boolean smokingAllowed;
 	private boolean availability;
 	private boolean adjoinsRoom;
