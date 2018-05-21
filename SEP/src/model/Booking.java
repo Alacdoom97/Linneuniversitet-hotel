@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class Booking {
 	ArrayList<Booking> bookings;
-	LocalDate start;
-	LocalDate end;
-	Guest guest;
-	Room room;
+	private LocalDate start;
+	private LocalDate end;
+	private Guest guest;
+	private Room room;
 	
 	public Booking(LocalDate start, LocalDate end, Guest guest, Room room) {
 		this.start = start;
