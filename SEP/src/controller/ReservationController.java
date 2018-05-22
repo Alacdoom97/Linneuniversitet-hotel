@@ -214,6 +214,9 @@ public class ReservationController {
 				else {
 				Booking booking = new Booking(arrival, departure, currentG, tempRoom);
 				tempRoom.addBooking(booking);
+				program.bl.addBooking(booking);
+				
+				main.reDraw(program.bl);
 				main.roomSearchStage.close();
 				}
 				
