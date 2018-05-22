@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import controller.ReservationController;
 import javafx.application.Application;
 import model.Booking;
+import model.BookingList;
 import model.Guest;
 import model.GuestList;
 import model.RoomList;
@@ -18,8 +19,9 @@ public class Main {
 
 
 	
-	public Booking bl = new Booking();
-
+	
+	public static BookingList bl = new BookingList();
+	
 	ReservationController rc = new ReservationController(this);
 
 	ReservationController resControl = new ReservationController(this);

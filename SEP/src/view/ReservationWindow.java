@@ -1,5 +1,6 @@
 package view;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 import controller.ReservationController;
@@ -23,8 +24,9 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Booking;
+import model.BookingList;
 import model.Room;
-
+import java.time.temporal.ChronoUnit;
 public class ReservationWindow {
 	final ToggleGroup group = new ToggleGroup();
 	final ToggleGroup group1 = new ToggleGroup();
@@ -365,8 +367,23 @@ public class ReservationWindow {
 		return hGrid;
 	}
 	
-	public void reDraw(Booking booking) {
-		
+	public void reDraw(BookingList bookings) {
+		for(int i = 0; i < bookings.size(); ++i){
+			LocalDate temp = bookings.getBooking(i).getStart();
+			LocalDate temp1 = bookings.getBooking(i).getEnd();
+			
+			int j = temp1.getDayOfMonth()-temp
+					.getDayOfMonth();
+			int roomnr = bookings.getBooking(i).getRoom().getRoomNumber();
+			
+			for(int k = temp.getDayOfMonth(); k < temp1.getDayOfMonth()+1; ++k){
+				grid2.add(cellFill("-fx-background-color:green"), k-1, roomnr);
+				
+			}
+			
+			
+			
+		}
 	}
 	
 	
