@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Room {
@@ -80,6 +81,20 @@ public class Room {
 	
 	public boolean getAdjoinRoom(){
 		return adjoinsRoom;
+	}
+	
+	public void addBooking(Booking booking){
+		bookings.add(booking);
+	}
+	
+	public boolean bookSearch(LocalDate start, LocalDate end){
+		for(int i = 0; i < bookings.size(); ++i){
+			
+			if((start.isAfter(bookings.get(i).getStart()) && start.isBefore(bookings.get(i).getEnd())) || (end.isBefore(bookings.get(i).getEnd())&& end.isAfter(bookings.get(i).getStart()))){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	

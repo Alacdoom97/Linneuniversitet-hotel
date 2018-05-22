@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import main.Main;
@@ -179,6 +180,7 @@ public class ReservationController {
 					departure = main.checkOutDate.getValue();
 					
 					ArrayList<Room> temp = program.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
+					
 					
 					
 					
