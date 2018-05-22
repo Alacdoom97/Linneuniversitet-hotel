@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-<<<<<<< HEAD
+
 import javafx.scene.control.ComboBox;
-=======
+
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
->>>>>>> origin/master
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -191,18 +191,18 @@ public class ReservationController {
 
 					temp = Main.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
 					
-<<<<<<< HEAD
+
 					ArrayList<Room> temp = program.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
 					
 					
 					
 					
 				}catch(Exception e6){
-=======
+
 					main.searchButtonActivate();
 
 				} catch (Exception e6) {
->>>>>>> origin/master
+
 					e6.printStackTrace();
 				}
 
