@@ -20,9 +20,9 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import model.Booking;
 import model.Room;
 
 public class ReservationWindow {
@@ -363,6 +363,10 @@ public class ReservationWindow {
 		}
 		
 		return hGrid;
+	}
+	
+	public void reDraw(Booking booking) {
+		
 	}
 	
 	
