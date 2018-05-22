@@ -176,13 +176,28 @@ public class RoomList {
 		ArrayList<Room> tempRoomList = new ArrayList<Room>();
 		ArrayList<Room> temp2 = new ArrayList<Room>();
 		for(int i= 0; i < roomsVaxjo.size(); ++i){
+<<<<<<< HEAD
 			if(quality == roomsVaxjo.get(i).getQuality() && bed == roomsVaxjo.get(i).getFloor() && adjoin == roomsVaxjo.get(i).getAdjoinRoom() && roomsVaxjo.get(i).bookSearch(start, end)){
 				tempRoomList.add(roomsVaxjo.get(i));
 				
 				
+=======
+			if(quality == roomsVaxjo.get(i).getQuality() && bed == roomsVaxjo.get(i).getFloor() && adjoin == roomsVaxjo.get(i).getAdjoinRoom() && roomsVaxjo.get(i).isAvailability()){
+				//for(int j = 0; j < roomsVaxjo.get(i).bookings.size(); ++j){
+					//if((start.isAfter(roomsVaxjo.get(i).bookings.get(j).getStart()) && start.isBefore(roomsVaxjo.get(i).bookings.get(j).getEnd())) || (end.isAfter(roomsVaxjo.get(i).bookings.get(j).getStart()) && end.isBefore(roomsVaxjo.get(i).bookings.get(j).getEnd())) ){
+					System.out.println("room is Available");
+					tempRoomList.add(roomsVaxjo.get(i));
+					}
+				else{
+						System.out.println(roomsVaxjo.get(i).getRoomNumber());
+						
+						
+					}
+				//}
+>>>>>>> origin/master
 				
 			}
-		}
+		
 		
 		
 		
