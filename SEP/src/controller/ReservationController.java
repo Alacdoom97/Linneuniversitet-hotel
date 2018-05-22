@@ -2,20 +2,10 @@ package controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
-import javafx.scene.control.ComboBox;
-
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import main.Main;
 import model.Grid;
 import model.GridList;
@@ -194,7 +184,7 @@ public class ReservationController {
 
 					ArrayList<Room> temp = program.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
 					
-					
+					main.searchButtonActivate();
 					
 					
 				} catch (Exception e6) {
@@ -217,6 +207,7 @@ public class ReservationController {
 						tempRoom = main.roomsList.get(i);
 					}
 				}
+				errWin.roomLocatedAlert();
 			}
 
 		});
