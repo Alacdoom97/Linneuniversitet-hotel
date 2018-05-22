@@ -31,6 +31,7 @@ public class ReservationWindow {
 	public final ComboBox cBoxQuality = new ComboBox();
 	public final ComboBox cBoxBeds = new ComboBox();
 	public final ComboBox adjoinment = new ComboBox();
+	public ComboBox roomSearch = new ComboBox();
 	public ListView roomView;
 	public ObservableList<String> roomsNames = FXCollections.observableArrayList();
 	public ObservableList<Room> roomsList = FXCollections.observableArrayList();
@@ -41,7 +42,7 @@ public class ReservationWindow {
 	public Button searchButton = new Button("Search");
 	public Button previousButton = new Button("<");
 	public Button nextButton = new Button(">");
-	public Button confirmRoom;
+	public Button confirmRoom = new Button("Confirm");
 	public Label name = new Label();
 	public Label birthday = new Label();
 	public Label country = new Label();
@@ -58,6 +59,7 @@ public class ReservationWindow {
 	public Pane layout = new Pane();
 	public GridPane grid2 = new GridPane();
 	public GridPane grid1 = new GridPane();
+	public Stage roomSearchStage;
 	
 	
 	public ReservationWindow(){
@@ -249,9 +251,7 @@ public class ReservationWindow {
 	@SuppressWarnings("unchecked")
 	public void searchButtonActivate() {
 		Pane pane = new Pane();
-		ComboBox sp = new ComboBox();
-		confirmRoom = new Button("Confirm");
-		roomView = new ListView(roomsList);
+		
 		
 		
 		roomsNames.clear();
@@ -265,25 +265,19 @@ public class ReservationWindow {
 		confirmRoom.setTranslateX(100);
 		confirmRoom.setTranslateY(200);
 		
-		sp.setTranslateX(50);
-		sp.setTranslateY(100);
-		sp.setPrefWidth(140);
-		sp.setPrefHeight(25);
-		sp.setPromptText("Rooms Available");
+		roomSearch.setTranslateX(50);
+		roomSearch.setTranslateY(100);
+		roomSearch.setPrefWidth(140);
+		roomSearch.setPrefHeight(25);
+		roomSearch.setPromptText("Rooms Available");
 		
-		roomView.setPrefSize(250, 250);
-		roomView.setEditable(true);
-		
-		resControl.searchForRooms();
-		
-		roomView.setItems(roomsNames);
-		sp.getItems().addAll(roomsNames);
-		pane.getChildren().addAll(sp, confirmRoom);
+		roomSearch.getItems().addAll(roomsNames);
+		pane.getChildren().addAll(roomSearch, confirmRoom);
 		
 		Scene roomSearchScene = new Scene(pane, 250, 250);
-		Stage roomSearch = new Stage();
-		roomSearch.setScene(roomSearchScene);
-		roomSearch.show();
+		roomSearchStage = new Stage();
+		roomSearchStage.setScene(roomSearchScene);
+		roomSearchStage.show();
 		
 	}
 	

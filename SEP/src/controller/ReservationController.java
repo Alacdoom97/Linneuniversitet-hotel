@@ -2,11 +2,13 @@ package controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import main.Main;
+import model.Booking;
 import model.Grid;
 import model.GridList;
 import model.Guest;
@@ -31,15 +33,15 @@ public class ReservationController {
 	private static GridList gl = new GridList();
 	private Grid grid;
 	GridPane current;
-	Guest currentG;
+	static Guest currentG = null;
 	private LocalDate arrival;
 	private LocalDate departure;
 	public static ArrayList<Room> temp;
 	int quality;
 	boolean adjoinment;
 	int roomtype;
-	private Room tempRoom;
-
+	private static Room tempRoom = null;
+	
 	public ReservationController(ReservationWindow main) {
 		this.main = main;
 
@@ -195,21 +197,27 @@ public class ReservationController {
 			}
 
 		});
-	}
-
-	public void searchForRooms() {
-		main.roomView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent roomSearch) {
-				tempRoom = null;
+		
+		main.confirmRoom.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent confirmRoom) {
+				
 				for (int i = 0; i < main.roomsList.size(); i++) {
-					if (main.roomView.getSelectionModel().getSelectedItem()
+					if (main.roomSearch.getValue().toString()
 							.equals(Integer.toString(main.roomsList.get(i).getRoomNumber()))) {
 						tempRoom = main.roomsList.get(i);
 					}
 				}
-				errWin.roomLocatedAlert();
+				if (arrival.toString().isEmpty() || departure.toString().isEmpty() || currentG == null || tempRoom == null) {
+					System.out.println(tempRoom.getRoomNumber());
+					errWin.reservationError();
+				}
+				else {
+				Booking booking = new Booking(arrival, departure, currentG, tempRoom);
+				tempRoom.addBooking(booking);
+				main.roomSearchStage.close();
+				}
+				
 			}
-
 		});
 	}
 
@@ -244,7 +252,7 @@ public class ReservationController {
 				main.name.setText("");
 				main.birthday.setText("");
 				main.address.setText("");
-				Guest currentG = null;
+				
 				for (int i = 0; i < cheWin.names.size(); i++) {
 					if (guestWin.listView.getSelectionModel().getSelectedItem()
 							.equals(cheWin.names.get(i).getName() + " " + cheWin.names.get(i).getLastName())) {

@@ -52,6 +52,12 @@ public class ErrorWindow {
 		roomLocated.showAndWait();
 	}
 	
-	
+	public void reservationError() {
+		Alert reserveError = new Alert(AlertType.ERROR);
+		reserveError.setTitle("Error!");
+		reserveError.setHeaderText("Fields missing!");
+		reserveError.setContentText("There are some fields missing! All Fields must be filled in!");
+		reserveError.showAndWait();
+	}
 
 }
