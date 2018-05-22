@@ -197,10 +197,6 @@ public class ReservationController {
 					
 					
 					
-				}catch(Exception e6){
-
-					main.searchButtonActivate();
-
 				} catch (Exception e6) {
 
 					e6.printStackTrace();

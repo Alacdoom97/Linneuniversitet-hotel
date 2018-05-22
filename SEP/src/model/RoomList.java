@@ -201,8 +201,9 @@ public class RoomList {
 		
 		
 		
-		return temp2;
-	
+		
+		}
+	return temp2;
 	}
 	
 	public Room getRoom(int i){
