@@ -92,9 +92,9 @@ public class CheckInWindow {
 
 		/*for (int i = 0; i < gueList.getSize(); ++i) {
 			names.add(gueList.getGuest(i));
-		}
+		}*/
 		data.clear();
-		names.clear();*/
+		names.clear();
 
 		SQLConnection sq = new SQLConnection();
 		String query = "SELECT * from GuestList";
@@ -124,14 +124,15 @@ public class CheckInWindow {
 			for (int i = 0; i < names.size(); i++) {
 				data.add(names.get(i).getName() + " " + names.get(i).getLastName());
 			}
+			sq.DBDisconnector();
 		}
-		// click the list to be able to see the guest info
+
 		cheControll.checkInHandle(gueList);
 		
 
 		listView.setItems(data);
 
-		
+		// Double click the list to be able to see the
 
 		StackPane root = new StackPane();
 		pane.getChildren().addAll(root, searchBar, searchBar2, searchButton);

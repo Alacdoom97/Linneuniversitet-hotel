@@ -219,19 +219,18 @@ public class ReservationController {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
-					guestWin.names.clear();
-					guestWin.data.clear();
-					for (int i = 0; i < mainControl.gl.getSize(); i++) {
-						Guest guest = mainControl.gl.getGuest(i);
-						if (guestWin.searchBar.getText().equals(guest.getName())
-								&& guestWin.searchBar2.getText().equals(guest.getPersNum())) {
-							guestWin.names.add(guest);
+					ArrayList<Guest> tempList = new ArrayList<Guest>();
+					for (int i = 0; i < cheWin.names.size(); i++) {
+						Guest guest = cheWin.names.get(i);
+						if (cheWin.searchBar.getText().equals(guest.getName())
+								&& cheWin.searchBar2.getText().equals(guest.getPersNum())) {
+							
+							tempList.add(guest);
 						}
 					}
 
-					for (int i = 0; i < guestWin.names.size(); i++) {
-						guestWin.data.add(guestWin.names.get(i).idToString(guestWin.names.get(i).getID()) + " "
-								+ guestWin.names.get(i).getName() + " " + guestWin.names.get(i).getLastName());
+					for (int i = 0; i < tempList.size(); i++) {
+						cheWin.data.add(tempList.get(i).getName() + " " + tempList.get(i).getLastName());
 					}
 				} catch (Exception e4) {
 					e4.printStackTrace();
@@ -246,11 +245,10 @@ public class ReservationController {
 				main.birthday.setText("");
 				main.address.setText("");
 				Guest currentG = null;
-				for (int i = 0; i < guestWin.names.size(); i++) {
+				for (int i = 0; i < cheWin.names.size(); i++) {
 					if (guestWin.listView.getSelectionModel().getSelectedItem()
-							.equals(guestWin.names.get(i).idToString(guestWin.names.get(i).getID()) + " "
-									+ guestWin.names.get(i).getName() + " " + guestWin.names.get(i).getLastName())) {
-						currentG = guestWin.names.get(i);
+							.equals(cheWin.names.get(i).getName() + " " + cheWin.names.get(i).getLastName())) {
+						currentG = cheWin.names.get(i);
 					}
 				}
 				System.out.println("haha");

@@ -1,6 +1,10 @@
 package view;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import controller.MainController;
+import database.SQLConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -20,6 +24,7 @@ public class GuestWindow{
 	public Stage guestWin = new Stage();
 
 	private static GuestList gueList;
+	CheckInWindow cheWin = new CheckInWindow();
 
 	public TextField searchBar;
 	public TextField searchBar2;
@@ -58,14 +63,39 @@ public class GuestWindow{
 		names.clear();
 		data.clear();
 		
-		for (int i = 0; i < gueList.getSize(); i++) {
-			names.add(gueList.getGuest(i));
+		data.clear();
+		names.clear();
+
+		SQLConnection sq = new SQLConnection();
+		String query = "SELECT * from GuestList";
+		ResultSet rs = sq.importData(query);
+
+		try {
+			while (rs.next()) {
+				int ID = rs.getInt("ID");
+				String companyName = rs.getString("companyName");
+				String firstName = rs.getString("name");
+				String lastName = rs.getString("lastname");
+				String address = rs.getString("adress");
+				String phoneNumber = rs.getString("phoneNumber");
+				String birthday = rs.getString("dateOfBirth");
+				Boolean isBusiness = rs.getBoolean("businessCheck");
+				Guest guest = new Guest(ID, companyName, firstName, lastName, address, phoneNumber, birthday,
+						isBusiness, false);
+
+				names.add(guest);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	         
-	        for (int i = 0; i < names.size(); i++) {
-	            data.add(names.get(i).idToString(names.get(i).getID()) + " " + names.get(i).getName() + " "
-	            								 + names.get(i).getLastName());
-	        }
+		if (data.isEmpty()) {
+			for (int i = 0; i < names.size(); i++) {
+				data.add(names.get(i).getName() + " " + names.get(i).getLastName());
+			}
+			sq.DBDisconnector();
+		}
 	        
 	        listView.setItems(data);
 	        
