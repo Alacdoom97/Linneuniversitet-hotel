@@ -258,9 +258,10 @@ public class ReservationWindow {
 		
 		roomsNames.clear();
 		roomsList.clear();
-		
+		roomSearch.getItems().clear();
 		for (int i = 0; i < resControl.temp.size(); i++) {
 			roomsList.add(resControl.temp.get(i));
+			
 
 			roomsNames.add(Integer.toString(roomsList.get(i).getRoomNumber()));
 		}
@@ -377,6 +378,10 @@ public class ReservationWindow {
 			int roomnr = bookings.getBooking(i).getRoom().getRoomNumber();
 			
 			for(int k = temp.getDayOfMonth(); k < temp1.getDayOfMonth()+1; ++k){
+				if(k == 31){
+					k = 2;
+					temp.plusMonths(1);
+				}
 				grid2.add(cellFill("-fx-background-color:green"), k-1, roomnr);
 				
 			}

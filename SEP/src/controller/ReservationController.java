@@ -181,10 +181,11 @@ public class ReservationController {
 					arrival = main.checkInDate.getValue();
 					departure = main.checkOutDate.getValue();
 
-					temp = Main.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
+
+					
 					
 
-					ArrayList<Room> temp = program.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
+					temp = program.rl.roomSearchV(quality, roomtype, adjoinment, arrival, departure);
 					
 					main.searchButtonActivate();
 					
@@ -210,8 +211,12 @@ public class ReservationController {
 				if (arrival.toString().isEmpty() || departure.toString().isEmpty() || currentG == null || tempRoom == null) {
 					System.out.println(tempRoom.getRoomNumber());
 					errWin.reservationError();
+				
+					
 				}
 				else {
+					
+
 				Booking booking = new Booking(arrival, departure, currentG, tempRoom);
 				tempRoom.addBooking(booking);
 				program.bl.addBooking(booking);
@@ -262,8 +267,7 @@ public class ReservationController {
 						currentG = cheWin.names.get(i);
 					}
 				}
-				System.out.println("haha");
-				System.out.println(currentG.getName());
+				
 				if (currentG != null) {
 					main.name.setText(currentG.getName());
 					main.birthday.setText(currentG.getPersNum());

@@ -97,6 +97,16 @@ public class Room {
 		return true;
 	}
 	
+	public boolean isBooked(LocalDate start, LocalDate end){
+		for(int i = 0; i < bookings.size(); ++i){
+			if(start.isAfter(bookings.get(i).getStart())&& start.isBefore(bookings.get(i).getEnd())){
+				
+			}
+		}
+		
+		return false;
+	}
+	
 	
 	
 

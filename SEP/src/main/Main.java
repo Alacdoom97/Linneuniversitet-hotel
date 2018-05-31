@@ -32,7 +32,7 @@ public class Main {
 		Booking bookings = new Booking(LocalDate.now(),LocalDate.now().plusDays(6),g1,rl.getRoom(9));
 		
 		rl.getRoom(9).bookings.add(bookings);
-		System.out.println(rl.getRoom(9).bookings.get(0).getStart()+" "+ rl.getRoom(9).bookings.get(0).getEnd());
+		
 		
 		Application.launch(MainWindow.class);
 		
