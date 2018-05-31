@@ -2,7 +2,7 @@ package view;
 
 import java.time.Duration;
 import java.time.LocalDate;
-
+import static java.time.temporal.TemporalAdjusters.*;
 import controller.ReservationController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -339,20 +339,37 @@ public class ReservationWindow {
 	}
 	
 	public void reDraw(BookingList bookings) {
+		
+		resControl.gl.clear();
+		resControl.gl.createNewYear(LocalDate.now());
+		
 		for(int i = 0; i < bookings.size(); ++i){
 			LocalDate temp = bookings.getBooking(i).getStart();
 			LocalDate temp1 = bookings.getBooking(i).getEnd();
+			LocalDate end = temp.with(lastDayOfMonth());
 			
-			int j = temp1.getDayOfMonth()-temp
-					.getDayOfMonth();
+			
 			int roomnr = bookings.getBooking(i).getRoom().getRoomNumber();
 			
-			for(int k = temp.getDayOfMonth(); k < temp1.getDayOfMonth()+1; ++k){
-				if(k == 31){
-					k = 2;
-					temp.plusMonths(1);
+			
+			
+			if(temp.getMonthValue() != temp1.getMonthValue()){
+				grid2 = resControl.gl.gridGet(temp).getGrid();
+				for(int l = temp.getDayOfMonth(); l <= end.getDayOfMonth(); ++l){
+					grid2.add(cellFill("-fx-background-color:green"), l-1, roomnr);
 				}
-				grid2.add(cellFill("-fx-background-color:green"), k-1, roomnr);
+				grid2 = resControl.gl.gridGet(temp1).getGrid();
+				for(int m = 1; m < temp1.getDayOfMonth()+1; ++m){
+					grid2.add(cellFill("-fx-background-color:green"), m-1, roomnr);
+				}
+			}else{
+				grid2 = resControl.gl.gridGet(temp1).getGrid();
+				
+				for(int k = temp.getDayOfMonth(); k < temp1.getDayOfMonth()+1; ++k){
+					grid2.add(cellFill("-fx-background-color:green"), k-1, roomnr);
+				
+			}
+			
 				
 			}
 			

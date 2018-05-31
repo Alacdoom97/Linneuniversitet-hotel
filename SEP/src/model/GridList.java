@@ -106,6 +106,11 @@ public class GridList {
 		return tl;
 	}
 	
+	public void clear(){
+		for(int i = 0; i < gridList.size(); ++i){
+			gridList.remove(i);
+		}
+	}
 	
 
 }
