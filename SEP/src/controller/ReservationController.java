@@ -30,7 +30,7 @@ public class ReservationController {
 	MainController mainControl = new MainController(new MainWindow());
 	int dateTrackerPrevious = 1;
 	int dateTrackerNext = 1;
-	private static GridList gl = new GridList();
+	public static GridList gl = new GridList();
 	private Grid grid;
 	GridPane current;
 	static Guest currentG = null;
@@ -98,20 +98,14 @@ public class ReservationController {
 					main.layout.getChildren().remove(main.grid2);
 					main.pane.getChildren().remove(main.monthLabel);
 					main.monthDisplay(main.dateChecker.plusMonths(1));
-					grid = new Grid();
-					grid.Grid(main.dateChecker, main.grid2);
-
-					if (gl.contains(main.dateChecker) == false) {
-						gl.gridAdd(grid);
-						System.out.println("added");
-					}
+					
 					main.dateChecker = main.dateChecker.plusMonths(1);
 
 					if (gl.contains(main.dateChecker)) {
 						main.grid2 = gl.gridGet(main.dateChecker).getGrid();
 					} else {
-						main.grid2 = main.newGrid();
-						main.gridFill(main.grid2);
+						gl.createNewYear(main.dateChecker);
+						System.out.println("haha");
 					}
 
 					main.layout.getChildren().add(main.grid2);
@@ -129,21 +123,17 @@ public class ReservationController {
 					main.layout.getChildren().remove(main.grid2);
 					main.pane.getChildren().remove(main.monthLabel);
 					main.monthDisplay(main.dateChecker.minusMonths(1));
-					Grid grid = new Grid();
-					grid.Grid(main.dateChecker, main.grid2);
+					
 
-					if (gl.contains(main.dateChecker) == false) {
-						gl.gridAdd(grid);
-						System.out.println("added");
-					}
+					
 
 					main.dateChecker = main.dateChecker.minusMonths(1);
 
 					if (gl.contains(main.dateChecker)) {
 						main.grid2 = gl.gridGet(main.dateChecker).getGrid();
 					} else {
-						main.grid2 = main.newGrid();
-						main.gridFill(main.grid2);
+						gl.createNewYear(main.dateChecker);
+						System.out.println("haha");
 					}
 					main.layout.getChildren().add(main.grid2);
 

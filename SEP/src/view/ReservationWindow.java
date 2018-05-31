@@ -227,13 +227,15 @@ public class ReservationWindow {
 		grid1.add(cancelB, 0, 15);
 		
 		
+		if(resControl.gl.size() == 0){
+			resControl.gl.createNewYear(dateChecker);
+		}
+		grid2 = resControl.gl.gridGet(LocalDate.now()).getGrid();
 		
-		grid2 = newGrid();
-		gridFill(grid2);
 		
 		
 		
-		grid2.add(cellFill("-fx-background-color:green"), 5, 5);
+		
 		
 		
 		pane.setTranslateX(98);
@@ -303,41 +305,9 @@ public class ReservationWindow {
 		pane.getChildren().add(monthLabel);
 	}
 	
-	public GridPane newGrid(){
-		GridPane newGp = new GridPane();
-		newGp.setGridLinesVisible(true);
-		newGp.setPrefSize(1000, 625);
-		newGp.setStyle("-fx-background-color:grey");
-		newGp.setTranslateX(99);
-		newGp.setTranslateY(230);
-		
-		int rowMax2 = 31;
-		int colMax2 = 31;
-		
-		for (int i = 0; i < rowMax2; ++i){
-			RowConstraints rowConst = new RowConstraints();
-			rowConst.setPercentHeight(100.0/rowMax2);
-			newGp.getRowConstraints().add(rowConst);
-		}
-		
-		for(int i = 0; i < colMax2; ++i){
-			ColumnConstraints colConst = new ColumnConstraints();
-			colConst.setPercentWidth(100.0/colMax2);
-			newGp.getColumnConstraints().add(colConst);
-		}
-		
-		
-		
-		return newGp;
-	}
 	
-	public void gridFill(GridPane grid){
-		for(int i = 0; i < 31; ++i){
-			grid.add(textLabel(Integer.toString(i+1)), i, 0);
-		}
-		
-		
-	}
+	
+	
 	
 	public GridPane hotelGrid(){
 		GridPane hGrid = new GridPane();
