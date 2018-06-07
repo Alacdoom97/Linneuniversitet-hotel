@@ -39,7 +39,7 @@ public class ReservationWindow {
 	public ObservableList<Room> roomsList = FXCollections.observableArrayList();
 	public Button guestButton = new Button();
 	public Button newGuestButton = new Button();
-	public Button confirmB = new Button("Confirm");
+	public Button unbookButton = new Button("Unbook");
 	public Button cancelB = new Button("Cancel");
 	public Button searchButton = new Button("Search");
 	public Button previousButton = new Button("<");
@@ -178,7 +178,7 @@ public class ReservationWindow {
 		grid.add(cBoxQuality, 1, 2);
 		
 		resControl.eventHandle();
-		grid1.setGridLinesVisible(false);
+		grid1.setGridLinesVisible(true);
 		grid1.setPrefSize(400, 800);
 		grid1.setTranslateX(1150);
 		grid1.setTranslateY(35);
@@ -221,8 +221,8 @@ public class ReservationWindow {
 		grid1.add(address, 0, 8);
 		grid1.add(textLabel("Phone"), 0, 9);
 		grid1.add(phone, 0, 10);
-		confirmB.setTranslateX(200);
-		grid1.add(confirmB, 0, 15);
+		unbookButton.setTranslateX(200);
+		grid1.add(unbookButton, 0, 15);
 		cancelB.setTranslateX(280);
 		grid1.add(cancelB, 0, 15);
 		
@@ -372,6 +372,8 @@ public class ReservationWindow {
 			
 				
 			}
+			layout.getChildren().remove(grid2);
+			layout.getChildren().add(grid2);
 			
 			
 			

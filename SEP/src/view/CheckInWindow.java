@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import main.Main;
 import model.Guest;
 import model.GuestList;
 
@@ -45,6 +46,7 @@ public class CheckInWindow {
 	public Label businessLab;
 	public Label birthdayLab;
 	public static GuestList gueList;
+	Main main = new Main();
 	MainWindow mainWin = new MainWindow();
 	ReservationController resControll = new ReservationController(this);
 	CheckInController cheControll = new CheckInController(this);
@@ -114,6 +116,7 @@ public class CheckInWindow {
 						isBusiness, false);
 
 				names.add(guest);
+				
 
 			}
 		} catch (SQLException e) {

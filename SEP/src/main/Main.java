@@ -1,8 +1,11 @@
 package main;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import controller.ReservationController;
+import database.SQLConnection;
 import javafx.application.Application;
 import model.Booking;
 import model.BookingList;
@@ -28,10 +31,33 @@ public class Main {
 	
 
 	public static void main(String[] args){
-		Guest g1 = new Guest(1, "McDonalds", "Hau", "Trinh", "Furutåvägen","hhahaha", "1993-04-01", true, false);
-		Booking bookings = new Booking(LocalDate.now(),LocalDate.now().plusDays(6),g1,rl.getRoom(9));
+		SQLConnection sq = new SQLConnection();
+		String query = "SELECT * from GuestList";
+		ResultSet rs = sq.importData(query);
+
+		try {
+			while (rs.next()) {
+				int ID = rs.getInt("ID");
+				String companyName = rs.getString("companyName");
+				String firstName = rs.getString("name");
+				String lastName = rs.getString("lastname");
+				String address = rs.getString("adress");
+				String phoneNumber = rs.getString("phoneNumber");
+				String birthday = rs.getString("dateOfBirth");
+				Boolean isBusiness = rs.getBoolean("businessCheck");
+				Guest guest = new Guest(ID, companyName, firstName, lastName, address, phoneNumber, birthday,
+						isBusiness, false);
+
+				gl.addToList(guest);
+				
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sq.DBDisconnector();
 		
-		rl.getRoom(9).bookings.add(bookings);
 		
 		
 		Application.launch(MainWindow.class);

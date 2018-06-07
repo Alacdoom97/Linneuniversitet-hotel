@@ -8,7 +8,7 @@ public class Room {
 	private int roomNumber;
 	private int quality;
 	private int floor;
-	public static ArrayList<Booking> bookings = new ArrayList();
+	public ArrayList<Booking> bookings = new ArrayList();
 	private boolean smokingAllowed;
 	private boolean availability;
 	private boolean adjoinsRoom;
@@ -100,9 +100,16 @@ public class Room {
 	public boolean isBooked(LocalDate start, LocalDate end){
 		for(int i = 0; i < bookings.size(); ++i){
 			if(start.isAfter(bookings.get(i).getStart())&& start.isBefore(bookings.get(i).getEnd())){
-				
+				return true;
+			}else if(end.isAfter(bookings.get(i).getStart())&& end.isBefore(bookings.get(i).getEnd())){
+				return true;
+			}else if(start.isEqual(bookings.get(i).getStart()) || start.isEqual(bookings.get(i).getEnd())){
+				return true;
+			}else if(end.isEqual(bookings.get(i).getStart()) || end.isEqual(bookings.get(i).getEnd())){
+				return true;
 			}
 		}
+		
 		
 		return false;
 	}

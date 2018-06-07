@@ -40,7 +40,7 @@ public class ReservationController {
 	int quality;
 	boolean adjoinment;
 	int roomtype;
-	private static Room tempRoom = null;
+	private Room tempRoom = null;
 	
 	public ReservationController(ReservationWindow main) {
 		this.main = main;
@@ -91,6 +91,18 @@ public class ReservationController {
 				}
 			}
 		});
+		
+		main.unbookButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				try {
+					if(currentG != null && currentG.getBooking() != null){
+						currentG.setBooking(null);
+					}
+				} catch (Exception e7) {
+					e7.printStackTrace();
+				}
+			}
+		});
 
 		main.nextButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
@@ -135,6 +147,7 @@ public class ReservationController {
 						gl.createNewYear(main.dateChecker);
 						System.out.println("haha");
 					}
+					main.layout.getChildren().remove(main.grid2);
 					main.layout.getChildren().add(main.grid2);
 
 				} catch (Exception e5) {
@@ -196,21 +209,32 @@ public class ReservationController {
 					if (main.roomSearch.getValue().toString()
 							.equals(Integer.toString(main.roomsList.get(i).getRoomNumber()))) {
 						tempRoom = main.roomsList.get(i);
+						System.out.println(tempRoom.isBooked(arrival, departure));
 					}
 				}
-				if (arrival.toString().isEmpty() || departure.toString().isEmpty() || currentG == null || tempRoom == null) {
-					System.out.println(tempRoom.getRoomNumber());
+				
+				if (tempRoom.isBooked(arrival, departure) == true || arrival.toString().isEmpty() || departure.toString().isEmpty() || currentG == null || tempRoom == null || currentG.getBooking() != null) {
+					
+					
 					errWin.reservationError();
 				
 					
 				}
 				else {
-					
-
+				
+				
 				Booking booking = new Booking(arrival, departure, currentG, tempRoom);
 				tempRoom.addBooking(booking);
-				program.bl.addBooking(booking);
 				
+				
+				for(int i = 0; i < main.roomsList.size(); ++i){
+					if(tempRoom.getRoomNumber() == main.roomsList.get(i).getRoomNumber()){
+						main.roomsList.remove(i);
+						main.roomsList.add(tempRoom);
+					}
+				}
+				program.bl.addBooking(booking);
+				currentG.setBooking(booking);
 				main.reDraw(program.bl);
 				main.roomSearchStage.close();
 				}

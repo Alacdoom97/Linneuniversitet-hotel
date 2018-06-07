@@ -1,6 +1,7 @@
 package controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import main.Main;
 import model.GuestList;
 import view.CheckInWindow;
 import view.GuestWindow;
@@ -37,6 +38,7 @@ public class MainController {
 			public void handle (ActionEvent e){
 				try{
 					resWin = new ReservationWindow();
+					Main mainclass = new Main();
 					
 					main.reservationButton.disableProperty().bind(resWin.resWin.showingProperty());
 				}catch(Exception e2){
